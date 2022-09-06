@@ -1,4 +1,11 @@
 # Release History
+
+***************** 
+## Release ONDEWO SURVEY Nodejs Client 1.1.0 
+ 
+### Improvements 
+ * Tracking API Version 1.1.0 
+
 *****************
 
 ## Release ONDEWO SURVEY Nodejs Client 1.1.0
