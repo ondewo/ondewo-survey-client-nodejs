@@ -30,7 +30,7 @@ IMAGE_UTILS_NAME=ondewo-survey-client-utils-nodejs:${ONDEWO_SURVEY_VERSION}
 PRETTIER_WRITE?=
 
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
-	| sed -n '/Release ONDEWO SURVEY Nodejs Client ${ONDEWO_SURVEY_VERSION}/,/\*\*/p'`
+	| sed -n '/Release ONDEWO Survey Nodejs Client ${ONDEWO_SURVEY_VERSION}/,/\*\*/p'`
 
 
 GH_REPO="https://github.com/ondewo/ondewo-survey-client-nodejs"
