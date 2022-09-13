@@ -55,6 +55,9 @@ prettier: ## Checks formatting with Prettier - Use PRETTIER_WRITE=-w to also aut
 eslint: ## Checks Code Logic and Typing
 	./node_modules/.bin/eslint .
 
+run_precommit_hooks:
+	.husky/pre-commit
+
 TEST:	## Prints some important variables
 	@echo "Release Notes: \n \n $(CURRENT_RELEASE_NOTES)"
 	@echo "GH Token: \t $(GITHUB_GH_TOKEN)"
@@ -92,10 +95,27 @@ check_build: ## Checks if all proto-code was generated
 
 release: ## Create Github and NPM Release
 	@echo "Start Release"
-	make build_and_publish_npm_via_docker
-	make create_release_branch
-	make create_release_tag
-	make release_to_github_via_docker_image
+	make install_precommit_hooks
+	make build
+	make check_build
+	make run_precommit_hooks
+	git status
+	git add api
+	git add Makefile
+	git add src
+	git add RELEASE.md
+	git add package.json
+	git add package-lock.json
+	git add ${ONDEWO_PROTO_COMPILER_DIR}
+	git status
+# git commit -m "Preparing for Release ${ONDEWO_SURVEY_VERSION}"
+# git push
+# make publish_npm_via_docker
+# make create_release_branch
+# make create_release_tag
+# make release_to_github_via_docker_image
+	@echo "Finished Release"
+
 
 gh_release: build_utils_docker_image release_to_github_via_docker_image ## Builds Utils Image and Releases to Github
 
@@ -164,8 +184,8 @@ run_release_with_devops: ## Runs the make release target with credentials from d
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_SURVEY_VERSION}"))
 	$(eval filtered_tags:= $(shell git tag --list | grep "${ONDEWO_SURVEY_VERSION}"))
-	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
-	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
+# @if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
+# @if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
 
 
 ########################################################
