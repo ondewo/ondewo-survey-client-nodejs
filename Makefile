@@ -30,7 +30,7 @@ IMAGE_UTILS_NAME=ondewo-survey-client-utils-nodejs:${ONDEWO_SURVEY_VERSION}
 PRETTIER_WRITE?=
 
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
-	| sed -n '/Release ONDEWO SURVEY Nodejs Client ${ONDEWO_SURVEY_VERSION}/,/\*\*/p'`
+	| sed -n '/Release ONDEWO Survey Nodejs Client ${ONDEWO_SURVEY_VERSION}/,/\*\*/p'`
 
 
 GH_REPO="https://github.com/ondewo/ondewo-survey-client-nodejs"
@@ -54,6 +54,9 @@ prettier: ## Checks formatting with Prettier - Use PRETTIER_WRITE=-w to also aut
 
 eslint: ## Checks Code Logic and Typing
 	./node_modules/.bin/eslint .
+
+run_precommit_hooks:
+	.husky/pre-commit
 
 TEST:	## Prints some important variables
 	@echo "Release Notes: \n \n $(CURRENT_RELEASE_NOTES)"
@@ -92,10 +95,27 @@ check_build: ## Checks if all proto-code was generated
 
 release: ## Create Github and NPM Release
 	@echo "Start Release"
-	make build_and_publish_npm_via_docker
+	make install_precommit_hooks
+	make build
+	make check_build
+	make run_precommit_hooks
+	git status
+	git add api
+	git add Makefile
+	git add src
+	git add RELEASE.md
+	git add package.json
+	git add package-lock.json
+	git add ${ONDEWO_PROTO_COMPILER_DIR}
+	git status
+	git commit -m "Preparing for Release ${ONDEWO_SURVEY_VERSION}"
+	git push
+	make publish_npm_via_docker
 	make create_release_branch
 	make create_release_tag
 	make release_to_github_via_docker_image
+	@echo "Finished Release"
+
 
 gh_release: build_utils_docker_image release_to_github_via_docker_image ## Builds Utils Image and Releases to Github
 
@@ -135,7 +155,7 @@ release_to_github_via_docker_image:  ## Release to Github via docker
 build_utils_docker_image:  ## Build utils docker image
 	docker build -f Dockerfile.utils -t ${IMAGE_UTILS_NAME} .
 
-build_and_publish_npm_via_docker: build build_utils_docker_image ## Builds Code, Docker-Image and Releases to NPM
+publish_npm_via_docker: build_utils_docker_image ## Builds Code, Docker-Image and Releases to NPM
 	docker run --rm \
 		-e NPM_AUTOMATION_TOKEN=${NPM_AUTOMATION_TOKEN} \
 		${IMAGE_UTILS_NAME} make docker_npm_release
@@ -188,13 +208,13 @@ build: check_out_correct_submodule_versions build_compiler update_package npm_ru
 	rm -rf ${SURVEY_APIS_DIR}/google
 
 
-remove_npm_script:
+remove_npm_script: ## Removes Script section from package.json
 	$(eval script_lines:= $(shell cat package.json | sed -n '/\"scripts\"/,/\}\,/='))
 	$(eval start:= $(shell echo $(script_lines) | cut -c 1-2))
 	$(eval end:= $(shell echo $(script_lines) | rev | cut -c 1-3 | rev))
 	@sed -i '$(start),$(end)d' package.json
 
-create_npm_package:
+create_npm_package: ## Creates NPM Package for Release
 	rm -rf npm
 	mkdir npm
 	cp -R api npm
@@ -204,7 +224,7 @@ create_npm_package:
 	cp LICENSE npm
 	cp README.md npm
 
-install_dependencies:
+install_dependencies: ## Installs Dev-Dependencies
 	npm i eslint --save-dev
 	npm i prettier --save-dev
 	npm i @typescript-eslint/eslint-plugin --save-dev
