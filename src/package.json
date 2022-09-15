@@ -1,6 +1,6 @@
 {
 	"name": "@ondewo/survey-client-nodejs",
-	"version": "1.1.0",
+	"version": "2.0.0",
 	"description": "ONDEWO (SURVEY) Platfrom client library for Nodejs",
 	"main": "public-api.js",
 	"typings": "public-api.d.ts",
