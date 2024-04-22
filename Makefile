@@ -18,7 +18,7 @@ export
 ONDEWO_SURVEY_VERSION = 2.0.0
 
 SURVEY_API_GIT_BRANCH=tags/2.0.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.1.1
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.8.0
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 SURVEY_APIS_DIR=src/ondewo-survey-api
 SURVEY_PROTOS_DIR=${SURVEY_APIS_DIR}/ondewo
@@ -76,6 +76,7 @@ check_build: ## Checks if all proto-code was generated
 	@for proto in `find src/ondewo-survey-api/ondewo -iname "*.proto*"`; \
 	do \
 		cat $${proto} | grep import | grep "google/" | cut -d "/" -f 3 | cut -d "." -f 1 >> build_check.txt; \
+		sed -i 's/import.*//g' build_check.txt; \
 		echo $${proto} | cut -d "/" -f 5 | cut -d "." -f 1 >> build_check.txt; \
 	done
 	@echo "`sort build_check.txt | uniq`" > build_check.txt
@@ -116,7 +117,6 @@ release: ## Create Github and NPM Release
 	make create_release_tag
 	make release_to_github_via_docker_image
 	@echo "Finished Release"
-
 
 gh_release: build_utils_docker_image release_to_github_via_docker_image ## Builds Utils Image and Releases to Github
 
@@ -211,7 +211,6 @@ build: check_out_correct_submodule_versions build_compiler update_package npm_ru
 	make install_dependencies
 	rm -rf ${SURVEY_APIS_DIR}/google
 
-
 remove_npm_script: ## Removes Script section from package.json
 	$(eval script_lines:= $(shell cat package.json | sed -n '/\"scripts\"/,/\}\,/='))
 	$(eval start:= $(shell echo $(script_lines) | cut -c 1-2))
@@ -229,10 +228,11 @@ create_npm_package: ## Creates NPM Package for Release
 	cp README.md npm
 
 install_dependencies: ## Installs Dev-Dependencies
-	npm i eslint --save-dev
-	npm i prettier --save-dev
-	npm i @typescript-eslint/eslint-plugin --save-dev
-	npm i husky --save-dev
+	npm i @typescript-eslint/eslint-plugin \
+		  eslint \
+		  prettier \
+		  husky \
+		  --save-dev
 
 check_out_correct_submodule_versions: ## Fetches all Submodules and checksout specified branch
 	@echo "START checking out correct submodule versions ..."
@@ -243,7 +243,6 @@ check_out_correct_submodule_versions: ## Fetches all Submodules and checksout sp
 	git -C ${ONDEWO_PROTO_COMPILER_DIR} checkout ${ONDEWO_PROTO_COMPILER_GIT_BRANCH}
 	cp -R ${SURVEY_APIS_DIR}/googleapis/google ${SURVEY_APIS_DIR}/google
 	@echo "DONE checking out correct submodule versions."
-
 
 npm_run_build: ## Runs the build command in package.json
 	@echo "START npm run build ..."
