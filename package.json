@@ -16,8 +16,11 @@
 	"main": "public-api.js",
 	"typings": "public-api.d.ts",
 	"scripts": {
-		"pretest": "tsc auth/offlineTokenProvider.ts auth/offlineTokenProvider.spec.ts --ignoreConfig --module commonjs --target es2020 --strict --lib es2020,dom --skipLibCheck --sourceMap --types node --typeRoots ./node_modules/@types --outDir .test-build",
-		"test": "c8 --check-coverage --lines 100 --branches 100 --functions 100 --include '**/offlineTokenProvider.js' --exclude '**/*.spec.js' --reporter text node --test .test-build/offlineTokenProvider.spec.js"
+		"pretest:auth": "tsc auth/offlineTokenProvider.ts auth/offlineTokenProvider.spec.ts --ignoreConfig --module commonjs --target es2020 --strict --lib es2020,dom --skipLibCheck --sourceMap --types node --typeRoots ./node_modules/@types --outDir .test-build",
+		"test:auth": "c8 --check-coverage --lines 100 --branches 100 --functions 100 --include '**/offlineTokenProvider.js' --exclude '**/*.spec.js' --reporter text node --test .test-build/offlineTokenProvider.spec.js",
+		"pretest:examples": "tsc examples/listSurveysExample.ts examples/listSurveysExample.spec.ts --ignoreConfig --module commonjs --target es2020 --strict --lib es2020,dom --skipLibCheck --sourceMap --types node --typeRoots ./node_modules/@types --outDir .test-build",
+		"test:examples": "node --test .test-build/listSurveysExample.spec.js",
+		"test": "npm run test:auth && npm run test:examples"
 	},
 	"repository": {
 		"type": "git",
