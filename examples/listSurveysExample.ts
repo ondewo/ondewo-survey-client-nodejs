@@ -66,7 +66,7 @@ export function fetchSurveys(
 	request.setPageToken(pageToken);
 
 	const metadata: grpc.Metadata = new grpc.Metadata();
-	metadata.add('authorization', authorizationHeader);
+	metadata.add('Authorization', authorizationHeader);
 
 	return new Promise<Survey[]>(
 		(resolve: (surveys: Survey[]) => void, reject: (reason: grpc.ServiceError) => void): void => {

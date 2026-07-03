@@ -108,7 +108,7 @@ runTestCase(
 
 		assert.equal(client.calls.length, 1);
 		assert.equal(client.calls[0].request.getPageToken(), pageToken);
-		assert.deepEqual(client.calls[0].metadata.get('authorization'), [authorizationHeader]);
+		assert.deepEqual(client.calls[0].metadata.get('Authorization'), [authorizationHeader]);
 		assert.equal(surveys.length, 1);
 		assert.equal(surveys[0].getSurveyId(), surveyId);
 	}
@@ -149,7 +149,7 @@ runTestCase(
 
 		assert.equal(observedHost, grpcHost);
 		assert.equal(client.calls.length, 1);
-		assert.deepEqual(client.calls[0].metadata.get('authorization'), [authorizationHeader]);
+		assert.deepEqual(client.calls[0].metadata.get('Authorization'), [authorizationHeader]);
 		assert.equal(client.closed, true);
 		assert.equal(surveys.length, 1);
 		assert.equal(surveys[0].getSurveyId(), surveyId);
