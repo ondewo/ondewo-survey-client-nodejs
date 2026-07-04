@@ -114,6 +114,24 @@ runTestCase(
 	}
 );
 
+runTestCase(
+	'fetchSurveys keys the bearer header under the lowercase "authorization" metadata name (grpc-js wire normalization)',
+	async (): Promise<void> => {
+		const authorizationHeader: string = 'Bearer wire-key-token';
+		const client: FakeSurveysClient = new FakeSurveysClient([new Survey()], null);
+
+		await fetchSurveys(client, authorizationHeader, '');
+
+		// @grpc/grpc-js (and native grpc-python) key metadata off the lowercased header name on the wire.
+		// getMap() exposes the actual normalized keys, so this asserts the effective key is lowercase
+		// "authorization" -- a capital "Authorization" must never reach the transport.
+		const sentKeys: string[] = Object.keys(client.calls[0].metadata.getMap());
+		assert.ok(sentKeys.includes('authorization'));
+		assert.equal(sentKeys.includes('Authorization'), false);
+		assert.deepEqual(client.calls[0].metadata.get('authorization'), [authorizationHeader]);
+	}
+);
+
 runTestCase('fetchSurveys rejects with the gRPC ServiceError when the call fails', async (): Promise<void> => {
 	const serviceError: grpc.ServiceError = makeServiceError(grpc.status.UNAUTHENTICATED);
 	const client: FakeSurveysClient = new FakeSurveysClient([], serviceError);
