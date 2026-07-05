@@ -14,3 +14,9 @@ src/
 ondewo-proto-compiler
 
 ondewo-survey-api
+package-lock.json
+package.json
+npm/
+dist/
+.test-build/
+.test-build-examples/

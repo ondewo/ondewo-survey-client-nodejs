@@ -3,17 +3,11 @@
 // Original file comments:
 // Copyright 2020 ONDEWO GmbH
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a>
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License. (editesyntax = "proto3";
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. (editesyntax = "proto3";
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var ondewo_survey_survey_pb = require('../../ondewo/survey/survey_pb.js');
@@ -168,7 +162,7 @@ function deserialize_ondewo_survey_UpdateSurveyRequest(buffer_arg) {
 // ///// Services ///////
 //
 var SurveysService = exports.SurveysService = {
-  // Create a Survey and an empty NLU Agent for it
+  // <p>Create a Survey and an empty NLU Agent for it</p>
 createSurvey: {
     path: '/ondewo.survey.Surveys/CreateSurvey',
     requestStream: false,
@@ -180,7 +174,7 @@ createSurvey: {
     responseSerialize: serialize_ondewo_survey_Survey,
     responseDeserialize: deserialize_ondewo_survey_Survey,
   },
-  // Retrieve a Survey message from the Database and return it
+  // <p>Retrieve a Survey message from the Database and return it</p>
 getSurvey: {
     path: '/ondewo.survey.Surveys/GetSurvey',
     requestStream: false,
@@ -192,7 +186,7 @@ getSurvey: {
     responseSerialize: serialize_ondewo_survey_Survey,
     responseDeserialize: deserialize_ondewo_survey_Survey,
   },
-  // Update an existing Survey message from the Database and return it
+  // <p>Update an existing Survey message from the Database and return it</p>
 updateSurvey: {
     path: '/ondewo.survey.Surveys/UpdateSurvey',
     requestStream: false,
@@ -204,7 +198,7 @@ updateSurvey: {
     responseSerialize: serialize_ondewo_survey_Survey,
     responseDeserialize: deserialize_ondewo_survey_Survey,
   },
-  // Delete a survey and its associated agent (if existent)
+  // <p>Delete a survey and its associated agent (if existent)</p>
 deleteSurvey: {
     path: '/ondewo.survey.Surveys/DeleteSurvey',
     requestStream: false,
@@ -216,7 +210,7 @@ deleteSurvey: {
     responseSerialize: serialize_google_protobuf_Empty,
     responseDeserialize: deserialize_google_protobuf_Empty,
   },
-  // Returns the list of all surveys in the server
+  // <p>Returns the list of all surveys in the server</p>
 listSurveys: {
     path: '/ondewo.survey.Surveys/ListSurveys',
     requestStream: false,
@@ -228,7 +222,7 @@ listSurveys: {
     responseSerialize: serialize_ondewo_survey_ListSurveysResponse,
     responseDeserialize: deserialize_ondewo_survey_ListSurveysResponse,
   },
-  // Retrieve answers to survey questions collected in interactions with a survey agent for a specific session
+  // <p>Retrieve answers to survey questions collected in interactions with a survey agent for a specific session</p>
 getSurveyAnswers: {
     path: '/ondewo.survey.Surveys/GetSurveyAnswers',
     requestStream: false,
@@ -240,7 +234,7 @@ getSurveyAnswers: {
     responseSerialize: serialize_ondewo_survey_SurveyAnswersResponse,
     responseDeserialize: deserialize_ondewo_survey_SurveyAnswersResponse,
   },
-  // Retrieve all answers to survey questions collected in interactions with a survey agent in any session
+  // <p>Retrieve all answers to survey questions collected in interactions with a survey agent in any session</p>
 getAllSurveyAnswers: {
     path: '/ondewo.survey.Surveys/GetAllSurveyAnswers',
     requestStream: false,
@@ -252,7 +246,7 @@ getAllSurveyAnswers: {
     responseSerialize: serialize_ondewo_survey_SurveyAnswersResponse,
     responseDeserialize: deserialize_ondewo_survey_SurveyAnswersResponse,
   },
-  // Populate and configures an NLU Agent from a Survey
+  // <p>Populate and configures an NLU Agent from a Survey</p>
 createAgentSurvey: {
     path: '/ondewo.survey.Surveys/CreateAgentSurvey',
     requestStream: false,
@@ -264,7 +258,7 @@ createAgentSurvey: {
     responseSerialize: serialize_ondewo_survey_AgentSurveyResponse,
     responseDeserialize: deserialize_ondewo_survey_AgentSurveyResponse,
   },
-  // Update an NLU agent from a survey
+  // <p>Update an NLU agent from a survey</p>
 updateAgentSurvey: {
     path: '/ondewo.survey.Surveys/UpdateAgentSurvey',
     requestStream: false,
@@ -276,7 +270,7 @@ updateAgentSurvey: {
     responseSerialize: serialize_ondewo_survey_AgentSurveyResponse,
     responseDeserialize: deserialize_ondewo_survey_AgentSurveyResponse,
   },
-  // Deletes all data of an NLU agent associated to a survey
+  // <p>Deletes all data of an NLU agent associated to a survey</p>
 deleteAgentSurvey: {
     path: '/ondewo.survey.Surveys/DeleteAgentSurvey',
     requestStream: false,
@@ -290,4 +284,4 @@ deleteAgentSurvey: {
   },
 };
 
-exports.SurveysClient = grpc.makeGenericClientConstructor(SurveysService);
+exports.SurveysClient = grpc.makeGenericClientConstructor(SurveysService, 'Surveys');

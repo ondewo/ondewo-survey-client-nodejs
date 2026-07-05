@@ -179,4 +179,4 @@ cancelOperation: {
   },
 };
 
-exports.OperationsClient = grpc.makeGenericClientConstructor(OperationsService);
+exports.OperationsClient = grpc.makeGenericClientConstructor(OperationsService, 'Operations');

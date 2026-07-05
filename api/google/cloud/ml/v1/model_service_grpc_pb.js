@@ -363,4 +363,4 @@ setDefaultVersion: {
   },
 };
 
-exports.ModelServiceClient = grpc.makeGenericClientConstructor(ModelServiceService);
+exports.ModelServiceClient = grpc.makeGenericClientConstructor(ModelServiceService, 'ModelService');

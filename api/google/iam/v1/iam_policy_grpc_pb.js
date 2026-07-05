@@ -146,4 +146,4 @@ testIamPermissions: {
   },
 };
 
-exports.IAMPolicyClient = grpc.makeGenericClientConstructor(IAMPolicyService);
+exports.IAMPolicyClient = grpc.makeGenericClientConstructor(IAMPolicyService, 'IAMPolicy');

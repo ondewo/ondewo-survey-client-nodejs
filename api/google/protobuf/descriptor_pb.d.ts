@@ -51,6 +51,10 @@ export class FileDescriptorProto extends jspb.Message {
     getWeakDependencyList(): Array<number>;
     setWeakDependencyList(value: Array<number>): FileDescriptorProto;
     addWeakDependency(value: number, index?: number): number;
+    clearOptionDependencyList(): void;
+    getOptionDependencyList(): Array<string>;
+    setOptionDependencyList(value: Array<string>): FileDescriptorProto;
+    addOptionDependency(value: string, index?: number): string;
     clearMessageTypeList(): void;
     getMessageTypeList(): Array<DescriptorProto>;
     setMessageTypeList(value: Array<DescriptorProto>): FileDescriptorProto;
@@ -105,6 +109,7 @@ export namespace FileDescriptorProto {
         dependencyList: Array<string>,
         publicDependencyList: Array<number>,
         weakDependencyList: Array<number>,
+        optionDependencyList: Array<string>,
         messageTypeList: Array<DescriptorProto.AsObject>,
         enumTypeList: Array<EnumDescriptorProto.AsObject>,
         serviceList: Array<ServiceDescriptorProto.AsObject>,
@@ -160,6 +165,11 @@ export class DescriptorProto extends jspb.Message {
     setReservedNameList(value: Array<string>): DescriptorProto;
     addReservedName(value: string, index?: number): string;
 
+    hasVisibility(): boolean;
+    clearVisibility(): void;
+    getVisibility(): SymbolVisibility | undefined;
+    setVisibility(value: SymbolVisibility): DescriptorProto;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): DescriptorProto.AsObject;
     static toObject(includeInstance: boolean, msg: DescriptorProto): DescriptorProto.AsObject;
@@ -182,6 +192,7 @@ export namespace DescriptorProto {
         options?: MessageOptions.AsObject,
         reservedRangeList: Array<DescriptorProto.ReservedRange.AsObject>,
         reservedNameList: Array<string>,
+        visibility?: SymbolVisibility,
     }
 
 
@@ -509,6 +520,11 @@ export class EnumDescriptorProto extends jspb.Message {
     setReservedNameList(value: Array<string>): EnumDescriptorProto;
     addReservedName(value: string, index?: number): string;
 
+    hasVisibility(): boolean;
+    clearVisibility(): void;
+    getVisibility(): SymbolVisibility | undefined;
+    setVisibility(value: SymbolVisibility): EnumDescriptorProto;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): EnumDescriptorProto.AsObject;
     static toObject(includeInstance: boolean, msg: EnumDescriptorProto): EnumDescriptorProto.AsObject;
@@ -526,6 +542,7 @@ export namespace EnumDescriptorProto {
         options?: EnumOptions.AsObject,
         reservedRangeList: Array<EnumDescriptorProto.EnumReservedRange.AsObject>,
         reservedNameList: Array<string>,
+        visibility?: SymbolVisibility,
     }
 
 
@@ -1415,6 +1432,16 @@ export class FeatureSet extends jspb.Message {
     getJsonFormat(): FeatureSet.JsonFormat | undefined;
     setJsonFormat(value: FeatureSet.JsonFormat): FeatureSet;
 
+    hasEnforceNamingStyle(): boolean;
+    clearEnforceNamingStyle(): void;
+    getEnforceNamingStyle(): FeatureSet.EnforceNamingStyle | undefined;
+    setEnforceNamingStyle(value: FeatureSet.EnforceNamingStyle): FeatureSet;
+
+    hasDefaultSymbolVisibility(): boolean;
+    clearDefaultSymbolVisibility(): void;
+    getDefaultSymbolVisibility(): FeatureSet.VisibilityFeature.DefaultSymbolVisibility | undefined;
+    setDefaultSymbolVisibility(value: FeatureSet.VisibilityFeature.DefaultSymbolVisibility): FeatureSet;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): FeatureSet.AsObject;
     static toObject(includeInstance: boolean, msg: FeatureSet): FeatureSet.AsObject;
@@ -1433,7 +1460,37 @@ export namespace FeatureSet {
         utf8Validation?: FeatureSet.Utf8Validation,
         messageEncoding?: FeatureSet.MessageEncoding,
         jsonFormat?: FeatureSet.JsonFormat,
+        enforceNamingStyle?: FeatureSet.EnforceNamingStyle,
+        defaultSymbolVisibility?: FeatureSet.VisibilityFeature.DefaultSymbolVisibility,
     }
+
+
+    export class VisibilityFeature extends jspb.Message { 
+
+        serializeBinary(): Uint8Array;
+        toObject(includeInstance?: boolean): VisibilityFeature.AsObject;
+        static toObject(includeInstance: boolean, msg: VisibilityFeature): VisibilityFeature.AsObject;
+        static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+        static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+        static serializeBinaryToWriter(message: VisibilityFeature, writer: jspb.BinaryWriter): void;
+        static deserializeBinary(bytes: Uint8Array): VisibilityFeature;
+        static deserializeBinaryFromReader(message: VisibilityFeature, reader: jspb.BinaryReader): VisibilityFeature;
+    }
+
+    export namespace VisibilityFeature {
+        export type AsObject = {
+        }
+
+        export enum DefaultSymbolVisibility {
+    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+    EXPORT_ALL = 1,
+    EXPORT_TOP_LEVEL = 2,
+    LOCAL_ALL = 3,
+    STRICT = 4,
+        }
+
+    }
+
 
     export enum FieldPresence {
     FIELD_PRESENCE_UNKNOWN = 0,
@@ -1470,6 +1527,12 @@ export namespace FeatureSet {
     JSON_FORMAT_UNKNOWN = 0,
     ALLOW = 1,
     LEGACY_BEST_EFFORT = 2,
+    }
+
+    export enum EnforceNamingStyle {
+    ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+    STYLE2024 = 1,
+    STYLE_LEGACY = 2,
     }
 
 }
@@ -1703,4 +1766,10 @@ export enum Edition {
     EDITION_99998_TEST_ONLY = 99998,
     EDITION_99999_TEST_ONLY = 99999,
     EDITION_MAX = 2147483647,
+}
+
+export enum SymbolVisibility {
+    VISIBILITY_UNSET = 0,
+    VISIBILITY_LOCAL = 1,
+    VISIBILITY_EXPORT = 2,
 }
