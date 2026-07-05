@@ -446,6 +446,102 @@ runTestCase('login falls back to the global fetch when no fetchImpl is provided'
 });
 
 /**
+ * Verifies the secure default: with `keycloakVerifySsl` omitted the default transport hands the token
+ * POST to the plain global `fetch` with NO `dispatcher`, so TLS certificate verification stays ON.
+ */
+runTestCase(
+	'keycloakVerifySsl default: the default transport attaches no dispatcher (TLS verify ON)',
+	async (): Promise<void> => {
+		const originalFetch: typeof globalThis.fetch = globalThis.fetch;
+		let capturedInit: TokenFetchInit | undefined;
+		globalThis.fetch = ((url: string, init: TokenFetchInit): Promise<TokenFetchResponse> => {
+			capturedInit = init;
+			return Promise.resolve({
+				ok: true,
+				status: 200,
+				text: (): Promise<string> =>
+					Promise.resolve(
+						JSON.stringify({ access_token: 'access-secure', refresh_token: 'offline-secure', expires_in: 300 })
+					)
+			});
+		}) as unknown as typeof globalThis.fetch;
+
+		try {
+			// Omit fetchImpl (-> default transport) and keycloakVerifySsl (-> defaults to verify ON).
+			const provider: OfflineTokenProvider = await login({ ...BASE_OPTIONS });
+			assert.ok(capturedInit !== undefined);
+			// No undici dispatcher => undici's global dispatcher with TLS verification ON.
+			assert.equal(capturedInit.dispatcher, undefined);
+			assert.equal(provider.getAccessToken(), 'access-secure');
+			provider.stop();
+		} finally {
+			globalThis.fetch = originalFetch;
+		}
+	}
+);
+
+/**
+ * Verifies the opt-in insecure path: with `keycloakVerifySsl: false` the default transport attaches an
+ * undici `Agent` (rejectUnauthorized:false) as the request `dispatcher`, disabling TLS verification for
+ * the token call.
+ */
+runTestCase(
+	'keycloakVerifySsl false: the default transport attaches an undici Agent dispatcher (TLS verify OFF)',
+	async (): Promise<void> => {
+		const originalFetch: typeof globalThis.fetch = globalThis.fetch;
+		let capturedInit: TokenFetchInit | undefined;
+		globalThis.fetch = ((url: string, init: TokenFetchInit): Promise<TokenFetchResponse> => {
+			capturedInit = init;
+			return Promise.resolve({
+				ok: true,
+				status: 200,
+				text: (): Promise<string> =>
+					Promise.resolve(
+						JSON.stringify({ access_token: 'access-insecure', refresh_token: 'offline-insecure', expires_in: 300 })
+					)
+			});
+		}) as unknown as typeof globalThis.fetch;
+
+		try {
+			const provider: OfflineTokenProvider = await login({ ...BASE_OPTIONS, keycloakVerifySsl: false });
+			// eslint-disable-next-line @typescript-eslint/no-require-imports
+			const undici: { Agent: new (options: unknown) => unknown } = require('undici') as {
+				Agent: new (options: unknown) => unknown;
+			};
+			assert.ok(capturedInit !== undefined);
+			// The insecure undici Agent (rejectUnauthorized:false) reached the token POST.
+			assert.ok(capturedInit.dispatcher instanceof undici.Agent);
+			assert.equal(provider.getAccessToken(), 'access-insecure');
+			provider.stop();
+		} finally {
+			globalThis.fetch = originalFetch;
+		}
+	}
+);
+
+/**
+ * Verifies an injected `fetchImpl` is used verbatim, so `keycloakVerifySsl: false` is a no-op (no
+ * `dispatcher`) for custom transports -- the flag only ever touches the built-in default transport.
+ */
+runTestCase('keycloakVerifySsl false is ignored when a custom fetchImpl is injected', async (): Promise<void> => {
+	const stub: FetchStub = makeFetchStub([
+		{ body: { access_token: 'access-1', refresh_token: 'offline-1', expires_in: 300 } }
+	]);
+
+	const provider: OfflineTokenProvider = await login({
+		...BASE_OPTIONS,
+		keycloakVerifySsl: false,
+		fetchImpl: stub.fetchImpl
+	});
+
+	assert.equal(stub.calls.length, 1);
+	// The injected transport receives the request unchanged -- the flag never touches it.
+	assert.equal(stub.calls[0].init.dispatcher, undefined);
+	assert.equal(provider.getAccessToken(), 'access-1');
+	provider.stop();
+});
+
+/**
  * Verifies the stop-during-in-flight-refresh race: calling {@link OfflineTokenProvider.stop} while a
  * refresh is awaiting its response lets that refresh still update the token, but its post-completion
  * `scheduleRefresh` observes `stopped` and arms no further timer.
