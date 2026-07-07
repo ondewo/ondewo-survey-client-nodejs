@@ -3,17 +3,11 @@
 // Original file comments:
 // Copyright 2020 ONDEWO GmbH
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a>
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License. (editesyntax = "proto3";
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. (editesyntax = "proto3";
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var ondewo_survey_fhir_pb = require('../../ondewo/survey/fhir_pb.js');
@@ -79,11 +73,11 @@ function deserialize_ondewo_survey_SurveyFHIRAnswersResponse(buffer_arg) {
 
 // ///// FHIR Services ///////
 //
-// The following servicer was designed to support the FHIR standard.
-// Both Questionnaires and Responses will be detected and transformed for a simpler usage.
+// <p>The following servicer was designed to support the FHIR standard.</p>
+// <p>Both Questionnaires and Responses will be detected and transformed for a simpler usage.</p>
 //
 var FHIRService = exports.FHIRService = {
-  // Create a Survey from FHIR format and an empty NLU Agent for it
+  // <p>Create a Survey from FHIR format and an empty NLU Agent for it</p>
 createFHIRSurvey: {
     path: '/ondewo.survey.FHIR/CreateFHIRSurvey',
     requestStream: false,
@@ -95,7 +89,7 @@ createFHIRSurvey: {
     responseSerialize: serialize_ondewo_survey_Survey,
     responseDeserialize: deserialize_ondewo_survey_Survey,
   },
-  // Get Survey Answers on FHIR format
+  // <p>Get Survey Answers on FHIR format</p>
 getFHIRSurveyAnswers: {
     path: '/ondewo.survey.FHIR/GetFHIRSurveyAnswers',
     requestStream: false,
@@ -107,7 +101,7 @@ getFHIRSurveyAnswers: {
     responseSerialize: serialize_ondewo_survey_SurveyFHIRAnswersResponse,
     responseDeserialize: deserialize_ondewo_survey_SurveyFHIRAnswersResponse,
   },
-  // Get all Survey Answers on FHIR format
+  // <p>Get all Survey Answers on FHIR format</p>
 getAllFHIRSurveyAnswers: {
     path: '/ondewo.survey.FHIR/GetAllFHIRSurveyAnswers',
     requestStream: false,
@@ -121,4 +115,4 @@ getAllFHIRSurveyAnswers: {
   },
 };
 
-exports.FHIRClient = grpc.makeGenericClientConstructor(FHIRService);
+exports.FHIRClient = grpc.makeGenericClientConstructor(FHIRService, 'FHIR');

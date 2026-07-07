@@ -32,6 +32,8 @@ export class Api extends jspb.Message {
     addMixins(value?: Mixin, index?: number): Mixin;
     getSyntax(): google_protobuf_type_pb.Syntax;
     setSyntax(value: google_protobuf_type_pb.Syntax): Api;
+    getEdition(): string;
+    setEdition(value: string): Api;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Api.AsObject;
@@ -52,6 +54,7 @@ export namespace Api {
         sourceContext?: google_protobuf_source_context_pb.SourceContext.AsObject,
         mixinsList: Array<Mixin.AsObject>,
         syntax: google_protobuf_type_pb.Syntax,
+        edition: string,
     }
 }
 
@@ -72,6 +75,8 @@ export class Method extends jspb.Message {
     addOptions(value?: google_protobuf_type_pb.Option, index?: number): google_protobuf_type_pb.Option;
     getSyntax(): google_protobuf_type_pb.Syntax;
     setSyntax(value: google_protobuf_type_pb.Syntax): Method;
+    getEdition(): string;
+    setEdition(value: string): Method;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Method.AsObject;
@@ -92,6 +97,7 @@ export namespace Method {
         responseStreaming: boolean,
         optionsList: Array<google_protobuf_type_pb.Option.AsObject>,
         syntax: google_protobuf_type_pb.Syntax,
+        edition: string,
     }
 }
 

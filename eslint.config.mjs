@@ -16,7 +16,20 @@ const compat = new FlatCompat({
 
 export default [
 	{
-		ignores: ['**/api/', 'src/ondewo-survey-api', '**/ondewo-proto-compiler', '**/*.mjs']
+		ignores: [
+			'npm/auth/offlineTokenProvider.d.ts',
+			'npm/auth/offlineTokenProvider.js',
+			'.test-build/listSurveysExample.js',
+			'.test-build/listSurveysExample.spec.js',
+			'.test-build/offlineTokenProvider.js',
+			'.test-build/offlineTokenProvider.spec.js',
+			'**/api/',
+			'src/ondewo-survey-api',
+			'**/ondewo-proto-compiler',
+			'**/*.mjs',
+			'auth/*.js',
+			'auth/*.d.ts'
+		]
 	},
 	...compat.extends(
 		'plugin:@typescript-eslint/recommended',
