@@ -33,16 +33,16 @@ import { runListSurveysExample } from './listSurveysExample';
 dotenv.config({ path: path.join(__dirname, 'environment.env') });
 
 const provider = await login({
-	keycloakUrl: process.env.KEYCLOAK_URL ?? 'https://auth.ondewo.com/auth',
-	realm: process.env.KEYCLOAK_REALM ?? 'ondewo-ccai-platform',
-	clientId: process.env.KEYCLOAK_CLIENT_ID ?? 'ondewo-survey-cai-sdk-public',
-	username: process.env.KEYCLOAK_USER_NAME ?? '',
-	password: process.env.KEYCLOAK_PASSWORD ?? ''
+ keycloakUrl: process.env.KEYCLOAK_URL ?? 'https://auth.ondewo.com/auth',
+ realm: process.env.KEYCLOAK_REALM ?? 'ondewo-ccai-platform',
+ clientId: process.env.KEYCLOAK_CLIENT_ID ?? 'ondewo-survey-cai-sdk-public',
+ username: process.env.KEYCLOAK_USER_NAME ?? '',
+ password: process.env.KEYCLOAK_PASSWORD ?? ''
 });
 
 const surveys = await runListSurveysExample({
-	grpcHost: `${process.env.ONDEWO_HOST ?? 'localhost'}:${process.env.ONDEWO_PORT ?? '50055'}`,
-	authorizationHeader: provider.getAuthorizationHeader()
+ grpcHost: `${process.env.ONDEWO_HOST ?? 'localhost'}:${process.env.ONDEWO_PORT ?? '50055'}`,
+ authorizationHeader: provider.getAuthorizationHeader()
 });
 ```
 
