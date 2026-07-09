@@ -43,9 +43,7 @@ git clone https://github.com/ondewo/ondewo-survey-client-nodejs.git ## Clone rep
 cd ondewo-survey-client-nodejs                                      ## Change into repo-directoy
 make setup_developer_environment_locally                         ## Install dependencies
 ```
-
 ## Package structure
-
 ```
 npm
 ├── api
@@ -80,23 +78,20 @@ npm
 ├── public-api.js
 └── README.md
 ```
-
+[comment]: <> (START OF GITHUB README)
 ## Build
 
 The `make build` command is dependent on 2 `repositories` and their speciefied `version`:
-
-- [ondewo-survey-api](https://github.com/ondewo/ondewo-survey-api) -- `SURVEY_API_GIT_BRANCH` in `Makefile`
-- [ondewo-proto-compiler](https://github.com/ondewo/ondewo-proto-compiler) -- `ONDEWO_PROTO_COMPILER_GIT_BRANCH` in `Makefile`
+  - [ondewo-survey-api](https://github.com/ondewo/ondewo-survey-api) -- `SURVEY_API_GIT_BRANCH` in `Makefile`
+  - [ondewo-proto-compiler](https://github.com/ondewo/ondewo-proto-compiler) -- `ONDEWO_PROTO_COMPILER_GIT_BRANCH` in `Makefile`
 
 Other than creating the proto-code, `build` also installs the `dev-dependencies` and changes the owner of the proto-code-files from `root` to the `current user`.
 
 In the case that some `google .protos` were not automatically generated, exists the option of creating a `proto-deps.txt` inside of the `src` folder. There, import statements can be written the same way as they are in `.proto` files.
-
   ```
   import "google/api/http.proto"; //Example
     <---- New Line
   ```
-
 > :warning: The last line in the `proto-deps.txt` needs to be an empty new line, otherwise the compiler will fail
 
 ## GitHub Repository - Release Automation
@@ -104,22 +99,16 @@ In the case that some `google .protos` were not automatically generated, exists 
 The repository is published to GitHub and NPM by the Automated Release Process of ONDEWO.
 
 TODO after PR merge:
-
 - checkout master
-
   ```shell
   git checkout master
   ```
-
 - pull newest state
-
   ```shell
   git pull
   ```
-
 - Adjust `ONDEWO_SURVEY_VERSION` in the `Makefile` <br><br>
 - Add new Release Notes to `src/RELEASE.md` in following format:
-
   ```
   ## Release ONDEWO Survey Nodejs Client X.X.X    <----- Beginning of Notes
 
@@ -127,13 +116,10 @@ TODO after PR merge:
 
   *****************                             <----- End of Notes
   ```
-
 - release
-
   ```shell
   make ondewo_release
   ```
-
 <br>
 The release process can be divided into 6 Steps:
 
@@ -145,3 +131,6 @@ The release process can be divided into 6 Steps:
 6. Create a new `Release` on GitHub
 
 > :warning:  The Release Automation checks if the build has created all the proto-code files, but it does not check the code-integrity. Please build and test the generated code prior to starting the release process.
+
+
+[comment]: <> (END OF GITHUB README)
