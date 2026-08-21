@@ -18,13 +18,13 @@ config:
   # MD045 image-alt-text: the branding header uses <img> logos / social icons.
   MD045: false
 globs:
-  - "*.md"
+  - '*.md'
 ignores:
-  - "api/**"
-  - "node_modules/**"
-  - "lib/**"
-  - "dist/**"
-  - "build/**"
-  - "ondewo-proto-compiler/**"
-  - "src/ondewo-survey-api/**"
-  - ".venv/**"
+  - 'api/**'
+  - 'node_modules/**'
+  - 'lib/**'
+  - 'dist/**'
+  - 'build/**'
+  - 'ondewo-proto-compiler/**'
+  - 'src/ondewo-survey-api/**'
+  - '.venv/**'
