@@ -5,22 +5,42 @@ on:
     branches: ['**']
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   unit-tests:
+    name: tests (node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        # 20 is the floor of the toolchain (c8 11 and undici 7 need >= 20), 22 is the current LTS,
+        # 24 the latest release line -- the same matrix as ondewo-nlu-client-nodejs.
+        node-version: ['20', '22', '24']
     steps:
       - uses: actions/checkout@v5
 
-      - name: Set up Node.js 20
+      - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund --legacy-peer-deps
+      # `npm ci` installs exactly the lockfile and fails if package.json and package-lock.json disagree.
+      - name: Install dependencies from the lockfile
+        run: npm ci --no-audit --no-fund
 
       # The repo is ~95% generated gRPC/protobuf stubs; coverage is gated on the HAND-WRITTEN surface
-      # (the D18 Keycloak offline-token auth provider). The test compiles the TS provider + spec and runs
-      # node's built-in test runner under c8 with a >=90% line-coverage gate.
-      - name: Unit tests + >=90% coverage gate on hand-written code
+      # (auth/offlineTokenProvider.ts and auth/grpcChannel.ts) at 100%, plus the RELEASE.md slice test.
+      - name: Unit tests + 100% coverage gate on hand-written code
         run: npm test
+
+      # auth/*.js and auth/*.d.ts are tsc output COMMITTED because the npm package ships them, while the
+      # tests exercise the .ts source. Rebuild them and fail if the result differs from what is committed,
+      # so the shipped helpers cannot drift from their source again.
+      - name: Committed auth build artifacts match their source
+        run: |
+          npm run build:auth
+          git diff --exit-code -- auth/
