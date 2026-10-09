@@ -134,3 +134,4 @@ export * from './api/google/cloud/asset/v1beta1/assets_grpc_pb';
 export * from './api/google/cloud/asset/v1beta1/assets_pb';
 export * from './api/google/privacy/dlp/v2/storage_pb';
 export * from './api/google/privacy/dlp/v2/storage_grpc_pb';
+export * from './auth/grpcChannel';

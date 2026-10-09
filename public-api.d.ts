@@ -71,3 +71,4 @@ export * from './api/google/cloud/ml/v1/model_service_pb.d';
 export * from './api/google/cloud/support/common_pb.d';
 export * from './api/google/cloud/asset/v1beta1/assets_pb.d';
 export * from './api/google/privacy/dlp/v2/storage_pb.d';
+export * from './auth/grpcChannel';
