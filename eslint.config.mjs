@@ -28,7 +28,10 @@ export default [
 			'**/ondewo-proto-compiler',
 			'**/*.mjs',
 			'auth/*.js',
-			'auth/*.d.ts'
+			'auth/*.d.ts',
+			// tsc test output (npm pretest) and the npm/ release copy: lint the .ts sources instead
+			'.test-build/',
+			'npm/'
 		]
 	},
 	...compat.extends(
