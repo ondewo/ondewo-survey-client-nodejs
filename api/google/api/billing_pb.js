@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -108,7 +108,7 @@ proto.google.api.Billing.prototype.toObject = function(opt_includeInstance) {
  */
 proto.google.api.Billing.toObject = function(includeInstance, msg) {
   var f, obj = {
-    consumerDestinationsList: jspb.Message.toObjectList(msg.getConsumerDestinationsList(),
+consumerDestinationsList: jspb.Message.toObjectList(msg.getConsumerDestinationsList(),
     proto.google.api.Billing.BillingDestination.toObject, includeInstance)
   };
 
@@ -230,8 +230,8 @@ proto.google.api.Billing.BillingDestination.prototype.toObject = function(opt_in
  */
 proto.google.api.Billing.BillingDestination.toObject = function(includeInstance, msg) {
   var f, obj = {
-    monitoredResource: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    metricsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+monitoredResource: jspb.Message.getFieldWithDefault(msg, 1, ""),
+metricsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {

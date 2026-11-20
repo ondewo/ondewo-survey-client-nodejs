@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 goog.exportSymbol('proto.google.api.Backend', null, global);
 goog.exportSymbol('proto.google.api.BackendRule', null, global);
@@ -104,7 +104,7 @@ proto.google.api.Backend.prototype.toObject = function(opt_includeInstance) {
  */
 proto.google.api.Backend.toObject = function(includeInstance, msg) {
   var f, obj = {
-    rulesList: jspb.Message.toObjectList(msg.getRulesList(),
+rulesList: jspb.Message.toObjectList(msg.getRulesList(),
     proto.google.api.BackendRule.toObject, includeInstance)
   };
 
@@ -257,10 +257,10 @@ proto.google.api.BackendRule.prototype.toObject = function(opt_includeInstance) 
  */
 proto.google.api.BackendRule.toObject = function(includeInstance, msg) {
   var f, obj = {
-    selector: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    address: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    deadline: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    minDeadline: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
+selector: jspb.Message.getFieldWithDefault(msg, 1, ""),
+address: jspb.Message.getFieldWithDefault(msg, 2, ""),
+deadline: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+minDeadline: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
   };
 
   if (includeInstance) {

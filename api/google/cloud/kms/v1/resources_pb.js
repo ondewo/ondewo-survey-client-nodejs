@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -128,8 +128,8 @@ proto.google.cloud.kms.v1.KeyRing.prototype.toObject = function(opt_includeInsta
  */
 proto.google.cloud.kms.v1.KeyRing.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -334,13 +334,13 @@ proto.google.cloud.kms.v1.CryptoKey.prototype.toObject = function(opt_includeIns
  */
 proto.google.cloud.kms.v1.CryptoKey.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    primary: (f = msg.getPrimary()) && proto.google.cloud.kms.v1.CryptoKeyVersion.toObject(includeInstance, f),
-    purpose: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    nextRotationTime: (f = msg.getNextRotationTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    rotationPeriod: (f = msg.getRotationPeriod()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
-    labelsMap: (f = msg.getLabelsMap()) ? f.toObject(includeInstance, undefined) : []
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+primary: (f = msg.getPrimary()) && proto.google.cloud.kms.v1.CryptoKeyVersion.toObject(includeInstance, f),
+purpose: jspb.Message.getFieldWithDefault(msg, 3, 0),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+nextRotationTime: (f = msg.getNextRotationTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+rotationPeriod: (f = msg.getRotationPeriod()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
+labelsMap: (f = msg.getLabelsMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {
@@ -704,7 +704,8 @@ proto.google.cloud.kms.v1.CryptoKey.prototype.getLabelsMap = function(opt_noLazy
  */
 proto.google.cloud.kms.v1.CryptoKey.prototype.clearLabelsMap = function() {
   this.getLabelsMap().clear();
-  return this;};
+  return this;
+};
 
 
 
@@ -739,11 +740,11 @@ proto.google.cloud.kms.v1.CryptoKeyVersion.prototype.toObject = function(opt_inc
  */
 proto.google.cloud.kms.v1.CryptoKeyVersion.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    state: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    destroyTime: (f = msg.getDestroyTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    destroyEventTime: (f = msg.getDestroyEventTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+state: jspb.Message.getFieldWithDefault(msg, 3, 0),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+destroyTime: (f = msg.getDestroyTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+destroyEventTime: (f = msg.getDestroyEventTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

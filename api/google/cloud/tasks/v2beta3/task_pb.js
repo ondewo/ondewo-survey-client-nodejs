@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -132,15 +132,15 @@ proto.google.cloud.tasks.v2beta3.Task.prototype.toObject = function(opt_includeI
  */
 proto.google.cloud.tasks.v2beta3.Task.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    appEngineHttpRequest: (f = msg.getAppEngineHttpRequest()) && google_cloud_tasks_v2beta3_target_pb.AppEngineHttpRequest.toObject(includeInstance, f),
-    scheduleTime: (f = msg.getScheduleTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    dispatchCount: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    responseCount: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    firstAttempt: (f = msg.getFirstAttempt()) && proto.google.cloud.tasks.v2beta3.Attempt.toObject(includeInstance, f),
-    lastAttempt: (f = msg.getLastAttempt()) && proto.google.cloud.tasks.v2beta3.Attempt.toObject(includeInstance, f),
-    view: jspb.Message.getFieldWithDefault(msg, 10, 0)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+appEngineHttpRequest: (f = msg.getAppEngineHttpRequest()) && google_cloud_tasks_v2beta3_target_pb.AppEngineHttpRequest.toObject(includeInstance, f),
+scheduleTime: (f = msg.getScheduleTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+dispatchCount: jspb.Message.getFieldWithDefault(msg, 6, 0),
+responseCount: jspb.Message.getFieldWithDefault(msg, 7, 0),
+firstAttempt: (f = msg.getFirstAttempt()) && proto.google.cloud.tasks.v2beta3.Attempt.toObject(includeInstance, f),
+lastAttempt: (f = msg.getLastAttempt()) && proto.google.cloud.tasks.v2beta3.Attempt.toObject(includeInstance, f),
+view: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -616,10 +616,10 @@ proto.google.cloud.tasks.v2beta3.Attempt.prototype.toObject = function(opt_inclu
  */
 proto.google.cloud.tasks.v2beta3.Attempt.toObject = function(includeInstance, msg) {
   var f, obj = {
-    scheduleTime: (f = msg.getScheduleTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    dispatchTime: (f = msg.getDispatchTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    responseTime: (f = msg.getResponseTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    responseStatus: (f = msg.getResponseStatus()) && google_rpc_status_pb.Status.toObject(includeInstance, f)
+scheduleTime: (f = msg.getScheduleTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+dispatchTime: (f = msg.getDispatchTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+responseTime: (f = msg.getResponseTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+responseStatus: (f = msg.getResponseStatus()) && google_rpc_status_pb.Status.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

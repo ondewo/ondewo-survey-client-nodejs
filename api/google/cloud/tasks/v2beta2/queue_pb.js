@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -156,13 +156,13 @@ proto.google.cloud.tasks.v2beta2.Queue.prototype.toObject = function(opt_include
  */
 proto.google.cloud.tasks.v2beta2.Queue.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    appEngineHttpTarget: (f = msg.getAppEngineHttpTarget()) && google_cloud_tasks_v2beta2_target_pb.AppEngineHttpTarget.toObject(includeInstance, f),
-    pullTarget: (f = msg.getPullTarget()) && google_cloud_tasks_v2beta2_target_pb.PullTarget.toObject(includeInstance, f),
-    rateLimits: (f = msg.getRateLimits()) && proto.google.cloud.tasks.v2beta2.RateLimits.toObject(includeInstance, f),
-    retryConfig: (f = msg.getRetryConfig()) && proto.google.cloud.tasks.v2beta2.RetryConfig.toObject(includeInstance, f),
-    state: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    purgeTime: (f = msg.getPurgeTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+appEngineHttpTarget: (f = msg.getAppEngineHttpTarget()) && google_cloud_tasks_v2beta2_target_pb.AppEngineHttpTarget.toObject(includeInstance, f),
+pullTarget: (f = msg.getPullTarget()) && google_cloud_tasks_v2beta2_target_pb.PullTarget.toObject(includeInstance, f),
+rateLimits: (f = msg.getRateLimits()) && proto.google.cloud.tasks.v2beta2.RateLimits.toObject(includeInstance, f),
+retryConfig: (f = msg.getRetryConfig()) && proto.google.cloud.tasks.v2beta2.RetryConfig.toObject(includeInstance, f),
+state: jspb.Message.getFieldWithDefault(msg, 7, 0),
+purgeTime: (f = msg.getPurgeTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -581,9 +581,9 @@ proto.google.cloud.tasks.v2beta2.RateLimits.prototype.toObject = function(opt_in
  */
 proto.google.cloud.tasks.v2beta2.RateLimits.toObject = function(includeInstance, msg) {
   var f, obj = {
-    maxTasksDispatchedPerSecond: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
-    maxBurstSize: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    maxConcurrentTasks: jspb.Message.getFieldWithDefault(msg, 3, 0)
+maxTasksDispatchedPerSecond: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+maxBurstSize: jspb.Message.getFieldWithDefault(msg, 2, 0),
+maxConcurrentTasks: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -797,12 +797,12 @@ proto.google.cloud.tasks.v2beta2.RetryConfig.prototype.toObject = function(opt_i
  */
 proto.google.cloud.tasks.v2beta2.RetryConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
-    maxAttempts: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    unlimitedAttempts: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    maxRetryDuration: (f = msg.getMaxRetryDuration()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
-    minBackoff: (f = msg.getMinBackoff()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
-    maxBackoff: (f = msg.getMaxBackoff()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
-    maxDoublings: jspb.Message.getFieldWithDefault(msg, 6, 0)
+maxAttempts: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+unlimitedAttempts: (f = jspb.Message.getBooleanField(msg, 2)) == null ? undefined : f,
+maxRetryDuration: (f = msg.getMaxRetryDuration()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
+minBackoff: (f = msg.getMinBackoff()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
+maxBackoff: (f = msg.getMaxBackoff()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
+maxDoublings: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {

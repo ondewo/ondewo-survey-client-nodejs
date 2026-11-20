@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -79,7 +79,7 @@ proto.google.api.Experimental.prototype.toObject = function(opt_includeInstance)
  */
 proto.google.api.Experimental.toObject = function(includeInstance, msg) {
   var f, obj = {
-    authorization: (f = msg.getAuthorization()) && google_api_experimental_authorization_config_pb.AuthorizationConfig.toObject(includeInstance, f)
+authorization: (f = msg.getAuthorization()) && google_api_experimental_authorization_config_pb.AuthorizationConfig.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

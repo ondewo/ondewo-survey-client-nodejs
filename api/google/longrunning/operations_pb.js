@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -220,11 +220,11 @@ proto.google.longrunning.Operation.prototype.toObject = function(opt_includeInst
  */
 proto.google.longrunning.Operation.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    metadata: (f = msg.getMetadata()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
-    done: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    error: (f = msg.getError()) && google_rpc_status_pb.Status.toObject(includeInstance, f),
-    response: (f = msg.getResponse()) && google_protobuf_any_pb.Any.toObject(includeInstance, f)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+metadata: (f = msg.getMetadata()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
+done: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+error: (f = msg.getError()) && google_rpc_status_pb.Status.toObject(includeInstance, f),
+response: (f = msg.getResponse()) && google_protobuf_any_pb.Any.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -533,7 +533,7 @@ proto.google.longrunning.GetOperationRequest.prototype.toObject = function(opt_i
  */
 proto.google.longrunning.GetOperationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -663,10 +663,10 @@ proto.google.longrunning.ListOperationsRequest.prototype.toObject = function(opt
  */
 proto.google.longrunning.ListOperationsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    filter: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    pageSize: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    pageToken: jspb.Message.getFieldWithDefault(msg, 3, "")
+name: jspb.Message.getFieldWithDefault(msg, 4, ""),
+filter: jspb.Message.getFieldWithDefault(msg, 1, ""),
+pageSize: jspb.Message.getFieldWithDefault(msg, 2, 0),
+pageToken: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -890,9 +890,9 @@ proto.google.longrunning.ListOperationsResponse.prototype.toObject = function(op
  */
 proto.google.longrunning.ListOperationsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    operationsList: jspb.Message.toObjectList(msg.getOperationsList(),
+operationsList: jspb.Message.toObjectList(msg.getOperationsList(),
     proto.google.longrunning.Operation.toObject, includeInstance),
-    nextPageToken: jspb.Message.getFieldWithDefault(msg, 2, "")
+nextPageToken: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -1073,7 +1073,7 @@ proto.google.longrunning.CancelOperationRequest.prototype.toObject = function(op
  */
 proto.google.longrunning.CancelOperationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -1203,7 +1203,7 @@ proto.google.longrunning.DeleteOperationRequest.prototype.toObject = function(op
  */
 proto.google.longrunning.DeleteOperationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

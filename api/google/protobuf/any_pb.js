@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 goog.exportSymbol('proto.google.protobuf.Any', null, global);
 /**
@@ -75,8 +75,8 @@ proto.google.protobuf.Any.prototype.toObject = function(opt_includeInstance) {
  */
 proto.google.protobuf.Any.toObject = function(includeInstance, msg) {
   var f, obj = {
-    typeUrl: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    value: msg.getValue_asB64()
+typeUrl: jspb.Message.getFieldWithDefault(msg, 1, ""),
+value: msg.getValue_asB64()
   };
 
   if (includeInstance) {

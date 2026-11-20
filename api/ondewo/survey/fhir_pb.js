@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -103,7 +103,7 @@ proto.ondewo.survey.CreateFHIRSurveyRequest.prototype.toObject = function(opt_in
  */
 proto.ondewo.survey.CreateFHIRSurveyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    fhirQuestionnaire: (f = msg.getFhirQuestionnaire()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f)
+fhirQuestionnaire: (f = msg.getFhirQuestionnaire()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -261,8 +261,8 @@ proto.ondewo.survey.SurveyFHIRAnswersResponse.prototype.toObject = function(opt_
  */
 proto.ondewo.survey.SurveyFHIRAnswersResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    surveyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    fhirQuestionnaireResponsesList: jspb.Message.toObjectList(msg.getFhirQuestionnaireResponsesList(),
+surveyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+fhirQuestionnaireResponsesList: jspb.Message.toObjectList(msg.getFhirQuestionnaireResponsesList(),
     google_protobuf_struct_pb.Struct.toObject, includeInstance)
   };
 

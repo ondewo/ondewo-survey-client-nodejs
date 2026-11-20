@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -150,9 +150,9 @@ proto.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary.prototype.toObject
  */
 proto.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary.toObject = function(includeInstance, msg) {
   var f, obj = {
-    libraryName: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    version: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    learnMoreUrlsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
+libraryName: jspb.Message.getFieldWithDefault(msg, 1, ""),
+version: jspb.Message.getFieldWithDefault(msg, 2, ""),
+learnMoreUrlsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -359,8 +359,8 @@ proto.google.cloud.websecurityscanner.v1alpha.ViolatingResource.prototype.toObje
  */
 proto.google.cloud.websecurityscanner.v1alpha.ViolatingResource.toObject = function(includeInstance, msg) {
   var f, obj = {
-    contentType: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    resourceUrl: jspb.Message.getFieldWithDefault(msg, 2, "")
+contentType: jspb.Message.getFieldWithDefault(msg, 1, ""),
+resourceUrl: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -526,7 +526,7 @@ proto.google.cloud.websecurityscanner.v1alpha.VulnerableParameters.prototype.toO
  */
 proto.google.cloud.websecurityscanner.v1alpha.VulnerableParameters.toObject = function(includeInstance, msg) {
   var f, obj = {
-    parameterNamesList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+parameterNamesList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -682,8 +682,8 @@ proto.google.cloud.websecurityscanner.v1alpha.Xss.prototype.toObject = function(
  */
 proto.google.cloud.websecurityscanner.v1alpha.Xss.toObject = function(includeInstance, msg) {
   var f, obj = {
-    stackTracesList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    errorMessage: jspb.Message.getFieldWithDefault(msg, 2, "")
+stackTracesList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+errorMessage: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {

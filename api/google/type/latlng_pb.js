@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 goog.exportSymbol('proto.google.type.LatLng', null, global);
 /**
@@ -75,8 +75,8 @@ proto.google.type.LatLng.prototype.toObject = function(opt_includeInstance) {
  */
 proto.google.type.LatLng.toObject = function(includeInstance, msg) {
   var f, obj = {
-    latitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
-    longitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0)
+latitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+longitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0)
   };
 
   if (includeInstance) {

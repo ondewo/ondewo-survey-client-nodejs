@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -80,20 +80,20 @@ proto.google.cloud.websecurityscanner.v1alpha.Finding.prototype.toObject = funct
  */
 proto.google.cloud.websecurityscanner.v1alpha.Finding.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    findingType: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    httpMethod: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    fuzzedUrl: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    body: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    reproductionUrl: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    frameUrl: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    finalUrl: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    trackingId: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    outdatedLibrary: (f = msg.getOutdatedLibrary()) && google_cloud_websecurityscanner_v1alpha_finding_addon_pb.OutdatedLibrary.toObject(includeInstance, f),
-    violatingResource: (f = msg.getViolatingResource()) && google_cloud_websecurityscanner_v1alpha_finding_addon_pb.ViolatingResource.toObject(includeInstance, f),
-    vulnerableParameters: (f = msg.getVulnerableParameters()) && google_cloud_websecurityscanner_v1alpha_finding_addon_pb.VulnerableParameters.toObject(includeInstance, f),
-    xss: (f = msg.getXss()) && google_cloud_websecurityscanner_v1alpha_finding_addon_pb.Xss.toObject(includeInstance, f)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+findingType: jspb.Message.getFieldWithDefault(msg, 2, 0),
+httpMethod: jspb.Message.getFieldWithDefault(msg, 3, ""),
+fuzzedUrl: jspb.Message.getFieldWithDefault(msg, 4, ""),
+body: jspb.Message.getFieldWithDefault(msg, 5, ""),
+description: jspb.Message.getFieldWithDefault(msg, 6, ""),
+reproductionUrl: jspb.Message.getFieldWithDefault(msg, 7, ""),
+frameUrl: jspb.Message.getFieldWithDefault(msg, 8, ""),
+finalUrl: jspb.Message.getFieldWithDefault(msg, 9, ""),
+trackingId: jspb.Message.getFieldWithDefault(msg, 10, ""),
+outdatedLibrary: (f = msg.getOutdatedLibrary()) && google_cloud_websecurityscanner_v1alpha_finding_addon_pb.OutdatedLibrary.toObject(includeInstance, f),
+violatingResource: (f = msg.getViolatingResource()) && google_cloud_websecurityscanner_v1alpha_finding_addon_pb.ViolatingResource.toObject(includeInstance, f),
+vulnerableParameters: (f = msg.getVulnerableParameters()) && google_cloud_websecurityscanner_v1alpha_finding_addon_pb.VulnerableParameters.toObject(includeInstance, f),
+xss: (f = msg.getXss()) && google_cloud_websecurityscanner_v1alpha_finding_addon_pb.Xss.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

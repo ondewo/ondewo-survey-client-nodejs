@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -177,15 +177,15 @@ proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.prototype.toObject = fu
  */
 proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    displayName: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    maxQps: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    startingUrlsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
-    authentication: (f = msg.getAuthentication()) && proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.toObject(includeInstance, f),
-    userAgent: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    blacklistPatternsList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
-    schedule: (f = msg.getSchedule()) && proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.toObject(includeInstance, f),
-    targetPlatformsList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+displayName: jspb.Message.getFieldWithDefault(msg, 2, ""),
+maxQps: jspb.Message.getFieldWithDefault(msg, 3, 0),
+startingUrlsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
+authentication: (f = msg.getAuthentication()) && proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.toObject(includeInstance, f),
+userAgent: jspb.Message.getFieldWithDefault(msg, 6, 0),
+blacklistPatternsList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
+schedule: (f = msg.getSchedule()) && proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.toObject(includeInstance, f),
+targetPlatformsList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -436,8 +436,8 @@ proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.prototyp
  */
 proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.toObject = function(includeInstance, msg) {
   var f, obj = {
-    googleAccount: (f = msg.getGoogleAccount()) && proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount.toObject(includeInstance, f),
-    customAccount: (f = msg.getCustomAccount()) && proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount.toObject(includeInstance, f)
+googleAccount: (f = msg.getGoogleAccount()) && proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount.toObject(includeInstance, f),
+customAccount: (f = msg.getCustomAccount()) && proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -564,8 +564,8 @@ proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAc
  */
 proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount.toObject = function(includeInstance, msg) {
   var f, obj = {
-    username: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 2, "")
+username: jspb.Message.getFieldWithDefault(msg, 1, ""),
+password: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -724,9 +724,9 @@ proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAc
  */
 proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount.toObject = function(includeInstance, msg) {
   var f, obj = {
-    username: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    loginUrl: jspb.Message.getFieldWithDefault(msg, 3, "")
+username: jspb.Message.getFieldWithDefault(msg, 1, ""),
+password: jspb.Message.getFieldWithDefault(msg, 2, ""),
+loginUrl: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -988,8 +988,8 @@ proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.prototype.toOb
  */
 proto.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.toObject = function(includeInstance, msg) {
   var f, obj = {
-    scheduleTime: (f = msg.getScheduleTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    intervalDurationDays: jspb.Message.getFieldWithDefault(msg, 2, 0)
+scheduleTime: (f = msg.getScheduleTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+intervalDurationDays: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {

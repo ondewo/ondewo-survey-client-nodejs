@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -376,11 +376,11 @@ proto.google.cloud.ml.v1.Model.prototype.toObject = function(opt_includeInstance
  */
 proto.google.cloud.ml.v1.Model.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    defaultVersion: (f = msg.getDefaultVersion()) && proto.google.cloud.ml.v1.Version.toObject(includeInstance, f),
-    regionsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
-    onlinePredictionLogging: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+description: jspb.Message.getFieldWithDefault(msg, 2, ""),
+defaultVersion: (f = msg.getDefaultVersion()) && proto.google.cloud.ml.v1.Version.toObject(includeInstance, f),
+regionsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
+onlinePredictionLogging: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
   };
 
   if (includeInstance) {
@@ -666,14 +666,14 @@ proto.google.cloud.ml.v1.Version.prototype.toObject = function(opt_includeInstan
  */
 proto.google.cloud.ml.v1.Version.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    deploymentUri: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    lastUseTime: (f = msg.getLastUseTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    runtimeVersion: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    manualScaling: (f = msg.getManualScaling()) && proto.google.cloud.ml.v1.ManualScaling.toObject(includeInstance, f)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+description: jspb.Message.getFieldWithDefault(msg, 2, ""),
+isDefault: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+deploymentUri: jspb.Message.getFieldWithDefault(msg, 4, ""),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+lastUseTime: (f = msg.getLastUseTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+runtimeVersion: jspb.Message.getFieldWithDefault(msg, 8, ""),
+manualScaling: (f = msg.getManualScaling()) && proto.google.cloud.ml.v1.ManualScaling.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1069,7 +1069,7 @@ proto.google.cloud.ml.v1.ManualScaling.prototype.toObject = function(opt_include
  */
 proto.google.cloud.ml.v1.ManualScaling.toObject = function(includeInstance, msg) {
   var f, obj = {
-    nodes: jspb.Message.getFieldWithDefault(msg, 1, 0)
+nodes: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -1199,8 +1199,8 @@ proto.google.cloud.ml.v1.CreateModelRequest.prototype.toObject = function(opt_in
  */
 proto.google.cloud.ml.v1.CreateModelRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    parent: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    model: (f = msg.getModel()) && proto.google.cloud.ml.v1.Model.toObject(includeInstance, f)
+parent: jspb.Message.getFieldWithDefault(msg, 1, ""),
+model: (f = msg.getModel()) && proto.google.cloud.ml.v1.Model.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1380,9 +1380,9 @@ proto.google.cloud.ml.v1.ListModelsRequest.prototype.toObject = function(opt_inc
  */
 proto.google.cloud.ml.v1.ListModelsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    parent: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    pageToken: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    pageSize: jspb.Message.getFieldWithDefault(msg, 5, 0)
+parent: jspb.Message.getFieldWithDefault(msg, 1, ""),
+pageToken: jspb.Message.getFieldWithDefault(msg, 4, ""),
+pageSize: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -1577,9 +1577,9 @@ proto.google.cloud.ml.v1.ListModelsResponse.prototype.toObject = function(opt_in
  */
 proto.google.cloud.ml.v1.ListModelsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    modelsList: jspb.Message.toObjectList(msg.getModelsList(),
+modelsList: jspb.Message.toObjectList(msg.getModelsList(),
     proto.google.cloud.ml.v1.Model.toObject, includeInstance),
-    nextPageToken: jspb.Message.getFieldWithDefault(msg, 2, "")
+nextPageToken: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -1760,7 +1760,7 @@ proto.google.cloud.ml.v1.GetModelRequest.prototype.toObject = function(opt_inclu
  */
 proto.google.cloud.ml.v1.GetModelRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -1890,7 +1890,7 @@ proto.google.cloud.ml.v1.DeleteModelRequest.prototype.toObject = function(opt_in
  */
 proto.google.cloud.ml.v1.DeleteModelRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -2020,8 +2020,8 @@ proto.google.cloud.ml.v1.CreateVersionRequest.prototype.toObject = function(opt_
  */
 proto.google.cloud.ml.v1.CreateVersionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    parent: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    version: (f = msg.getVersion()) && proto.google.cloud.ml.v1.Version.toObject(includeInstance, f)
+parent: jspb.Message.getFieldWithDefault(msg, 1, ""),
+version: (f = msg.getVersion()) && proto.google.cloud.ml.v1.Version.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2201,9 +2201,9 @@ proto.google.cloud.ml.v1.ListVersionsRequest.prototype.toObject = function(opt_i
  */
 proto.google.cloud.ml.v1.ListVersionsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    parent: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    pageToken: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    pageSize: jspb.Message.getFieldWithDefault(msg, 5, 0)
+parent: jspb.Message.getFieldWithDefault(msg, 1, ""),
+pageToken: jspb.Message.getFieldWithDefault(msg, 4, ""),
+pageSize: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -2398,9 +2398,9 @@ proto.google.cloud.ml.v1.ListVersionsResponse.prototype.toObject = function(opt_
  */
 proto.google.cloud.ml.v1.ListVersionsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    versionsList: jspb.Message.toObjectList(msg.getVersionsList(),
+versionsList: jspb.Message.toObjectList(msg.getVersionsList(),
     proto.google.cloud.ml.v1.Version.toObject, includeInstance),
-    nextPageToken: jspb.Message.getFieldWithDefault(msg, 2, "")
+nextPageToken: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -2581,7 +2581,7 @@ proto.google.cloud.ml.v1.GetVersionRequest.prototype.toObject = function(opt_inc
  */
 proto.google.cloud.ml.v1.GetVersionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -2711,7 +2711,7 @@ proto.google.cloud.ml.v1.DeleteVersionRequest.prototype.toObject = function(opt_
  */
 proto.google.cloud.ml.v1.DeleteVersionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -2841,7 +2841,7 @@ proto.google.cloud.ml.v1.SetDefaultVersionRequest.prototype.toObject = function(
  */
 proto.google.cloud.ml.v1.SetDefaultVersionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

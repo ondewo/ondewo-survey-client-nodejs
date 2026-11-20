@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -269,8 +269,8 @@ proto.google.cloud.tasks.v2beta2.PullMessage.prototype.toObject = function(opt_i
  */
 proto.google.cloud.tasks.v2beta2.PullMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
-    payload: msg.getPayload_asB64(),
-    tag: jspb.Message.getFieldWithDefault(msg, 2, "")
+payload: msg.getPayload_asB64(),
+tag: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -453,7 +453,7 @@ proto.google.cloud.tasks.v2beta2.AppEngineHttpTarget.prototype.toObject = functi
  */
 proto.google.cloud.tasks.v2beta2.AppEngineHttpTarget.toObject = function(includeInstance, msg) {
   var f, obj = {
-    appEngineRoutingOverride: (f = msg.getAppEngineRoutingOverride()) && proto.google.cloud.tasks.v2beta2.AppEngineRouting.toObject(includeInstance, f)
+appEngineRoutingOverride: (f = msg.getAppEngineRoutingOverride()) && proto.google.cloud.tasks.v2beta2.AppEngineRouting.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -604,11 +604,11 @@ proto.google.cloud.tasks.v2beta2.AppEngineHttpRequest.prototype.toObject = funct
  */
 proto.google.cloud.tasks.v2beta2.AppEngineHttpRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    httpMethod: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    appEngineRouting: (f = msg.getAppEngineRouting()) && proto.google.cloud.tasks.v2beta2.AppEngineRouting.toObject(includeInstance, f),
-    relativeUrl: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    headersMap: (f = msg.getHeadersMap()) ? f.toObject(includeInstance, undefined) : [],
-    payload: msg.getPayload_asB64()
+httpMethod: jspb.Message.getFieldWithDefault(msg, 1, 0),
+appEngineRouting: (f = msg.getAppEngineRouting()) && proto.google.cloud.tasks.v2beta2.AppEngineRouting.toObject(includeInstance, f),
+relativeUrl: jspb.Message.getFieldWithDefault(msg, 3, ""),
+headersMap: (f = msg.getHeadersMap()) ? f.toObject(includeInstance, undefined) : [],
+payload: msg.getPayload_asB64()
   };
 
   if (includeInstance) {
@@ -825,7 +825,8 @@ proto.google.cloud.tasks.v2beta2.AppEngineHttpRequest.prototype.getHeadersMap = 
  */
 proto.google.cloud.tasks.v2beta2.AppEngineHttpRequest.prototype.clearHeadersMap = function() {
   this.getHeadersMap().clear();
-  return this;};
+  return this;
+};
 
 
 /**
@@ -902,10 +903,10 @@ proto.google.cloud.tasks.v2beta2.AppEngineRouting.prototype.toObject = function(
  */
 proto.google.cloud.tasks.v2beta2.AppEngineRouting.toObject = function(includeInstance, msg) {
   var f, obj = {
-    service: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    version: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    instance: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    host: jspb.Message.getFieldWithDefault(msg, 4, "")
+service: jspb.Message.getFieldWithDefault(msg, 1, ""),
+version: jspb.Message.getFieldWithDefault(msg, 2, ""),
+instance: jspb.Message.getFieldWithDefault(msg, 3, ""),
+host: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {

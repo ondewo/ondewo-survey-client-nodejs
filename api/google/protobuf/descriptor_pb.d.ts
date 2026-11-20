@@ -1055,6 +1055,11 @@ export namespace FieldOptions {
         getEditionRemoved(): Edition | undefined;
         setEditionRemoved(value: Edition): FeatureSupport;
 
+        hasRemovalError(): boolean;
+        clearRemovalError(): void;
+        getRemovalError(): string | undefined;
+        setRemovalError(value: string): FeatureSupport;
+
         serializeBinary(): Uint8Array;
         toObject(includeInstance?: boolean): FeatureSupport.AsObject;
         static toObject(includeInstance: boolean, msg: FeatureSupport): FeatureSupport.AsObject;
@@ -1071,6 +1076,7 @@ export namespace FieldOptions {
             editionDeprecated?: Edition,
             deprecationWarning?: string,
             editionRemoved?: Edition,
+            removalError?: string,
         }
     }
 
@@ -1533,6 +1539,7 @@ export namespace FeatureSet {
     ENFORCE_NAMING_STYLE_UNKNOWN = 0,
     STYLE2024 = 1,
     STYLE_LEGACY = 2,
+    STYLE2026 = 3,
     }
 
 }
@@ -1760,6 +1767,8 @@ export enum Edition {
     EDITION_PROTO3 = 999,
     EDITION_2023 = 1000,
     EDITION_2024 = 1001,
+    EDITION_2026 = 1002,
+    EDITION_UNSTABLE = 9999,
     EDITION_1_TEST_ONLY = 1,
     EDITION_2_TEST_ONLY = 2,
     EDITION_99997_TEST_ONLY = 99997,

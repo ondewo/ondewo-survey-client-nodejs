@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -79,21 +79,21 @@ proto.google.logging.type.HttpRequest.prototype.toObject = function(opt_includeI
  */
 proto.google.logging.type.HttpRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    requestMethod: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    requestUrl: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    requestSize: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    status: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    responseSize: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    userAgent: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    remoteIp: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    serverIp: jspb.Message.getFieldWithDefault(msg, 13, ""),
-    referer: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    latency: (f = msg.getLatency()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
-    cacheLookup: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
-    cacheHit: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
-    cacheValidatedWithOriginServer: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    cacheFillBytes: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    protocol: jspb.Message.getFieldWithDefault(msg, 15, "")
+requestMethod: jspb.Message.getFieldWithDefault(msg, 1, ""),
+requestUrl: jspb.Message.getFieldWithDefault(msg, 2, ""),
+requestSize: jspb.Message.getFieldWithDefault(msg, 3, 0),
+status: jspb.Message.getFieldWithDefault(msg, 4, 0),
+responseSize: jspb.Message.getFieldWithDefault(msg, 5, 0),
+userAgent: jspb.Message.getFieldWithDefault(msg, 6, ""),
+remoteIp: jspb.Message.getFieldWithDefault(msg, 7, ""),
+serverIp: jspb.Message.getFieldWithDefault(msg, 13, ""),
+referer: jspb.Message.getFieldWithDefault(msg, 8, ""),
+latency: (f = msg.getLatency()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
+cacheLookup: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+cacheHit: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
+cacheValidatedWithOriginServer: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+cacheFillBytes: jspb.Message.getFieldWithDefault(msg, 12, 0),
+protocol: jspb.Message.getFieldWithDefault(msg, 15, "")
   };
 
   if (includeInstance) {

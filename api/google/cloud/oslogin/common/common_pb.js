@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -99,15 +99,15 @@ proto.google.cloud.oslogin.common.PosixAccount.prototype.toObject = function(opt
  */
 proto.google.cloud.oslogin.common.PosixAccount.toObject = function(includeInstance, msg) {
   var f, obj = {
-    primary: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
-    username: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    uid: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    gid: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    homeDirectory: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    shell: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    gecos: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    systemId: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    accountId: jspb.Message.getFieldWithDefault(msg, 9, "")
+primary: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+username: jspb.Message.getFieldWithDefault(msg, 2, ""),
+uid: jspb.Message.getFieldWithDefault(msg, 3, 0),
+gid: jspb.Message.getFieldWithDefault(msg, 4, 0),
+homeDirectory: jspb.Message.getFieldWithDefault(msg, 5, ""),
+shell: jspb.Message.getFieldWithDefault(msg, 6, ""),
+gecos: jspb.Message.getFieldWithDefault(msg, 7, ""),
+systemId: jspb.Message.getFieldWithDefault(msg, 8, ""),
+accountId: jspb.Message.getFieldWithDefault(msg, 9, "")
   };
 
   if (includeInstance) {
@@ -469,9 +469,9 @@ proto.google.cloud.oslogin.common.SshPublicKey.prototype.toObject = function(opt
  */
 proto.google.cloud.oslogin.common.SshPublicKey.toObject = function(includeInstance, msg) {
   var f, obj = {
-    key: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    expirationTimeUsec: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    fingerprint: jspb.Message.getFieldWithDefault(msg, 3, "")
+key: jspb.Message.getFieldWithDefault(msg, 1, ""),
+expirationTimeUsec: jspb.Message.getFieldWithDefault(msg, 2, 0),
+fingerprint: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {

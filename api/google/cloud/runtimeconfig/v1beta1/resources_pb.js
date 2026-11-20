@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -174,8 +174,8 @@ proto.google.cloud.runtimeconfig.v1beta1.RuntimeConfig.prototype.toObject = func
  */
 proto.google.cloud.runtimeconfig.v1beta1.RuntimeConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 2, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+description: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -360,11 +360,11 @@ proto.google.cloud.runtimeconfig.v1beta1.Variable.prototype.toObject = function(
  */
 proto.google.cloud.runtimeconfig.v1beta1.Variable.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    value: msg.getValue_asB64(),
-    text: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    updateTime: (f = msg.getUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    state: jspb.Message.getFieldWithDefault(msg, 4, 0)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+value: msg.getValue_asB64(),
+text: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
+updateTime: (f = msg.getUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+state: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -716,7 +716,7 @@ proto.google.cloud.runtimeconfig.v1beta1.EndCondition.prototype.toObject = funct
  */
 proto.google.cloud.runtimeconfig.v1beta1.EndCondition.toObject = function(includeInstance, msg) {
   var f, obj = {
-    cardinality: (f = msg.getCardinality()) && proto.google.cloud.runtimeconfig.v1beta1.EndCondition.Cardinality.toObject(includeInstance, f)
+cardinality: (f = msg.getCardinality()) && proto.google.cloud.runtimeconfig.v1beta1.EndCondition.Cardinality.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -830,8 +830,8 @@ proto.google.cloud.runtimeconfig.v1beta1.EndCondition.Cardinality.prototype.toOb
  */
 proto.google.cloud.runtimeconfig.v1beta1.EndCondition.Cardinality.toObject = function(includeInstance, msg) {
   var f, obj = {
-    path: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    number: jspb.Message.getFieldWithDefault(msg, 2, 0)
+path: jspb.Message.getFieldWithDefault(msg, 1, ""),
+number: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -1027,13 +1027,13 @@ proto.google.cloud.runtimeconfig.v1beta1.Waiter.prototype.toObject = function(op
  */
 proto.google.cloud.runtimeconfig.v1beta1.Waiter.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    timeout: (f = msg.getTimeout()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
-    failure: (f = msg.getFailure()) && proto.google.cloud.runtimeconfig.v1beta1.EndCondition.toObject(includeInstance, f),
-    success: (f = msg.getSuccess()) && proto.google.cloud.runtimeconfig.v1beta1.EndCondition.toObject(includeInstance, f),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    done: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
-    error: (f = msg.getError()) && google_rpc_status_pb.Status.toObject(includeInstance, f)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+timeout: (f = msg.getTimeout()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
+failure: (f = msg.getFailure()) && proto.google.cloud.runtimeconfig.v1beta1.EndCondition.toObject(includeInstance, f),
+success: (f = msg.getSuccess()) && proto.google.cloud.runtimeconfig.v1beta1.EndCondition.toObject(includeInstance, f),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+done: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+error: (f = msg.getError()) && google_rpc_status_pb.Status.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

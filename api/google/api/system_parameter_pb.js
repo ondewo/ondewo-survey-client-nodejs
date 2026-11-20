@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 goog.exportSymbol('proto.google.api.SystemParameter', null, global);
 goog.exportSymbol('proto.google.api.SystemParameterRule', null, global);
@@ -126,7 +126,7 @@ proto.google.api.SystemParameters.prototype.toObject = function(opt_includeInsta
  */
 proto.google.api.SystemParameters.toObject = function(includeInstance, msg) {
   var f, obj = {
-    rulesList: jspb.Message.toObjectList(msg.getRulesList(),
+rulesList: jspb.Message.toObjectList(msg.getRulesList(),
     proto.google.api.SystemParameterRule.toObject, includeInstance)
   };
 
@@ -286,8 +286,8 @@ proto.google.api.SystemParameterRule.prototype.toObject = function(opt_includeIn
  */
 proto.google.api.SystemParameterRule.toObject = function(includeInstance, msg) {
   var f, obj = {
-    selector: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    parametersList: jspb.Message.toObjectList(msg.getParametersList(),
+selector: jspb.Message.getFieldWithDefault(msg, 1, ""),
+parametersList: jspb.Message.toObjectList(msg.getParametersList(),
     proto.google.api.SystemParameter.toObject, includeInstance)
   };
 
@@ -469,9 +469,9 @@ proto.google.api.SystemParameter.prototype.toObject = function(opt_includeInstan
  */
 proto.google.api.SystemParameter.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    httpHeader: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    urlQueryParameter: jspb.Message.getFieldWithDefault(msg, 3, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+httpHeader: jspb.Message.getFieldWithDefault(msg, 2, ""),
+urlQueryParameter: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {

@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -358,22 +358,22 @@ proto.google.cloud.iot.v1.Device.prototype.toObject = function(opt_includeInstan
  */
 proto.google.cloud.iot.v1.Device.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    numId: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    credentialsList: jspb.Message.toObjectList(msg.getCredentialsList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+numId: jspb.Message.getFieldWithDefault(msg, 3, 0),
+credentialsList: jspb.Message.toObjectList(msg.getCredentialsList(),
     proto.google.cloud.iot.v1.DeviceCredential.toObject, includeInstance),
-    lastHeartbeatTime: (f = msg.getLastHeartbeatTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    lastEventTime: (f = msg.getLastEventTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    lastStateTime: (f = msg.getLastStateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    lastConfigAckTime: (f = msg.getLastConfigAckTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    lastConfigSendTime: (f = msg.getLastConfigSendTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    blocked: jspb.Message.getBooleanFieldWithDefault(msg, 19, false),
-    lastErrorTime: (f = msg.getLastErrorTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    lastErrorStatus: (f = msg.getLastErrorStatus()) && google_rpc_status_pb.Status.toObject(includeInstance, f),
-    config: (f = msg.getConfig()) && proto.google.cloud.iot.v1.DeviceConfig.toObject(includeInstance, f),
-    state: (f = msg.getState()) && proto.google.cloud.iot.v1.DeviceState.toObject(includeInstance, f),
-    metadataMap: (f = msg.getMetadataMap()) ? f.toObject(includeInstance, undefined) : []
+lastHeartbeatTime: (f = msg.getLastHeartbeatTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+lastEventTime: (f = msg.getLastEventTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+lastStateTime: (f = msg.getLastStateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+lastConfigAckTime: (f = msg.getLastConfigAckTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+lastConfigSendTime: (f = msg.getLastConfigSendTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+blocked: jspb.Message.getBooleanFieldWithDefault(msg, 19, false),
+lastErrorTime: (f = msg.getLastErrorTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+lastErrorStatus: (f = msg.getLastErrorStatus()) && google_rpc_status_pb.Status.toObject(includeInstance, f),
+config: (f = msg.getConfig()) && proto.google.cloud.iot.v1.DeviceConfig.toObject(includeInstance, f),
+state: (f = msg.getState()) && proto.google.cloud.iot.v1.DeviceState.toObject(includeInstance, f),
+metadataMap: (f = msg.getMetadataMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {
@@ -1088,7 +1088,8 @@ proto.google.cloud.iot.v1.Device.prototype.getMetadataMap = function(opt_noLazyC
  */
 proto.google.cloud.iot.v1.Device.prototype.clearMetadataMap = function() {
   this.getMetadataMap().clear();
-  return this;};
+  return this;
+};
 
 
 
@@ -1130,14 +1131,14 @@ proto.google.cloud.iot.v1.DeviceRegistry.prototype.toObject = function(opt_inclu
  */
 proto.google.cloud.iot.v1.DeviceRegistry.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    eventNotificationConfigsList: jspb.Message.toObjectList(msg.getEventNotificationConfigsList(),
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+eventNotificationConfigsList: jspb.Message.toObjectList(msg.getEventNotificationConfigsList(),
     proto.google.cloud.iot.v1.EventNotificationConfig.toObject, includeInstance),
-    stateNotificationConfig: (f = msg.getStateNotificationConfig()) && proto.google.cloud.iot.v1.StateNotificationConfig.toObject(includeInstance, f),
-    mqttConfig: (f = msg.getMqttConfig()) && proto.google.cloud.iot.v1.MqttConfig.toObject(includeInstance, f),
-    httpConfig: (f = msg.getHttpConfig()) && proto.google.cloud.iot.v1.HttpConfig.toObject(includeInstance, f),
-    credentialsList: jspb.Message.toObjectList(msg.getCredentialsList(),
+stateNotificationConfig: (f = msg.getStateNotificationConfig()) && proto.google.cloud.iot.v1.StateNotificationConfig.toObject(includeInstance, f),
+mqttConfig: (f = msg.getMqttConfig()) && proto.google.cloud.iot.v1.MqttConfig.toObject(includeInstance, f),
+httpConfig: (f = msg.getHttpConfig()) && proto.google.cloud.iot.v1.HttpConfig.toObject(includeInstance, f),
+credentialsList: jspb.Message.toObjectList(msg.getCredentialsList(),
     proto.google.cloud.iot.v1.RegistryCredential.toObject, includeInstance)
   };
 
@@ -1549,7 +1550,7 @@ proto.google.cloud.iot.v1.MqttConfig.prototype.toObject = function(opt_includeIn
  */
 proto.google.cloud.iot.v1.MqttConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
-    mqttEnabledState: jspb.Message.getFieldWithDefault(msg, 1, 0)
+mqttEnabledState: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -1679,7 +1680,7 @@ proto.google.cloud.iot.v1.HttpConfig.prototype.toObject = function(opt_includeIn
  */
 proto.google.cloud.iot.v1.HttpConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
-    httpEnabledState: jspb.Message.getFieldWithDefault(msg, 1, 0)
+httpEnabledState: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -1809,8 +1810,8 @@ proto.google.cloud.iot.v1.EventNotificationConfig.prototype.toObject = function(
  */
 proto.google.cloud.iot.v1.EventNotificationConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
-    subfolderMatches: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    pubsubTopicName: jspb.Message.getFieldWithDefault(msg, 1, "")
+subfolderMatches: jspb.Message.getFieldWithDefault(msg, 2, ""),
+pubsubTopicName: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -1969,7 +1970,7 @@ proto.google.cloud.iot.v1.StateNotificationConfig.prototype.toObject = function(
  */
 proto.google.cloud.iot.v1.StateNotificationConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pubsubTopicName: jspb.Message.getFieldWithDefault(msg, 1, "")
+pubsubTopicName: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -2124,7 +2125,7 @@ proto.google.cloud.iot.v1.RegistryCredential.prototype.toObject = function(opt_i
  */
 proto.google.cloud.iot.v1.RegistryCredential.toObject = function(includeInstance, msg) {
   var f, obj = {
-    publicKeyCertificate: (f = msg.getPublicKeyCertificate()) && proto.google.cloud.iot.v1.PublicKeyCertificate.toObject(includeInstance, f)
+publicKeyCertificate: (f = msg.getPublicKeyCertificate()) && proto.google.cloud.iot.v1.PublicKeyCertificate.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2275,12 +2276,12 @@ proto.google.cloud.iot.v1.X509CertificateDetails.prototype.toObject = function(o
  */
 proto.google.cloud.iot.v1.X509CertificateDetails.toObject = function(includeInstance, msg) {
   var f, obj = {
-    issuer: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    subject: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    startTime: (f = msg.getStartTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    expiryTime: (f = msg.getExpiryTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    signatureAlgorithm: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    publicKeyType: jspb.Message.getFieldWithDefault(msg, 6, "")
+issuer: jspb.Message.getFieldWithDefault(msg, 1, ""),
+subject: jspb.Message.getFieldWithDefault(msg, 2, ""),
+startTime: (f = msg.getStartTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+expiryTime: (f = msg.getExpiryTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+signatureAlgorithm: jspb.Message.getFieldWithDefault(msg, 5, ""),
+publicKeyType: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -2597,9 +2598,9 @@ proto.google.cloud.iot.v1.PublicKeyCertificate.prototype.toObject = function(opt
  */
 proto.google.cloud.iot.v1.PublicKeyCertificate.toObject = function(includeInstance, msg) {
   var f, obj = {
-    format: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    certificate: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    x509Details: (f = msg.getX509Details()) && proto.google.cloud.iot.v1.X509CertificateDetails.toObject(includeInstance, f)
+format: jspb.Message.getFieldWithDefault(msg, 1, 0),
+certificate: jspb.Message.getFieldWithDefault(msg, 2, ""),
+x509Details: (f = msg.getX509Details()) && proto.google.cloud.iot.v1.X509CertificateDetails.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2833,8 +2834,8 @@ proto.google.cloud.iot.v1.DeviceCredential.prototype.toObject = function(opt_inc
  */
 proto.google.cloud.iot.v1.DeviceCredential.toObject = function(includeInstance, msg) {
   var f, obj = {
-    publicKey: (f = msg.getPublicKey()) && proto.google.cloud.iot.v1.PublicKeyCredential.toObject(includeInstance, f),
-    expirationTime: (f = msg.getExpirationTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+publicKey: (f = msg.getPublicKey()) && proto.google.cloud.iot.v1.PublicKeyCredential.toObject(includeInstance, f),
+expirationTime: (f = msg.getExpirationTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3035,8 +3036,8 @@ proto.google.cloud.iot.v1.PublicKeyCredential.prototype.toObject = function(opt_
  */
 proto.google.cloud.iot.v1.PublicKeyCredential.toObject = function(includeInstance, msg) {
   var f, obj = {
-    format: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    key: jspb.Message.getFieldWithDefault(msg, 2, "")
+format: jspb.Message.getFieldWithDefault(msg, 1, 0),
+key: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -3195,10 +3196,10 @@ proto.google.cloud.iot.v1.DeviceConfig.prototype.toObject = function(opt_include
  */
 proto.google.cloud.iot.v1.DeviceConfig.toObject = function(includeInstance, msg) {
   var f, obj = {
-    version: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    cloudUpdateTime: (f = msg.getCloudUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    deviceAckTime: (f = msg.getDeviceAckTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    binaryData: msg.getBinaryData_asB64()
+version: jspb.Message.getFieldWithDefault(msg, 1, 0),
+cloudUpdateTime: (f = msg.getCloudUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+deviceAckTime: (f = msg.getDeviceAckTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+binaryData: msg.getBinaryData_asB64()
   };
 
   if (includeInstance) {
@@ -3481,8 +3482,8 @@ proto.google.cloud.iot.v1.DeviceState.prototype.toObject = function(opt_includeI
  */
 proto.google.cloud.iot.v1.DeviceState.toObject = function(includeInstance, msg) {
   var f, obj = {
-    updateTime: (f = msg.getUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    binaryData: msg.getBinaryData_asB64()
+updateTime: (f = msg.getUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+binaryData: msg.getBinaryData_asB64()
   };
 
   if (includeInstance) {

@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -239,15 +239,15 @@ proto.google.cloud.support.common.SupportAccount.prototype.toObject = function(o
  */
 proto.google.cloud.support.common.SupportAccount.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    accountId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    cloudResource: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    displayName: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    state: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    billingAccountName: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    unifyAccountId: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    pricingModel: jspb.Message.getFieldWithDefault(msg, 9, 0)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+accountId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+cloudResource: jspb.Message.getFieldWithDefault(msg, 3, ""),
+displayName: jspb.Message.getFieldWithDefault(msg, 4, ""),
+state: jspb.Message.getFieldWithDefault(msg, 5, 0),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+billingAccountName: jspb.Message.getFieldWithDefault(msg, 7, ""),
+unifyAccountId: jspb.Message.getFieldWithDefault(msg, 8, ""),
+pricingModel: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -656,22 +656,22 @@ proto.google.cloud.support.common.Case.prototype.toObject = function(opt_include
  */
 proto.google.cloud.support.common.Case.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    displayName: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    description: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    component: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    subcomponent: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    clientTimezone: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    ccAddressesList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
-    projectId: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    issuesList: jspb.Message.toObjectList(msg.getIssuesList(),
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+displayName: jspb.Message.getFieldWithDefault(msg, 2, ""),
+description: jspb.Message.getFieldWithDefault(msg, 3, ""),
+component: jspb.Message.getFieldWithDefault(msg, 4, ""),
+subcomponent: jspb.Message.getFieldWithDefault(msg, 5, ""),
+clientTimezone: jspb.Message.getFieldWithDefault(msg, 6, ""),
+ccAddressesList: (f = jspb.Message.getRepeatedField(msg, 7)) == null ? undefined : f,
+projectId: jspb.Message.getFieldWithDefault(msg, 8, ""),
+issuesList: jspb.Message.toObjectList(msg.getIssuesList(),
     proto.google.cloud.support.common.CustomerIssue.toObject, includeInstance),
-    priority: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    state: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    updateTime: (f = msg.getUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    creatorEmail: jspb.Message.getFieldWithDefault(msg, 15, ""),
-    category: jspb.Message.getFieldWithDefault(msg, 16, "")
+priority: jspb.Message.getFieldWithDefault(msg, 11, 0),
+state: jspb.Message.getFieldWithDefault(msg, 12, 0),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+updateTime: (f = msg.getUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+creatorEmail: jspb.Message.getFieldWithDefault(msg, 15, ""),
+category: jspb.Message.getFieldWithDefault(msg, 16, "")
   };
 
   if (includeInstance) {
@@ -1317,11 +1317,11 @@ proto.google.cloud.support.common.CustomerIssue.prototype.toObject = function(op
  */
 proto.google.cloud.support.common.CustomerIssue.toObject = function(includeInstance, msg) {
   var f, obj = {
-    issueId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    state: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    resolveTime: (f = msg.getResolveTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    updateTime: (f = msg.getUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+issueId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+state: jspb.Message.getFieldWithDefault(msg, 2, 0),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+resolveTime: (f = msg.getResolveTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+updateTime: (f = msg.getUpdateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1642,8 +1642,8 @@ proto.google.cloud.support.common.SupportRole.prototype.toObject = function(opt_
  */
 proto.google.cloud.support.common.SupportRole.toObject = function(includeInstance, msg) {
   var f, obj = {
-    email: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    role: jspb.Message.getFieldWithDefault(msg, 2, 0)
+email: jspb.Message.getFieldWithDefault(msg, 1, ""),
+role: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -1813,10 +1813,10 @@ proto.google.cloud.support.common.Comment.prototype.toObject = function(opt_incl
  */
 proto.google.cloud.support.common.Comment.toObject = function(includeInstance, msg) {
   var f, obj = {
-    text: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    author: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 4, "")
+text: jspb.Message.getFieldWithDefault(msg, 1, ""),
+createTime: (f = msg.getCreateTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+author: jspb.Message.getFieldWithDefault(msg, 3, ""),
+name: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -2054,7 +2054,7 @@ proto.google.cloud.support.common.IssueTaxonomy.prototype.toObject = function(op
  */
 proto.google.cloud.support.common.IssueTaxonomy.toObject = function(includeInstance, msg) {
   var f, obj = {
-    categoriesMap: (f = msg.getCategoriesMap()) ? f.toObject(includeInstance, proto.google.cloud.support.common.IssueTaxonomy.Category.toObject) : []
+categoriesMap: (f = msg.getCategoriesMap()) ? f.toObject(includeInstance, proto.google.cloud.support.common.IssueTaxonomy.Category.toObject) : []
   };
 
   if (includeInstance) {
@@ -2172,10 +2172,10 @@ proto.google.cloud.support.common.IssueTaxonomy.Component.prototype.toObject = f
  */
 proto.google.cloud.support.common.IssueTaxonomy.Component.toObject = function(includeInstance, msg) {
   var f, obj = {
-    displayName: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    languagesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
-    template: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    subcomponentsList: jspb.Message.toObjectList(msg.getSubcomponentsList(),
+displayName: jspb.Message.getFieldWithDefault(msg, 1, ""),
+languagesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+template: jspb.Message.getFieldWithDefault(msg, 3, ""),
+subcomponentsList: jspb.Message.toObjectList(msg.getSubcomponentsList(),
     proto.google.cloud.support.common.IssueTaxonomy.Component.toObject, includeInstance)
   };
 
@@ -2434,8 +2434,8 @@ proto.google.cloud.support.common.IssueTaxonomy.Category.prototype.toObject = fu
  */
 proto.google.cloud.support.common.IssueTaxonomy.Category.toObject = function(includeInstance, msg) {
   var f, obj = {
-    displayName: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    componentsMap: (f = msg.getComponentsMap()) ? f.toObject(includeInstance, proto.google.cloud.support.common.IssueTaxonomy.Component.toObject) : []
+displayName: jspb.Message.getFieldWithDefault(msg, 1, ""),
+componentsMap: (f = msg.getComponentsMap()) ? f.toObject(includeInstance, proto.google.cloud.support.common.IssueTaxonomy.Component.toObject) : []
   };
 
   if (includeInstance) {
@@ -2562,7 +2562,8 @@ proto.google.cloud.support.common.IssueTaxonomy.Category.prototype.getComponents
  */
 proto.google.cloud.support.common.IssueTaxonomy.Category.prototype.clearComponentsMap = function() {
   this.getComponentsMap().clear();
-  return this;};
+  return this;
+};
 
 
 /**
@@ -2584,7 +2585,8 @@ proto.google.cloud.support.common.IssueTaxonomy.prototype.getCategoriesMap = fun
  */
 proto.google.cloud.support.common.IssueTaxonomy.prototype.clearCategoriesMap = function() {
   this.getCategoriesMap().clear();
-  return this;};
+  return this;
+};
 
 
 goog.object.extend(exports, proto.google.cloud.support.common);

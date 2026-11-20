@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -151,9 +151,9 @@ proto.google.cloud.asset.v1beta1.TemporalAsset.prototype.toObject = function(opt
  */
 proto.google.cloud.asset.v1beta1.TemporalAsset.toObject = function(includeInstance, msg) {
   var f, obj = {
-    window: (f = msg.getWindow()) && proto.google.cloud.asset.v1beta1.TimeWindow.toObject(includeInstance, f),
-    deleted: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    asset: (f = msg.getAsset()) && proto.google.cloud.asset.v1beta1.Asset.toObject(includeInstance, f)
+window: (f = msg.getWindow()) && proto.google.cloud.asset.v1beta1.TimeWindow.toObject(includeInstance, f),
+deleted: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+asset: (f = msg.getAsset()) && proto.google.cloud.asset.v1beta1.Asset.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -383,8 +383,8 @@ proto.google.cloud.asset.v1beta1.TimeWindow.prototype.toObject = function(opt_in
  */
 proto.google.cloud.asset.v1beta1.TimeWindow.toObject = function(includeInstance, msg) {
   var f, obj = {
-    startTime: (f = msg.getStartTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    endTime: (f = msg.getEndTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+startTime: (f = msg.getStartTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+endTime: (f = msg.getEndTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -585,10 +585,10 @@ proto.google.cloud.asset.v1beta1.Asset.prototype.toObject = function(opt_include
  */
 proto.google.cloud.asset.v1beta1.Asset.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    assetType: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    resource: (f = msg.getResource()) && proto.google.cloud.asset.v1beta1.Resource.toObject(includeInstance, f),
-    iamPolicy: (f = msg.getIamPolicy()) && google_iam_v1_policy_pb.Policy.toObject(includeInstance, f)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+assetType: jspb.Message.getFieldWithDefault(msg, 2, ""),
+resource: (f = msg.getResource()) && proto.google.cloud.asset.v1beta1.Resource.toObject(includeInstance, f),
+iamPolicy: (f = msg.getIamPolicy()) && google_iam_v1_policy_pb.Policy.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -847,12 +847,12 @@ proto.google.cloud.asset.v1beta1.Resource.prototype.toObject = function(opt_incl
  */
 proto.google.cloud.asset.v1beta1.Resource.toObject = function(includeInstance, msg) {
   var f, obj = {
-    version: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    discoveryDocumentUri: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    discoveryName: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    resourceUrl: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    parent: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    data: (f = msg.getData()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f)
+version: jspb.Message.getFieldWithDefault(msg, 1, ""),
+discoveryDocumentUri: jspb.Message.getFieldWithDefault(msg, 2, ""),
+discoveryName: jspb.Message.getFieldWithDefault(msg, 3, ""),
+resourceUrl: jspb.Message.getFieldWithDefault(msg, 4, ""),
+parent: jspb.Message.getFieldWithDefault(msg, 5, ""),
+data: (f = msg.getData()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f)
   };
 
   if (includeInstance) {

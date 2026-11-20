@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_protobuf_duration_pb = require('google-protobuf/google/protobuf/duration_pb.js');
 goog.object.extend(proto, google_protobuf_duration_pb);
@@ -240,10 +240,10 @@ proto.google.iam.credentials.v1.GenerateAccessTokenRequest.prototype.toObject = 
  */
 proto.google.iam.credentials.v1.GenerateAccessTokenRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    delegatesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
-    scopeList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
-    lifetime: (f = msg.getLifetime()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+delegatesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+scopeList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f,
+lifetime: (f = msg.getLifetime()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -519,8 +519,8 @@ proto.google.iam.credentials.v1.GenerateAccessTokenResponse.prototype.toObject =
  */
 proto.google.iam.credentials.v1.GenerateAccessTokenResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accessToken: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    expireTime: (f = msg.getExpireTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+accessToken: jspb.Message.getFieldWithDefault(msg, 1, ""),
+expireTime: (f = msg.getExpireTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -707,9 +707,9 @@ proto.google.iam.credentials.v1.SignBlobRequest.prototype.toObject = function(op
  */
 proto.google.iam.credentials.v1.SignBlobRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    delegatesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    payload: msg.getPayload_asB64()
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+delegatesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+payload: msg.getPayload_asB64()
   };
 
   if (includeInstance) {
@@ -940,8 +940,8 @@ proto.google.iam.credentials.v1.SignBlobResponse.prototype.toObject = function(o
  */
 proto.google.iam.credentials.v1.SignBlobResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    keyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    signedBlob: msg.getSignedBlob_asB64()
+keyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+signedBlob: msg.getSignedBlob_asB64()
   };
 
   if (includeInstance) {
@@ -1131,9 +1131,9 @@ proto.google.iam.credentials.v1.SignJwtRequest.prototype.toObject = function(opt
  */
 proto.google.iam.credentials.v1.SignJwtRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    delegatesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    payload: jspb.Message.getFieldWithDefault(msg, 5, "")
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+delegatesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+payload: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -1340,8 +1340,8 @@ proto.google.iam.credentials.v1.SignJwtResponse.prototype.toObject = function(op
  */
 proto.google.iam.credentials.v1.SignJwtResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    keyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    signedJwt: jspb.Message.getFieldWithDefault(msg, 2, "")
+keyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+signedJwt: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -1507,10 +1507,10 @@ proto.google.iam.credentials.v1.GenerateIdTokenRequest.prototype.toObject = func
  */
 proto.google.iam.credentials.v1.GenerateIdTokenRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    delegatesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
-    audience: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    includeEmail: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+delegatesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+audience: jspb.Message.getFieldWithDefault(msg, 3, ""),
+includeEmail: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -1746,7 +1746,7 @@ proto.google.iam.credentials.v1.GenerateIdTokenResponse.prototype.toObject = fun
  */
 proto.google.iam.credentials.v1.GenerateIdTokenResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    token: jspb.Message.getFieldWithDefault(msg, 1, "")
+token: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO Survey Nodejs Client 2.1.0
+
+### Improvements
+
+* Tracking API Version [2.1.0](https://github.com/ondewo/ondewo-survey-api/releases/tag/2.1.0) ( [Documentation](https://ondewo.github.io/ondewo-survey-api/) )
+* Generated with ondewo-proto-compiler 5.17.0 (protoc 35.1). New runtime floors: `@grpc/grpc-js` 1.14.7 and `google-protobuf` 3.21.4
+
+*****************
+
 ## Release ONDEWO Survey Nodejs Client 2.0.2
 
 ### Improvements

@@ -13,35 +13,55 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 goog.exportSymbol('proto.google.protobuf.DescriptorProto', null, global);
 goog.exportSymbol('proto.google.protobuf.DescriptorProto.ExtensionRange', null, global);
 goog.exportSymbol('proto.google.protobuf.DescriptorProto.ReservedRange', null, global);
+goog.exportSymbol('proto.google.protobuf.Edition', null, global);
 goog.exportSymbol('proto.google.protobuf.EnumDescriptorProto', null, global);
 goog.exportSymbol('proto.google.protobuf.EnumDescriptorProto.EnumReservedRange', null, global);
 goog.exportSymbol('proto.google.protobuf.EnumOptions', null, global);
 goog.exportSymbol('proto.google.protobuf.EnumValueDescriptorProto', null, global);
 goog.exportSymbol('proto.google.protobuf.EnumValueOptions', null, global);
 goog.exportSymbol('proto.google.protobuf.ExtensionRangeOptions', null, global);
+goog.exportSymbol('proto.google.protobuf.ExtensionRangeOptions.Declaration', null, global);
+goog.exportSymbol('proto.google.protobuf.ExtensionRangeOptions.VerificationState', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet.EnforceNamingStyle', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet.EnumType', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet.FieldPresence', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet.JsonFormat', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet.MessageEncoding', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet.RepeatedFieldEncoding', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet.Utf8Validation', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet.VisibilityFeature', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSetDefaults', null, global);
+goog.exportSymbol('proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault', null, global);
 goog.exportSymbol('proto.google.protobuf.FieldDescriptorProto', null, global);
 goog.exportSymbol('proto.google.protobuf.FieldDescriptorProto.Label', null, global);
 goog.exportSymbol('proto.google.protobuf.FieldDescriptorProto.Type', null, global);
 goog.exportSymbol('proto.google.protobuf.FieldOptions', null, global);
 goog.exportSymbol('proto.google.protobuf.FieldOptions.CType', null, global);
+goog.exportSymbol('proto.google.protobuf.FieldOptions.EditionDefault', null, global);
+goog.exportSymbol('proto.google.protobuf.FieldOptions.FeatureSupport', null, global);
 goog.exportSymbol('proto.google.protobuf.FieldOptions.JSType', null, global);
+goog.exportSymbol('proto.google.protobuf.FieldOptions.OptionRetention', null, global);
+goog.exportSymbol('proto.google.protobuf.FieldOptions.OptionTargetType', null, global);
 goog.exportSymbol('proto.google.protobuf.FileDescriptorProto', null, global);
 goog.exportSymbol('proto.google.protobuf.FileDescriptorSet', null, global);
 goog.exportSymbol('proto.google.protobuf.FileOptions', null, global);
 goog.exportSymbol('proto.google.protobuf.FileOptions.OptimizeMode', null, global);
 goog.exportSymbol('proto.google.protobuf.GeneratedCodeInfo', null, global);
 goog.exportSymbol('proto.google.protobuf.GeneratedCodeInfo.Annotation', null, global);
+goog.exportSymbol('proto.google.protobuf.GeneratedCodeInfo.Annotation.Semantic', null, global);
 goog.exportSymbol('proto.google.protobuf.MessageOptions', null, global);
 goog.exportSymbol('proto.google.protobuf.MethodDescriptorProto', null, global);
 goog.exportSymbol('proto.google.protobuf.MethodOptions', null, global);
@@ -52,6 +72,7 @@ goog.exportSymbol('proto.google.protobuf.ServiceDescriptorProto', null, global);
 goog.exportSymbol('proto.google.protobuf.ServiceOptions', null, global);
 goog.exportSymbol('proto.google.protobuf.SourceCodeInfo', null, global);
 goog.exportSymbol('proto.google.protobuf.SourceCodeInfo.Location', null, global);
+goog.exportSymbol('proto.google.protobuf.SymbolVisibility', null, global);
 goog.exportSymbol('proto.google.protobuf.UninterpretedOption', null, global);
 goog.exportSymbol('proto.google.protobuf.UninterpretedOption.NamePart', null, global);
 /**
@@ -65,7 +86,7 @@ goog.exportSymbol('proto.google.protobuf.UninterpretedOption.NamePart', null, gl
  * @constructor
  */
 proto.google.protobuf.FileDescriptorSet = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.google.protobuf.FileDescriptorSet.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, 2, proto.google.protobuf.FileDescriptorSet.repeatedFields_, null);
 };
 goog.inherits(proto.google.protobuf.FileDescriptorSet, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -75,6 +96,36 @@ if (goog.DEBUG && !COMPILED) {
    */
   proto.google.protobuf.FileDescriptorSet.displayName = 'proto.google.protobuf.FileDescriptorSet';
 }
+
+/**
+ * The extensions registered with this message class. This is a map of
+ * extension field number to fieldInfo object.
+ *
+ * For example:
+ *     { 123: {fieldIndex: 123, fieldName: {my_field_name: 0}, ctor: proto.example.MyMessage} }
+ *
+ * fieldName contains the JsCompiler renamed field name property so that it
+ * works in OPTIMIZED mode.
+ *
+ * @type {!Object<number, jspb.ExtensionFieldInfo>}
+ */
+proto.google.protobuf.FileDescriptorSet.extensions = {};
+
+
+/**
+ * The extensions registered with this message class. This is a map of
+ * extension field number to fieldInfo object.
+ *
+ * For example:
+ *     { 123: {fieldIndex: 123, fieldName: {my_field_name: 0}, ctor: proto.example.MyMessage} }
+ *
+ * fieldName contains the JsCompiler renamed field name property so that it
+ * works in OPTIMIZED mode.
+ *
+ * @type {!Object<number, jspb.ExtensionFieldBinaryInfo>}
+ */
+proto.google.protobuf.FileDescriptorSet.extensionsBinary = {};
+
 /**
  * Generated by JsPbCodeGenerator.
  * @param {Array=} opt_data Optional initial data array, typically from a
@@ -210,6 +261,27 @@ proto.google.protobuf.ExtensionRangeOptions.extensions = {};
  */
 proto.google.protobuf.ExtensionRangeOptions.extensionsBinary = {};
 
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.google.protobuf.ExtensionRangeOptions.Declaration, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.google.protobuf.ExtensionRangeOptions.Declaration.displayName = 'proto.google.protobuf.ExtensionRangeOptions.Declaration';
+}
 /**
  * Generated by JsPbCodeGenerator.
  * @param {Array=} opt_data Optional initial data array, typically from a
@@ -520,6 +592,48 @@ proto.google.protobuf.FieldOptions.extensionsBinary = {};
  * @extends {jspb.Message}
  * @constructor
  */
+proto.google.protobuf.FieldOptions.EditionDefault = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.google.protobuf.FieldOptions.EditionDefault, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.google.protobuf.FieldOptions.EditionDefault.displayName = 'proto.google.protobuf.FieldOptions.EditionDefault';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.google.protobuf.FieldOptions.FeatureSupport, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.google.protobuf.FieldOptions.FeatureSupport.displayName = 'proto.google.protobuf.FieldOptions.FeatureSupport';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.google.protobuf.OneofOptions = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, 500, proto.google.protobuf.OneofOptions.repeatedFields_, null);
 };
@@ -817,8 +931,122 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.google.protobuf.FeatureSet = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, 9, null, null);
+};
+goog.inherits(proto.google.protobuf.FeatureSet, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.google.protobuf.FeatureSet.displayName = 'proto.google.protobuf.FeatureSet';
+}
+
+/**
+ * The extensions registered with this message class. This is a map of
+ * extension field number to fieldInfo object.
+ *
+ * For example:
+ *     { 123: {fieldIndex: 123, fieldName: {my_field_name: 0}, ctor: proto.example.MyMessage} }
+ *
+ * fieldName contains the JsCompiler renamed field name property so that it
+ * works in OPTIMIZED mode.
+ *
+ * @type {!Object<number, jspb.ExtensionFieldInfo>}
+ */
+proto.google.protobuf.FeatureSet.extensions = {};
+
+
+/**
+ * The extensions registered with this message class. This is a map of
+ * extension field number to fieldInfo object.
+ *
+ * For example:
+ *     { 123: {fieldIndex: 123, fieldName: {my_field_name: 0}, ctor: proto.example.MyMessage} }
+ *
+ * fieldName contains the JsCompiler renamed field name property so that it
+ * works in OPTIMIZED mode.
+ *
+ * @type {!Object<number, jspb.ExtensionFieldBinaryInfo>}
+ */
+proto.google.protobuf.FeatureSet.extensionsBinary = {};
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.google.protobuf.FeatureSet.VisibilityFeature = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.google.protobuf.FeatureSet.VisibilityFeature, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.google.protobuf.FeatureSet.VisibilityFeature.displayName = 'proto.google.protobuf.FeatureSet.VisibilityFeature';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.google.protobuf.FeatureSetDefaults = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.google.protobuf.FeatureSetDefaults.repeatedFields_, null);
+};
+goog.inherits(proto.google.protobuf.FeatureSetDefaults, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.google.protobuf.FeatureSetDefaults.displayName = 'proto.google.protobuf.FeatureSetDefaults';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.displayName = 'proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.google.protobuf.SourceCodeInfo = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.google.protobuf.SourceCodeInfo.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, 2, proto.google.protobuf.SourceCodeInfo.repeatedFields_, null);
 };
 goog.inherits(proto.google.protobuf.SourceCodeInfo, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -828,6 +1056,36 @@ if (goog.DEBUG && !COMPILED) {
    */
   proto.google.protobuf.SourceCodeInfo.displayName = 'proto.google.protobuf.SourceCodeInfo';
 }
+
+/**
+ * The extensions registered with this message class. This is a map of
+ * extension field number to fieldInfo object.
+ *
+ * For example:
+ *     { 123: {fieldIndex: 123, fieldName: {my_field_name: 0}, ctor: proto.example.MyMessage} }
+ *
+ * fieldName contains the JsCompiler renamed field name property so that it
+ * works in OPTIMIZED mode.
+ *
+ * @type {!Object<number, jspb.ExtensionFieldInfo>}
+ */
+proto.google.protobuf.SourceCodeInfo.extensions = {};
+
+
+/**
+ * The extensions registered with this message class. This is a map of
+ * extension field number to fieldInfo object.
+ *
+ * For example:
+ *     { 123: {fieldIndex: 123, fieldName: {my_field_name: 0}, ctor: proto.example.MyMessage} }
+ *
+ * fieldName contains the JsCompiler renamed field name property so that it
+ * works in OPTIMIZED mode.
+ *
+ * @type {!Object<number, jspb.ExtensionFieldBinaryInfo>}
+ */
+proto.google.protobuf.SourceCodeInfo.extensionsBinary = {};
+
 /**
  * Generated by JsPbCodeGenerator.
  * @param {Array=} opt_data Optional initial data array, typically from a
@@ -930,10 +1188,13 @@ proto.google.protobuf.FileDescriptorSet.prototype.toObject = function(opt_includ
  */
 proto.google.protobuf.FileDescriptorSet.toObject = function(includeInstance, msg) {
   var f, obj = {
-    fileList: jspb.Message.toObjectList(msg.getFileList(),
+fileList: jspb.Message.toObjectList(msg.getFileList(),
     proto.google.protobuf.FileDescriptorProto.toObject, includeInstance)
   };
 
+  jspb.Message.toObjectExtension(/** @type {!jspb.Message} */ (msg), obj,
+      proto.google.protobuf.FileDescriptorSet.extensions, proto.google.protobuf.FileDescriptorSet.prototype.getExtension,
+      includeInstance);
   if (includeInstance) {
     obj.$jspbMessageInstance = msg;
   }
@@ -974,7 +1235,10 @@ proto.google.protobuf.FileDescriptorSet.deserializeBinaryFromReader = function(m
       msg.addFile(value);
       break;
     default:
-      reader.skipField();
+      jspb.Message.readBinaryExtension(msg, reader,
+        proto.google.protobuf.FileDescriptorSet.extensionsBinary,
+        proto.google.protobuf.FileDescriptorSet.prototype.getExtension,
+        proto.google.protobuf.FileDescriptorSet.prototype.setExtension);
       break;
     }
   }
@@ -1010,6 +1274,8 @@ proto.google.protobuf.FileDescriptorSet.serializeBinaryToWriter = function(messa
       proto.google.protobuf.FileDescriptorProto.serializeBinaryToWriter
     );
   }
+  jspb.Message.serializeBinaryExtensions(message, writer,
+    proto.google.protobuf.FileDescriptorSet.extensionsBinary, proto.google.protobuf.FileDescriptorSet.prototype.getExtension);
 };
 
 
@@ -1057,7 +1323,7 @@ proto.google.protobuf.FileDescriptorSet.prototype.clearFileList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.google.protobuf.FileDescriptorProto.repeatedFields_ = [3,10,11,4,5,6,7];
+proto.google.protobuf.FileDescriptorProto.repeatedFields_ = [3,10,11,15,4,5,6,7];
 
 
 
@@ -1090,22 +1356,24 @@ proto.google.protobuf.FileDescriptorProto.prototype.toObject = function(opt_incl
  */
 proto.google.protobuf.FileDescriptorProto.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    pb_package: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
-    dependencyList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    publicDependencyList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
-    weakDependencyList: (f = jspb.Message.getRepeatedField(msg, 11)) == null ? undefined : f,
-    messageTypeList: jspb.Message.toObjectList(msg.getMessageTypeList(),
+name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+pb_package: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+dependencyList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+publicDependencyList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
+weakDependencyList: (f = jspb.Message.getRepeatedField(msg, 11)) == null ? undefined : f,
+optionDependencyList: (f = jspb.Message.getRepeatedField(msg, 15)) == null ? undefined : f,
+messageTypeList: jspb.Message.toObjectList(msg.getMessageTypeList(),
     proto.google.protobuf.DescriptorProto.toObject, includeInstance),
-    enumTypeList: jspb.Message.toObjectList(msg.getEnumTypeList(),
+enumTypeList: jspb.Message.toObjectList(msg.getEnumTypeList(),
     proto.google.protobuf.EnumDescriptorProto.toObject, includeInstance),
-    serviceList: jspb.Message.toObjectList(msg.getServiceList(),
+serviceList: jspb.Message.toObjectList(msg.getServiceList(),
     proto.google.protobuf.ServiceDescriptorProto.toObject, includeInstance),
-    extensionList: jspb.Message.toObjectList(msg.getExtensionList(),
+extensionList: jspb.Message.toObjectList(msg.getExtensionList(),
     proto.google.protobuf.FieldDescriptorProto.toObject, includeInstance),
-    options: (f = msg.getOptions()) && proto.google.protobuf.FileOptions.toObject(includeInstance, f),
-    sourceCodeInfo: (f = msg.getSourceCodeInfo()) && proto.google.protobuf.SourceCodeInfo.toObject(includeInstance, f),
-    syntax: (f = jspb.Message.getField(msg, 12)) == null ? undefined : f
+options: (f = msg.getOptions()) && proto.google.protobuf.FileOptions.toObject(includeInstance, f),
+sourceCodeInfo: (f = msg.getSourceCodeInfo()) && proto.google.protobuf.SourceCodeInfo.toObject(includeInstance, f),
+syntax: (f = jspb.Message.getField(msg, 12)) == null ? undefined : f,
+edition: (f = jspb.Message.getField(msg, 14)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1166,6 +1434,10 @@ proto.google.protobuf.FileDescriptorProto.deserializeBinaryFromReader = function
         msg.addWeakDependency(values[i]);
       }
       break;
+    case 15:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addOptionDependency(value);
+      break;
     case 4:
       var value = new proto.google.protobuf.DescriptorProto;
       reader.readMessage(value,proto.google.protobuf.DescriptorProto.deserializeBinaryFromReader);
@@ -1199,6 +1471,10 @@ proto.google.protobuf.FileDescriptorProto.deserializeBinaryFromReader = function
     case 12:
       var value = /** @type {string} */ (reader.readString());
       msg.setSyntax(value);
+      break;
+    case 14:
+      var value = /** @type {!proto.google.protobuf.Edition} */ (reader.readEnum());
+      msg.setEdition(value);
       break;
     default:
       reader.skipField();
@@ -1264,6 +1540,13 @@ proto.google.protobuf.FileDescriptorProto.serializeBinaryToWriter = function(mes
       f
     );
   }
+  f = message.getOptionDependencyList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      15,
+      f
+    );
+  }
   f = message.getMessageTypeList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
@@ -1316,6 +1599,13 @@ proto.google.protobuf.FileDescriptorProto.serializeBinaryToWriter = function(mes
   if (f != null) {
     writer.writeString(
       12,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getField(message, 14));
+  if (f != null) {
+    writer.writeEnum(
+      14,
       f
     );
   }
@@ -1502,6 +1792,43 @@ proto.google.protobuf.FileDescriptorProto.prototype.addWeakDependency = function
  */
 proto.google.protobuf.FileDescriptorProto.prototype.clearWeakDependencyList = function() {
   return this.setWeakDependencyList([]);
+};
+
+
+/**
+ * repeated string option_dependency = 15;
+ * @return {!Array<string>}
+ */
+proto.google.protobuf.FileDescriptorProto.prototype.getOptionDependencyList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 15));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.google.protobuf.FileDescriptorProto} returns this
+ */
+proto.google.protobuf.FileDescriptorProto.prototype.setOptionDependencyList = function(value) {
+  return jspb.Message.setField(this, 15, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.google.protobuf.FileDescriptorProto} returns this
+ */
+proto.google.protobuf.FileDescriptorProto.prototype.addOptionDependency = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 15, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.google.protobuf.FileDescriptorProto} returns this
+ */
+proto.google.protobuf.FileDescriptorProto.prototype.clearOptionDependencyList = function() {
+  return this.setOptionDependencyList([]);
 };
 
 
@@ -1767,6 +2094,42 @@ proto.google.protobuf.FileDescriptorProto.prototype.hasSyntax = function() {
 };
 
 
+/**
+ * optional Edition edition = 14;
+ * @return {!proto.google.protobuf.Edition}
+ */
+proto.google.protobuf.FileDescriptorProto.prototype.getEdition = function() {
+  return /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getFieldWithDefault(this, 14, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.Edition} value
+ * @return {!proto.google.protobuf.FileDescriptorProto} returns this
+ */
+proto.google.protobuf.FileDescriptorProto.prototype.setEdition = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FileDescriptorProto} returns this
+ */
+proto.google.protobuf.FileDescriptorProto.prototype.clearEdition = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FileDescriptorProto.prototype.hasEdition = function() {
+  return jspb.Message.getField(this, 14) != null;
+};
+
+
 
 /**
  * List of repeated fields within this message type.
@@ -1806,23 +2169,24 @@ proto.google.protobuf.DescriptorProto.prototype.toObject = function(opt_includeI
  */
 proto.google.protobuf.DescriptorProto.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    fieldList: jspb.Message.toObjectList(msg.getFieldList(),
+name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+fieldList: jspb.Message.toObjectList(msg.getFieldList(),
     proto.google.protobuf.FieldDescriptorProto.toObject, includeInstance),
-    extensionList: jspb.Message.toObjectList(msg.getExtensionList(),
+extensionList: jspb.Message.toObjectList(msg.getExtensionList(),
     proto.google.protobuf.FieldDescriptorProto.toObject, includeInstance),
-    nestedTypeList: jspb.Message.toObjectList(msg.getNestedTypeList(),
+nestedTypeList: jspb.Message.toObjectList(msg.getNestedTypeList(),
     proto.google.protobuf.DescriptorProto.toObject, includeInstance),
-    enumTypeList: jspb.Message.toObjectList(msg.getEnumTypeList(),
+enumTypeList: jspb.Message.toObjectList(msg.getEnumTypeList(),
     proto.google.protobuf.EnumDescriptorProto.toObject, includeInstance),
-    extensionRangeList: jspb.Message.toObjectList(msg.getExtensionRangeList(),
+extensionRangeList: jspb.Message.toObjectList(msg.getExtensionRangeList(),
     proto.google.protobuf.DescriptorProto.ExtensionRange.toObject, includeInstance),
-    oneofDeclList: jspb.Message.toObjectList(msg.getOneofDeclList(),
+oneofDeclList: jspb.Message.toObjectList(msg.getOneofDeclList(),
     proto.google.protobuf.OneofDescriptorProto.toObject, includeInstance),
-    options: (f = msg.getOptions()) && proto.google.protobuf.MessageOptions.toObject(includeInstance, f),
-    reservedRangeList: jspb.Message.toObjectList(msg.getReservedRangeList(),
+options: (f = msg.getOptions()) && proto.google.protobuf.MessageOptions.toObject(includeInstance, f),
+reservedRangeList: jspb.Message.toObjectList(msg.getReservedRangeList(),
     proto.google.protobuf.DescriptorProto.ReservedRange.toObject, includeInstance),
-    reservedNameList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f
+reservedNameList: (f = jspb.Message.getRepeatedField(msg, 10)) == null ? undefined : f,
+visibility: (f = jspb.Message.getField(msg, 11)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1906,6 +2270,10 @@ proto.google.protobuf.DescriptorProto.deserializeBinaryFromReader = function(msg
     case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.addReservedName(value);
+      break;
+    case 11:
+      var value = /** @type {!proto.google.protobuf.SymbolVisibility} */ (reader.readEnum());
+      msg.setVisibility(value);
       break;
     default:
       reader.skipField();
@@ -2014,6 +2382,13 @@ proto.google.protobuf.DescriptorProto.serializeBinaryToWriter = function(message
       f
     );
   }
+  f = /** @type {!proto.google.protobuf.SymbolVisibility} */ (jspb.Message.getField(message, 11));
+  if (f != null) {
+    writer.writeEnum(
+      11,
+      f
+    );
+  }
 };
 
 
@@ -2049,9 +2424,9 @@ proto.google.protobuf.DescriptorProto.ExtensionRange.prototype.toObject = functi
  */
 proto.google.protobuf.DescriptorProto.ExtensionRange.toObject = function(includeInstance, msg) {
   var f, obj = {
-    start: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    end: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
-    options: (f = msg.getOptions()) && proto.google.protobuf.ExtensionRangeOptions.toObject(includeInstance, f)
+start: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+end: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+options: (f = msg.getOptions()) && proto.google.protobuf.ExtensionRangeOptions.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2296,8 +2671,8 @@ proto.google.protobuf.DescriptorProto.ReservedRange.prototype.toObject = functio
  */
 proto.google.protobuf.DescriptorProto.ReservedRange.toObject = function(includeInstance, msg) {
   var f, obj = {
-    start: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    end: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
+start: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+end: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -2836,13 +3211,49 @@ proto.google.protobuf.DescriptorProto.prototype.clearReservedNameList = function
 };
 
 
+/**
+ * optional SymbolVisibility visibility = 11;
+ * @return {!proto.google.protobuf.SymbolVisibility}
+ */
+proto.google.protobuf.DescriptorProto.prototype.getVisibility = function() {
+  return /** @type {!proto.google.protobuf.SymbolVisibility} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.SymbolVisibility} value
+ * @return {!proto.google.protobuf.DescriptorProto} returns this
+ */
+proto.google.protobuf.DescriptorProto.prototype.setVisibility = function(value) {
+  return jspb.Message.setField(this, 11, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.DescriptorProto} returns this
+ */
+proto.google.protobuf.DescriptorProto.prototype.clearVisibility = function() {
+  return jspb.Message.setField(this, 11, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.DescriptorProto.prototype.hasVisibility = function() {
+  return jspb.Message.getField(this, 11) != null;
+};
+
+
 
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
  * @const
  */
-proto.google.protobuf.ExtensionRangeOptions.repeatedFields_ = [999];
+proto.google.protobuf.ExtensionRangeOptions.repeatedFields_ = [999,2];
 
 
 
@@ -2875,8 +3286,12 @@ proto.google.protobuf.ExtensionRangeOptions.prototype.toObject = function(opt_in
  */
 proto.google.protobuf.ExtensionRangeOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
-    proto.google.protobuf.UninterpretedOption.toObject, includeInstance)
+uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
+    proto.google.protobuf.UninterpretedOption.toObject, includeInstance),
+declarationList: jspb.Message.toObjectList(msg.getDeclarationList(),
+    proto.google.protobuf.ExtensionRangeOptions.Declaration.toObject, includeInstance),
+features: (f = msg.getFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+verification: jspb.Message.getFieldWithDefault(msg, 3, 1)
   };
 
   jspb.Message.toObjectExtension(/** @type {!jspb.Message} */ (msg), obj,
@@ -2921,6 +3336,20 @@ proto.google.protobuf.ExtensionRangeOptions.deserializeBinaryFromReader = functi
       reader.readMessage(value,proto.google.protobuf.UninterpretedOption.deserializeBinaryFromReader);
       msg.addUninterpretedOption(value);
       break;
+    case 2:
+      var value = new proto.google.protobuf.ExtensionRangeOptions.Declaration;
+      reader.readMessage(value,proto.google.protobuf.ExtensionRangeOptions.Declaration.deserializeBinaryFromReader);
+      msg.addDeclaration(value);
+      break;
+    case 50:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFeatures(value);
+      break;
+    case 3:
+      var value = /** @type {!proto.google.protobuf.ExtensionRangeOptions.VerificationState} */ (reader.readEnum());
+      msg.setVerification(value);
+      break;
     default:
       jspb.Message.readBinaryExtension(msg, reader,
         proto.google.protobuf.ExtensionRangeOptions.extensionsBinary,
@@ -2961,8 +3390,379 @@ proto.google.protobuf.ExtensionRangeOptions.serializeBinaryToWriter = function(m
       proto.google.protobuf.UninterpretedOption.serializeBinaryToWriter
     );
   }
+  f = message.getDeclarationList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      2,
+      f,
+      proto.google.protobuf.ExtensionRangeOptions.Declaration.serializeBinaryToWriter
+    );
+  }
+  f = message.getFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      50,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {!proto.google.protobuf.ExtensionRangeOptions.VerificationState} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
   jspb.Message.serializeBinaryExtensions(message, writer,
     proto.google.protobuf.ExtensionRangeOptions.extensionsBinary, proto.google.protobuf.ExtensionRangeOptions.prototype.getExtension);
+};
+
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.ExtensionRangeOptions.VerificationState = {
+  DECLARATION: 0,
+  UNVERIFIED: 1
+};
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.toObject = function(opt_includeInstance) {
+  return proto.google.protobuf.ExtensionRangeOptions.Declaration.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.google.protobuf.ExtensionRangeOptions.Declaration} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.toObject = function(includeInstance, msg) {
+  var f, obj = {
+number: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+fullName: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+type: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+reserved: (f = jspb.Message.getBooleanField(msg, 5)) == null ? undefined : f,
+repeated: (f = jspb.Message.getBooleanField(msg, 6)) == null ? undefined : f
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.google.protobuf.ExtensionRangeOptions.Declaration;
+  return proto.google.protobuf.ExtensionRangeOptions.Declaration.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.google.protobuf.ExtensionRangeOptions.Declaration} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setNumber(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setFullName(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setType(value);
+      break;
+    case 5:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReserved(value);
+      break;
+    case 6:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setRepeated(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.google.protobuf.ExtensionRangeOptions.Declaration.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.google.protobuf.ExtensionRangeOptions.Declaration} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = /** @type {number} */ (jspb.Message.getField(message, 1));
+  if (f != null) {
+    writer.writeInt32(
+      1,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeBool(
+      5,
+      f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 6));
+  if (f != null) {
+    writer.writeBool(
+      6,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int32 number = 1;
+ * @return {number}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.getNumber = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.setNumber = function(value) {
+  return jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.clearNumber = function() {
+  return jspb.Message.setField(this, 1, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.hasNumber = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string full_name = 2;
+ * @return {string}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.getFullName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.setFullName = function(value) {
+  return jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.clearFullName = function() {
+  return jspb.Message.setField(this, 2, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.hasFullName = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional string type = 3;
+ * @return {string}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.getType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.setType = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.clearType = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.hasType = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional bool reserved = 5;
+ * @return {boolean}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.getReserved = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.setReserved = function(value) {
+  return jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.clearReserved = function() {
+  return jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.hasReserved = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
+
+/**
+ * optional bool repeated = 6;
+ * @return {boolean}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.getRepeated = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.setRepeated = function(value) {
+  return jspb.Message.setField(this, 6, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.clearRepeated = function() {
+  return jspb.Message.setField(this, 6, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.ExtensionRangeOptions.Declaration.prototype.hasRepeated = function() {
+  return jspb.Message.getField(this, 6) != null;
 };
 
 
@@ -3004,6 +3804,117 @@ proto.google.protobuf.ExtensionRangeOptions.prototype.clearUninterpretedOptionLi
 };
 
 
+/**
+ * repeated Declaration declaration = 2;
+ * @return {!Array<!proto.google.protobuf.ExtensionRangeOptions.Declaration>}
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.getDeclarationList = function() {
+  return /** @type{!Array<!proto.google.protobuf.ExtensionRangeOptions.Declaration>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.google.protobuf.ExtensionRangeOptions.Declaration, 2));
+};
+
+
+/**
+ * @param {!Array<!proto.google.protobuf.ExtensionRangeOptions.Declaration>} value
+ * @return {!proto.google.protobuf.ExtensionRangeOptions} returns this
+*/
+proto.google.protobuf.ExtensionRangeOptions.prototype.setDeclarationList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+};
+
+
+/**
+ * @param {!proto.google.protobuf.ExtensionRangeOptions.Declaration=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.Declaration}
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.addDeclaration = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.google.protobuf.ExtensionRangeOptions.Declaration, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.clearDeclarationList = function() {
+  return this.setDeclarationList([]);
+};
+
+
+/**
+ * optional FeatureSet features = 50;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.getFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 50));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.ExtensionRangeOptions} returns this
+*/
+proto.google.protobuf.ExtensionRangeOptions.prototype.setFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 50, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.clearFeatures = function() {
+  return this.setFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.hasFeatures = function() {
+  return jspb.Message.getField(this, 50) != null;
+};
+
+
+/**
+ * optional VerificationState verification = 3;
+ * @return {!proto.google.protobuf.ExtensionRangeOptions.VerificationState}
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.getVerification = function() {
+  return /** @type {!proto.google.protobuf.ExtensionRangeOptions.VerificationState} */ (jspb.Message.getFieldWithDefault(this, 3, 1));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.ExtensionRangeOptions.VerificationState} value
+ * @return {!proto.google.protobuf.ExtensionRangeOptions} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.setVerification = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.ExtensionRangeOptions} returns this
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.clearVerification = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.ExtensionRangeOptions.prototype.hasVerification = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
 
 
 
@@ -3036,17 +3947,17 @@ proto.google.protobuf.FieldDescriptorProto.prototype.toObject = function(opt_inc
  */
 proto.google.protobuf.FieldDescriptorProto.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    number: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
-    label: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
-    type: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
-    typeName: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
-    extendee: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
-    defaultValue: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f,
-    oneofIndex: (f = jspb.Message.getField(msg, 9)) == null ? undefined : f,
-    jsonName: (f = jspb.Message.getField(msg, 10)) == null ? undefined : f,
-    options: (f = msg.getOptions()) && proto.google.protobuf.FieldOptions.toObject(includeInstance, f),
-    proto3Optional: (f = jspb.Message.getBooleanField(msg, 17)) == null ? undefined : f
+name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+number: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+label: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+type: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
+typeName: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
+extendee: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+defaultValue: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f,
+oneofIndex: (f = jspb.Message.getField(msg, 9)) == null ? undefined : f,
+jsonName: (f = jspb.Message.getField(msg, 10)) == null ? undefined : f,
+options: (f = msg.getOptions()) && proto.google.protobuf.FieldOptions.toObject(includeInstance, f),
+proto3Optional: (f = jspb.Message.getBooleanField(msg, 17)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3267,8 +4178,8 @@ proto.google.protobuf.FieldDescriptorProto.Type = {
  */
 proto.google.protobuf.FieldDescriptorProto.Label = {
   LABEL_OPTIONAL: 1,
-  LABEL_REQUIRED: 2,
-  LABEL_REPEATED: 3
+  LABEL_REPEATED: 3,
+  LABEL_REQUIRED: 2
 };
 
 /**
@@ -3700,8 +4611,8 @@ proto.google.protobuf.OneofDescriptorProto.prototype.toObject = function(opt_inc
  */
 proto.google.protobuf.OneofDescriptorProto.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    options: (f = msg.getOptions()) && proto.google.protobuf.OneofOptions.toObject(includeInstance, f)
+name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+options: (f = msg.getOptions()) && proto.google.protobuf.OneofOptions.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3906,13 +4817,14 @@ proto.google.protobuf.EnumDescriptorProto.prototype.toObject = function(opt_incl
  */
 proto.google.protobuf.EnumDescriptorProto.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    valueList: jspb.Message.toObjectList(msg.getValueList(),
+name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+valueList: jspb.Message.toObjectList(msg.getValueList(),
     proto.google.protobuf.EnumValueDescriptorProto.toObject, includeInstance),
-    options: (f = msg.getOptions()) && proto.google.protobuf.EnumOptions.toObject(includeInstance, f),
-    reservedRangeList: jspb.Message.toObjectList(msg.getReservedRangeList(),
+options: (f = msg.getOptions()) && proto.google.protobuf.EnumOptions.toObject(includeInstance, f),
+reservedRangeList: jspb.Message.toObjectList(msg.getReservedRangeList(),
     proto.google.protobuf.EnumDescriptorProto.EnumReservedRange.toObject, includeInstance),
-    reservedNameList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f
+reservedNameList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f,
+visibility: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -3971,6 +4883,10 @@ proto.google.protobuf.EnumDescriptorProto.deserializeBinaryFromReader = function
     case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.addReservedName(value);
+      break;
+    case 6:
+      var value = /** @type {!proto.google.protobuf.SymbolVisibility} */ (reader.readEnum());
+      msg.setVisibility(value);
       break;
     default:
       reader.skipField();
@@ -4039,6 +4955,13 @@ proto.google.protobuf.EnumDescriptorProto.serializeBinaryToWriter = function(mes
       f
     );
   }
+  f = /** @type {!proto.google.protobuf.SymbolVisibility} */ (jspb.Message.getField(message, 6));
+  if (f != null) {
+    writer.writeEnum(
+      6,
+      f
+    );
+  }
 };
 
 
@@ -4074,8 +4997,8 @@ proto.google.protobuf.EnumDescriptorProto.EnumReservedRange.prototype.toObject =
  */
 proto.google.protobuf.EnumDescriptorProto.EnumReservedRange.toObject = function(includeInstance, msg) {
   var f, obj = {
-    start: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    end: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
+start: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+end: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -4424,6 +5347,42 @@ proto.google.protobuf.EnumDescriptorProto.prototype.clearReservedNameList = func
 };
 
 
+/**
+ * optional SymbolVisibility visibility = 6;
+ * @return {!proto.google.protobuf.SymbolVisibility}
+ */
+proto.google.protobuf.EnumDescriptorProto.prototype.getVisibility = function() {
+  return /** @type {!proto.google.protobuf.SymbolVisibility} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.SymbolVisibility} value
+ * @return {!proto.google.protobuf.EnumDescriptorProto} returns this
+ */
+proto.google.protobuf.EnumDescriptorProto.prototype.setVisibility = function(value) {
+  return jspb.Message.setField(this, 6, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.EnumDescriptorProto} returns this
+ */
+proto.google.protobuf.EnumDescriptorProto.prototype.clearVisibility = function() {
+  return jspb.Message.setField(this, 6, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.EnumDescriptorProto.prototype.hasVisibility = function() {
+  return jspb.Message.getField(this, 6) != null;
+};
+
+
 
 
 
@@ -4456,9 +5415,9 @@ proto.google.protobuf.EnumValueDescriptorProto.prototype.toObject = function(opt
  */
 proto.google.protobuf.EnumValueDescriptorProto.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    number: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
-    options: (f = msg.getOptions()) && proto.google.protobuf.EnumValueOptions.toObject(includeInstance, f)
+name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+number: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+options: (f = msg.getOptions()) && proto.google.protobuf.EnumValueOptions.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4710,10 +5669,10 @@ proto.google.protobuf.ServiceDescriptorProto.prototype.toObject = function(opt_i
  */
 proto.google.protobuf.ServiceDescriptorProto.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    methodList: jspb.Message.toObjectList(msg.getMethodList(),
+name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+methodList: jspb.Message.toObjectList(msg.getMethodList(),
     proto.google.protobuf.MethodDescriptorProto.toObject, includeInstance),
-    options: (f = msg.getOptions()) && proto.google.protobuf.ServiceOptions.toObject(includeInstance, f)
+options: (f = msg.getOptions()) && proto.google.protobuf.ServiceOptions.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4962,12 +5921,12 @@ proto.google.protobuf.MethodDescriptorProto.prototype.toObject = function(opt_in
  */
 proto.google.protobuf.MethodDescriptorProto.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    inputType: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
-    outputType: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
-    options: (f = msg.getOptions()) && proto.google.protobuf.MethodOptions.toObject(includeInstance, f),
-    clientStreaming: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    serverStreaming: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
+name: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+inputType: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+outputType: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+options: (f = msg.getOptions()) && proto.google.protobuf.MethodOptions.toObject(includeInstance, f),
+clientStreaming: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+serverStreaming: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
   if (includeInstance) {
@@ -5360,27 +6319,27 @@ proto.google.protobuf.FileOptions.prototype.toObject = function(opt_includeInsta
  */
 proto.google.protobuf.FileOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    javaPackage: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    javaOuterClassname: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f,
-    javaMultipleFiles: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    javaGenerateEqualsAndHash: (f = jspb.Message.getBooleanField(msg, 20)) == null ? undefined : f,
-    javaStringCheckUtf8: jspb.Message.getBooleanFieldWithDefault(msg, 27, false),
-    optimizeFor: jspb.Message.getFieldWithDefault(msg, 9, 1),
-    goPackage: (f = jspb.Message.getField(msg, 11)) == null ? undefined : f,
-    ccGenericServices: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
-    javaGenericServices: jspb.Message.getBooleanFieldWithDefault(msg, 17, false),
-    pyGenericServices: jspb.Message.getBooleanFieldWithDefault(msg, 18, false),
-    phpGenericServices: jspb.Message.getBooleanFieldWithDefault(msg, 42, false),
-    deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 23, false),
-    ccEnableArenas: jspb.Message.getBooleanFieldWithDefault(msg, 31, true),
-    objcClassPrefix: (f = jspb.Message.getField(msg, 36)) == null ? undefined : f,
-    csharpNamespace: (f = jspb.Message.getField(msg, 37)) == null ? undefined : f,
-    swiftPrefix: (f = jspb.Message.getField(msg, 39)) == null ? undefined : f,
-    phpClassPrefix: (f = jspb.Message.getField(msg, 40)) == null ? undefined : f,
-    phpNamespace: (f = jspb.Message.getField(msg, 41)) == null ? undefined : f,
-    phpMetadataNamespace: (f = jspb.Message.getField(msg, 44)) == null ? undefined : f,
-    rubyPackage: (f = jspb.Message.getField(msg, 45)) == null ? undefined : f,
-    uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
+javaPackage: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+javaOuterClassname: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f,
+javaMultipleFiles: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+javaGenerateEqualsAndHash: (f = jspb.Message.getBooleanField(msg, 20)) == null ? undefined : f,
+javaStringCheckUtf8: jspb.Message.getBooleanFieldWithDefault(msg, 27, false),
+optimizeFor: jspb.Message.getFieldWithDefault(msg, 9, 1),
+goPackage: (f = jspb.Message.getField(msg, 11)) == null ? undefined : f,
+ccGenericServices: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
+javaGenericServices: jspb.Message.getBooleanFieldWithDefault(msg, 17, false),
+pyGenericServices: jspb.Message.getBooleanFieldWithDefault(msg, 18, false),
+deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 23, false),
+ccEnableArenas: jspb.Message.getBooleanFieldWithDefault(msg, 31, true),
+objcClassPrefix: (f = jspb.Message.getField(msg, 36)) == null ? undefined : f,
+csharpNamespace: (f = jspb.Message.getField(msg, 37)) == null ? undefined : f,
+swiftPrefix: (f = jspb.Message.getField(msg, 39)) == null ? undefined : f,
+phpClassPrefix: (f = jspb.Message.getField(msg, 40)) == null ? undefined : f,
+phpNamespace: (f = jspb.Message.getField(msg, 41)) == null ? undefined : f,
+phpMetadataNamespace: (f = jspb.Message.getField(msg, 44)) == null ? undefined : f,
+rubyPackage: (f = jspb.Message.getField(msg, 45)) == null ? undefined : f,
+features: (f = msg.getFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
     proto.google.protobuf.UninterpretedOption.toObject, includeInstance)
   };
 
@@ -5461,10 +6420,6 @@ proto.google.protobuf.FileOptions.deserializeBinaryFromReader = function(msg, re
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setPyGenericServices(value);
       break;
-    case 42:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setPhpGenericServices(value);
-      break;
     case 23:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setDeprecated(value);
@@ -5500,6 +6455,11 @@ proto.google.protobuf.FileOptions.deserializeBinaryFromReader = function(msg, re
     case 45:
       var value = /** @type {string} */ (reader.readString());
       msg.setRubyPackage(value);
+      break;
+    case 50:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFeatures(value);
       break;
     case 999:
       var value = new proto.google.protobuf.UninterpretedOption;
@@ -5608,13 +6568,6 @@ proto.google.protobuf.FileOptions.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = /** @type {boolean} */ (jspb.Message.getField(message, 42));
-  if (f != null) {
-    writer.writeBool(
-      42,
-      f
-    );
-  }
   f = /** @type {boolean} */ (jspb.Message.getField(message, 23));
   if (f != null) {
     writer.writeBool(
@@ -5676,6 +6629,14 @@ proto.google.protobuf.FileOptions.serializeBinaryToWriter = function(message, wr
     writer.writeString(
       45,
       f
+    );
+  }
+  f = message.getFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      50,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
     );
   }
   f = message.getUninterpretedOptionList();
@@ -6061,42 +7022,6 @@ proto.google.protobuf.FileOptions.prototype.hasPyGenericServices = function() {
 
 
 /**
- * optional bool php_generic_services = 42;
- * @return {boolean}
- */
-proto.google.protobuf.FileOptions.prototype.getPhpGenericServices = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 42, false));
-};
-
-
-/**
- * @param {boolean} value
- * @return {!proto.google.protobuf.FileOptions} returns this
- */
-proto.google.protobuf.FileOptions.prototype.setPhpGenericServices = function(value) {
-  return jspb.Message.setField(this, 42, value);
-};
-
-
-/**
- * Clears the field making it undefined.
- * @return {!proto.google.protobuf.FileOptions} returns this
- */
-proto.google.protobuf.FileOptions.prototype.clearPhpGenericServices = function() {
-  return jspb.Message.setField(this, 42, undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.google.protobuf.FileOptions.prototype.hasPhpGenericServices = function() {
-  return jspb.Message.getField(this, 42) != null;
-};
-
-
-/**
  * optional bool deprecated = 23;
  * @return {boolean}
  */
@@ -6421,6 +7346,43 @@ proto.google.protobuf.FileOptions.prototype.hasRubyPackage = function() {
 
 
 /**
+ * optional FeatureSet features = 50;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.FileOptions.prototype.getFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 50));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.FileOptions} returns this
+*/
+proto.google.protobuf.FileOptions.prototype.setFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 50, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.FileOptions} returns this
+ */
+proto.google.protobuf.FileOptions.prototype.clearFeatures = function() {
+  return this.setFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FileOptions.prototype.hasFeatures = function() {
+  return jspb.Message.getField(this, 50) != null;
+};
+
+
+/**
  * repeated UninterpretedOption uninterpreted_option = 999;
  * @return {!Array<!proto.google.protobuf.UninterpretedOption>}
  */
@@ -6497,11 +7459,13 @@ proto.google.protobuf.MessageOptions.prototype.toObject = function(opt_includeIn
  */
 proto.google.protobuf.MessageOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    messageSetWireFormat: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
-    noStandardDescriptorAccessor: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    mapEntry: (f = jspb.Message.getBooleanField(msg, 7)) == null ? undefined : f,
-    uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
+messageSetWireFormat: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+noStandardDescriptorAccessor: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+mapEntry: (f = jspb.Message.getBooleanField(msg, 7)) == null ? undefined : f,
+deprecatedLegacyJsonFieldConflicts: (f = jspb.Message.getBooleanField(msg, 11)) == null ? undefined : f,
+features: (f = msg.getFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
     proto.google.protobuf.UninterpretedOption.toObject, includeInstance)
   };
 
@@ -6557,6 +7521,15 @@ proto.google.protobuf.MessageOptions.deserializeBinaryFromReader = function(msg,
     case 7:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setMapEntry(value);
+      break;
+    case 11:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDeprecatedLegacyJsonFieldConflicts(value);
+      break;
+    case 12:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFeatures(value);
       break;
     case 999:
       var value = new proto.google.protobuf.UninterpretedOption;
@@ -6621,6 +7594,21 @@ proto.google.protobuf.MessageOptions.serializeBinaryToWriter = function(message,
     writer.writeBool(
       7,
       f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 11));
+  if (f != null) {
+    writer.writeBool(
+      11,
+      f
+    );
+  }
+  f = message.getFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      12,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
     );
   }
   f = message.getUninterpretedOptionList();
@@ -6781,6 +7769,79 @@ proto.google.protobuf.MessageOptions.prototype.hasMapEntry = function() {
 
 
 /**
+ * optional bool deprecated_legacy_json_field_conflicts = 11;
+ * @return {boolean}
+ */
+proto.google.protobuf.MessageOptions.prototype.getDeprecatedLegacyJsonFieldConflicts = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.google.protobuf.MessageOptions} returns this
+ */
+proto.google.protobuf.MessageOptions.prototype.setDeprecatedLegacyJsonFieldConflicts = function(value) {
+  return jspb.Message.setField(this, 11, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.MessageOptions} returns this
+ */
+proto.google.protobuf.MessageOptions.prototype.clearDeprecatedLegacyJsonFieldConflicts = function() {
+  return jspb.Message.setField(this, 11, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.MessageOptions.prototype.hasDeprecatedLegacyJsonFieldConflicts = function() {
+  return jspb.Message.getField(this, 11) != null;
+};
+
+
+/**
+ * optional FeatureSet features = 12;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.MessageOptions.prototype.getFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 12));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.MessageOptions} returns this
+*/
+proto.google.protobuf.MessageOptions.prototype.setFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 12, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.MessageOptions} returns this
+ */
+proto.google.protobuf.MessageOptions.prototype.clearFeatures = function() {
+  return this.setFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.MessageOptions.prototype.hasFeatures = function() {
+  return jspb.Message.getField(this, 12) != null;
+};
+
+
+/**
  * repeated UninterpretedOption uninterpreted_option = 999;
  * @return {!Array<!proto.google.protobuf.UninterpretedOption>}
  */
@@ -6824,7 +7885,7 @@ proto.google.protobuf.MessageOptions.prototype.clearUninterpretedOptionList = fu
  * @private {!Array<number>}
  * @const
  */
-proto.google.protobuf.FieldOptions.repeatedFields_ = [999];
+proto.google.protobuf.FieldOptions.repeatedFields_ = [19,20,999];
 
 
 
@@ -6857,13 +7918,21 @@ proto.google.protobuf.FieldOptions.prototype.toObject = function(opt_includeInst
  */
 proto.google.protobuf.FieldOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    ctype: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    packed: (f = jspb.Message.getBooleanField(msg, 2)) == null ? undefined : f,
-    jstype: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    lazy: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
-    deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    weak: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
-    uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
+ctype: jspb.Message.getFieldWithDefault(msg, 1, 0),
+packed: (f = jspb.Message.getBooleanField(msg, 2)) == null ? undefined : f,
+jstype: jspb.Message.getFieldWithDefault(msg, 6, 0),
+lazy: jspb.Message.getBooleanFieldWithDefault(msg, 5, false),
+unverifiedLazy: jspb.Message.getBooleanFieldWithDefault(msg, 15, false),
+deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+weak: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+debugRedact: jspb.Message.getBooleanFieldWithDefault(msg, 16, false),
+retention: (f = jspb.Message.getField(msg, 17)) == null ? undefined : f,
+targetsList: (f = jspb.Message.getRepeatedField(msg, 19)) == null ? undefined : f,
+editionDefaultsList: jspb.Message.toObjectList(msg.getEditionDefaultsList(),
+    proto.google.protobuf.FieldOptions.EditionDefault.toObject, includeInstance),
+features: (f = msg.getFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+featureSupport: (f = msg.getFeatureSupport()) && proto.google.protobuf.FieldOptions.FeatureSupport.toObject(includeInstance, f),
+uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
     proto.google.protobuf.UninterpretedOption.toObject, includeInstance)
   };
 
@@ -6920,6 +7989,10 @@ proto.google.protobuf.FieldOptions.deserializeBinaryFromReader = function(msg, r
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setLazy(value);
       break;
+    case 15:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setUnverifiedLazy(value);
+      break;
     case 3:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setDeprecated(value);
@@ -6927,6 +8000,35 @@ proto.google.protobuf.FieldOptions.deserializeBinaryFromReader = function(msg, r
     case 10:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setWeak(value);
+      break;
+    case 16:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDebugRedact(value);
+      break;
+    case 17:
+      var value = /** @type {!proto.google.protobuf.FieldOptions.OptionRetention} */ (reader.readEnum());
+      msg.setRetention(value);
+      break;
+    case 19:
+      var values = /** @type {!Array<!proto.google.protobuf.FieldOptions.OptionTargetType>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addTargets(values[i]);
+      }
+      break;
+    case 20:
+      var value = new proto.google.protobuf.FieldOptions.EditionDefault;
+      reader.readMessage(value,proto.google.protobuf.FieldOptions.EditionDefault.deserializeBinaryFromReader);
+      msg.addEditionDefaults(value);
+      break;
+    case 21:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFeatures(value);
+      break;
+    case 22:
+      var value = new proto.google.protobuf.FieldOptions.FeatureSupport;
+      reader.readMessage(value,proto.google.protobuf.FieldOptions.FeatureSupport.deserializeBinaryFromReader);
+      msg.setFeatureSupport(value);
       break;
     case 999:
       var value = new proto.google.protobuf.UninterpretedOption;
@@ -6993,6 +8095,13 @@ proto.google.protobuf.FieldOptions.serializeBinaryToWriter = function(message, w
       f
     );
   }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 15));
+  if (f != null) {
+    writer.writeBool(
+      15,
+      f
+    );
+  }
   f = /** @type {boolean} */ (jspb.Message.getField(message, 3));
   if (f != null) {
     writer.writeBool(
@@ -7005,6 +8114,51 @@ proto.google.protobuf.FieldOptions.serializeBinaryToWriter = function(message, w
     writer.writeBool(
       10,
       f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 16));
+  if (f != null) {
+    writer.writeBool(
+      16,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.FieldOptions.OptionRetention} */ (jspb.Message.getField(message, 17));
+  if (f != null) {
+    writer.writeEnum(
+      17,
+      f
+    );
+  }
+  f = message.getTargetsList();
+  if (f.length > 0) {
+    writer.writeRepeatedEnum(
+      19,
+      f
+    );
+  }
+  f = message.getEditionDefaultsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      20,
+      f,
+      proto.google.protobuf.FieldOptions.EditionDefault.serializeBinaryToWriter
+    );
+  }
+  f = message.getFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      21,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
+    );
+  }
+  f = message.getFeatureSupport();
+  if (f != null) {
+    writer.writeMessage(
+      22,
+      f,
+      proto.google.protobuf.FieldOptions.FeatureSupport.serializeBinaryToWriter
     );
   }
   f = message.getUninterpretedOptionList();
@@ -7037,6 +8191,567 @@ proto.google.protobuf.FieldOptions.JSType = {
   JS_STRING: 1,
   JS_NUMBER: 2
 };
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FieldOptions.OptionRetention = {
+  RETENTION_UNKNOWN: 0,
+  RETENTION_RUNTIME: 1,
+  RETENTION_SOURCE: 2
+};
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FieldOptions.OptionTargetType = {
+  TARGET_TYPE_UNKNOWN: 0,
+  TARGET_TYPE_FILE: 1,
+  TARGET_TYPE_EXTENSION_RANGE: 2,
+  TARGET_TYPE_MESSAGE: 3,
+  TARGET_TYPE_FIELD: 4,
+  TARGET_TYPE_ONEOF: 5,
+  TARGET_TYPE_ENUM: 6,
+  TARGET_TYPE_ENUM_ENTRY: 7,
+  TARGET_TYPE_SERVICE: 8,
+  TARGET_TYPE_METHOD: 9
+};
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.toObject = function(opt_includeInstance) {
+  return proto.google.protobuf.FieldOptions.EditionDefault.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.google.protobuf.FieldOptions.EditionDefault} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.toObject = function(includeInstance, msg) {
+  var f, obj = {
+edition: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+value: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.google.protobuf.FieldOptions.EditionDefault}
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.google.protobuf.FieldOptions.EditionDefault;
+  return proto.google.protobuf.FieldOptions.EditionDefault.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.google.protobuf.FieldOptions.EditionDefault} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.google.protobuf.FieldOptions.EditionDefault}
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 3:
+      var value = /** @type {!proto.google.protobuf.Edition} */ (reader.readEnum());
+      msg.setEdition(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setValue(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.google.protobuf.FieldOptions.EditionDefault.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.google.protobuf.FieldOptions.EditionDefault} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional Edition edition = 3;
+ * @return {!proto.google.protobuf.Edition}
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.getEdition = function() {
+  return /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.Edition} value
+ * @return {!proto.google.protobuf.FieldOptions.EditionDefault} returns this
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.setEdition = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions.EditionDefault} returns this
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.clearEdition = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.hasEdition = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional string value = 2;
+ * @return {string}
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.getValue = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.google.protobuf.FieldOptions.EditionDefault} returns this
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.setValue = function(value) {
+  return jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions.EditionDefault} returns this
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.clearValue = function() {
+  return jspb.Message.setField(this, 2, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.EditionDefault.prototype.hasValue = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.toObject = function(opt_includeInstance) {
+  return proto.google.protobuf.FieldOptions.FeatureSupport.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.google.protobuf.FieldOptions.FeatureSupport} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.toObject = function(includeInstance, msg) {
+  var f, obj = {
+editionIntroduced: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+editionDeprecated: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+deprecationWarning: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+editionRemoved: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+removalError: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.google.protobuf.FieldOptions.FeatureSupport;
+  return proto.google.protobuf.FieldOptions.FeatureSupport.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.google.protobuf.FieldOptions.FeatureSupport} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {!proto.google.protobuf.Edition} */ (reader.readEnum());
+      msg.setEditionIntroduced(value);
+      break;
+    case 2:
+      var value = /** @type {!proto.google.protobuf.Edition} */ (reader.readEnum());
+      msg.setEditionDeprecated(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDeprecationWarning(value);
+      break;
+    case 4:
+      var value = /** @type {!proto.google.protobuf.Edition} */ (reader.readEnum());
+      msg.setEditionRemoved(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRemovalError(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.google.protobuf.FieldOptions.FeatureSupport.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.google.protobuf.FieldOptions.FeatureSupport} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getField(message, 1));
+  if (f != null) {
+    writer.writeEnum(
+      1,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeEnum(
+      2,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getField(message, 4));
+  if (f != null) {
+    writer.writeEnum(
+      4,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional Edition edition_introduced = 1;
+ * @return {!proto.google.protobuf.Edition}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.getEditionIntroduced = function() {
+  return /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.Edition} value
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.setEditionIntroduced = function(value) {
+  return jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.clearEditionIntroduced = function() {
+  return jspb.Message.setField(this, 1, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.hasEditionIntroduced = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional Edition edition_deprecated = 2;
+ * @return {!proto.google.protobuf.Edition}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.getEditionDeprecated = function() {
+  return /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.Edition} value
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.setEditionDeprecated = function(value) {
+  return jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.clearEditionDeprecated = function() {
+  return jspb.Message.setField(this, 2, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.hasEditionDeprecated = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional string deprecation_warning = 3;
+ * @return {string}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.getDeprecationWarning = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.setDeprecationWarning = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.clearDeprecationWarning = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.hasDeprecationWarning = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional Edition edition_removed = 4;
+ * @return {!proto.google.protobuf.Edition}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.getEditionRemoved = function() {
+  return /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.Edition} value
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.setEditionRemoved = function(value) {
+  return jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.clearEditionRemoved = function() {
+  return jspb.Message.setField(this, 4, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.hasEditionRemoved = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional string removal_error = 5;
+ * @return {string}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.getRemovalError = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.setRemovalError = function(value) {
+  return jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions.FeatureSupport} returns this
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.clearRemovalError = function() {
+  return jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.FeatureSupport.prototype.hasRemovalError = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
 
 /**
  * optional CType ctype = 1;
@@ -7183,6 +8898,42 @@ proto.google.protobuf.FieldOptions.prototype.hasLazy = function() {
 
 
 /**
+ * optional bool unverified_lazy = 15;
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.prototype.getUnverifiedLazy = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 15, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.setUnverifiedLazy = function(value) {
+  return jspb.Message.setField(this, 15, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.clearUnverifiedLazy = function() {
+  return jspb.Message.setField(this, 15, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.prototype.hasUnverifiedLazy = function() {
+  return jspb.Message.getField(this, 15) != null;
+};
+
+
+/**
  * optional bool deprecated = 3;
  * @return {boolean}
  */
@@ -7251,6 +9002,227 @@ proto.google.protobuf.FieldOptions.prototype.clearWeak = function() {
  */
 proto.google.protobuf.FieldOptions.prototype.hasWeak = function() {
   return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional bool debug_redact = 16;
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.prototype.getDebugRedact = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 16, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.setDebugRedact = function(value) {
+  return jspb.Message.setField(this, 16, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.clearDebugRedact = function() {
+  return jspb.Message.setField(this, 16, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.prototype.hasDebugRedact = function() {
+  return jspb.Message.getField(this, 16) != null;
+};
+
+
+/**
+ * optional OptionRetention retention = 17;
+ * @return {!proto.google.protobuf.FieldOptions.OptionRetention}
+ */
+proto.google.protobuf.FieldOptions.prototype.getRetention = function() {
+  return /** @type {!proto.google.protobuf.FieldOptions.OptionRetention} */ (jspb.Message.getFieldWithDefault(this, 17, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FieldOptions.OptionRetention} value
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.setRetention = function(value) {
+  return jspb.Message.setField(this, 17, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.clearRetention = function() {
+  return jspb.Message.setField(this, 17, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.prototype.hasRetention = function() {
+  return jspb.Message.getField(this, 17) != null;
+};
+
+
+/**
+ * repeated OptionTargetType targets = 19;
+ * @return {!Array<!proto.google.protobuf.FieldOptions.OptionTargetType>}
+ */
+proto.google.protobuf.FieldOptions.prototype.getTargetsList = function() {
+  return /** @type {!Array<!proto.google.protobuf.FieldOptions.OptionTargetType>} */ (jspb.Message.getRepeatedField(this, 19));
+};
+
+
+/**
+ * @param {!Array<!proto.google.protobuf.FieldOptions.OptionTargetType>} value
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.setTargetsList = function(value) {
+  return jspb.Message.setField(this, 19, value || []);
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FieldOptions.OptionTargetType} value
+ * @param {number=} opt_index
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.addTargets = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 19, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.clearTargetsList = function() {
+  return this.setTargetsList([]);
+};
+
+
+/**
+ * repeated EditionDefault edition_defaults = 20;
+ * @return {!Array<!proto.google.protobuf.FieldOptions.EditionDefault>}
+ */
+proto.google.protobuf.FieldOptions.prototype.getEditionDefaultsList = function() {
+  return /** @type{!Array<!proto.google.protobuf.FieldOptions.EditionDefault>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.google.protobuf.FieldOptions.EditionDefault, 20));
+};
+
+
+/**
+ * @param {!Array<!proto.google.protobuf.FieldOptions.EditionDefault>} value
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+*/
+proto.google.protobuf.FieldOptions.prototype.setEditionDefaultsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 20, value);
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FieldOptions.EditionDefault=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.google.protobuf.FieldOptions.EditionDefault}
+ */
+proto.google.protobuf.FieldOptions.prototype.addEditionDefaults = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 20, opt_value, proto.google.protobuf.FieldOptions.EditionDefault, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.clearEditionDefaultsList = function() {
+  return this.setEditionDefaultsList([]);
+};
+
+
+/**
+ * optional FeatureSet features = 21;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.FieldOptions.prototype.getFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 21));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+*/
+proto.google.protobuf.FieldOptions.prototype.setFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 21, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.clearFeatures = function() {
+  return this.setFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.prototype.hasFeatures = function() {
+  return jspb.Message.getField(this, 21) != null;
+};
+
+
+/**
+ * optional FeatureSupport feature_support = 22;
+ * @return {?proto.google.protobuf.FieldOptions.FeatureSupport}
+ */
+proto.google.protobuf.FieldOptions.prototype.getFeatureSupport = function() {
+  return /** @type{?proto.google.protobuf.FieldOptions.FeatureSupport} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FieldOptions.FeatureSupport, 22));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FieldOptions.FeatureSupport|undefined} value
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+*/
+proto.google.protobuf.FieldOptions.prototype.setFeatureSupport = function(value) {
+  return jspb.Message.setWrapperField(this, 22, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.FieldOptions} returns this
+ */
+proto.google.protobuf.FieldOptions.prototype.clearFeatureSupport = function() {
+  return this.setFeatureSupport(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FieldOptions.prototype.hasFeatureSupport = function() {
+  return jspb.Message.getField(this, 22) != null;
 };
 
 
@@ -7331,7 +9303,8 @@ proto.google.protobuf.OneofOptions.prototype.toObject = function(opt_includeInst
  */
 proto.google.protobuf.OneofOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
+features: (f = msg.getFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
     proto.google.protobuf.UninterpretedOption.toObject, includeInstance)
   };
 
@@ -7372,6 +9345,11 @@ proto.google.protobuf.OneofOptions.deserializeBinaryFromReader = function(msg, r
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFeatures(value);
+      break;
     case 999:
       var value = new proto.google.protobuf.UninterpretedOption;
       reader.readMessage(value,proto.google.protobuf.UninterpretedOption.deserializeBinaryFromReader);
@@ -7409,6 +9387,14 @@ proto.google.protobuf.OneofOptions.prototype.serializeBinary = function() {
  */
 proto.google.protobuf.OneofOptions.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
+    );
+  }
   f = message.getUninterpretedOptionList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
@@ -7419,6 +9405,43 @@ proto.google.protobuf.OneofOptions.serializeBinaryToWriter = function(message, w
   }
   jspb.Message.serializeBinaryExtensions(message, writer,
     proto.google.protobuf.OneofOptions.extensionsBinary, proto.google.protobuf.OneofOptions.prototype.getExtension);
+};
+
+
+/**
+ * optional FeatureSet features = 1;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.OneofOptions.prototype.getFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 1));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.OneofOptions} returns this
+*/
+proto.google.protobuf.OneofOptions.prototype.setFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.OneofOptions} returns this
+ */
+proto.google.protobuf.OneofOptions.prototype.clearFeatures = function() {
+  return this.setFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.OneofOptions.prototype.hasFeatures = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -7499,9 +9522,11 @@ proto.google.protobuf.EnumOptions.prototype.toObject = function(opt_includeInsta
  */
 proto.google.protobuf.EnumOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    allowAlias: (f = jspb.Message.getBooleanField(msg, 2)) == null ? undefined : f,
-    deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
+allowAlias: (f = jspb.Message.getBooleanField(msg, 2)) == null ? undefined : f,
+deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+deprecatedLegacyJsonFieldConflicts: (f = jspb.Message.getBooleanField(msg, 6)) == null ? undefined : f,
+features: (f = msg.getFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
     proto.google.protobuf.UninterpretedOption.toObject, includeInstance)
   };
 
@@ -7549,6 +9574,15 @@ proto.google.protobuf.EnumOptions.deserializeBinaryFromReader = function(msg, re
     case 3:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setDeprecated(value);
+      break;
+    case 6:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDeprecatedLegacyJsonFieldConflicts(value);
+      break;
+    case 7:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFeatures(value);
       break;
     case 999:
       var value = new proto.google.protobuf.UninterpretedOption;
@@ -7599,6 +9633,21 @@ proto.google.protobuf.EnumOptions.serializeBinaryToWriter = function(message, wr
     writer.writeBool(
       3,
       f
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 6));
+  if (f != null) {
+    writer.writeBool(
+      6,
+      f
+    );
+  }
+  f = message.getFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      7,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
     );
   }
   f = message.getUninterpretedOptionList();
@@ -7687,6 +9736,79 @@ proto.google.protobuf.EnumOptions.prototype.hasDeprecated = function() {
 
 
 /**
+ * optional bool deprecated_legacy_json_field_conflicts = 6;
+ * @return {boolean}
+ */
+proto.google.protobuf.EnumOptions.prototype.getDeprecatedLegacyJsonFieldConflicts = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.google.protobuf.EnumOptions} returns this
+ */
+proto.google.protobuf.EnumOptions.prototype.setDeprecatedLegacyJsonFieldConflicts = function(value) {
+  return jspb.Message.setField(this, 6, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.EnumOptions} returns this
+ */
+proto.google.protobuf.EnumOptions.prototype.clearDeprecatedLegacyJsonFieldConflicts = function() {
+  return jspb.Message.setField(this, 6, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.EnumOptions.prototype.hasDeprecatedLegacyJsonFieldConflicts = function() {
+  return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional FeatureSet features = 7;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.EnumOptions.prototype.getFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 7));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.EnumOptions} returns this
+*/
+proto.google.protobuf.EnumOptions.prototype.setFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 7, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.EnumOptions} returns this
+ */
+proto.google.protobuf.EnumOptions.prototype.clearFeatures = function() {
+  return this.setFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.EnumOptions.prototype.hasFeatures = function() {
+  return jspb.Message.getField(this, 7) != null;
+};
+
+
+/**
  * repeated UninterpretedOption uninterpreted_option = 999;
  * @return {!Array<!proto.google.protobuf.UninterpretedOption>}
  */
@@ -7763,8 +9885,11 @@ proto.google.protobuf.EnumValueOptions.prototype.toObject = function(opt_include
  */
 proto.google.protobuf.EnumValueOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
-    uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
+deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+features: (f = msg.getFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+debugRedact: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+featureSupport: (f = msg.getFeatureSupport()) && proto.google.protobuf.FieldOptions.FeatureSupport.toObject(includeInstance, f),
+uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
     proto.google.protobuf.UninterpretedOption.toObject, includeInstance)
   };
 
@@ -7809,6 +9934,20 @@ proto.google.protobuf.EnumValueOptions.deserializeBinaryFromReader = function(ms
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setDeprecated(value);
       break;
+    case 2:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFeatures(value);
+      break;
+    case 3:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDebugRedact(value);
+      break;
+    case 4:
+      var value = new proto.google.protobuf.FieldOptions.FeatureSupport;
+      reader.readMessage(value,proto.google.protobuf.FieldOptions.FeatureSupport.deserializeBinaryFromReader);
+      msg.setFeatureSupport(value);
+      break;
     case 999:
       var value = new proto.google.protobuf.UninterpretedOption;
       reader.readMessage(value,proto.google.protobuf.UninterpretedOption.deserializeBinaryFromReader);
@@ -7851,6 +9990,29 @@ proto.google.protobuf.EnumValueOptions.serializeBinaryToWriter = function(messag
     writer.writeBool(
       1,
       f
+    );
+  }
+  f = message.getFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeBool(
+      3,
+      f
+    );
+  }
+  f = message.getFeatureSupport();
+  if (f != null) {
+    writer.writeMessage(
+      4,
+      f,
+      proto.google.protobuf.FieldOptions.FeatureSupport.serializeBinaryToWriter
     );
   }
   f = message.getUninterpretedOptionList();
@@ -7899,6 +10061,116 @@ proto.google.protobuf.EnumValueOptions.prototype.clearDeprecated = function() {
  */
 proto.google.protobuf.EnumValueOptions.prototype.hasDeprecated = function() {
   return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional FeatureSet features = 2;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.EnumValueOptions.prototype.getFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.EnumValueOptions} returns this
+*/
+proto.google.protobuf.EnumValueOptions.prototype.setFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.EnumValueOptions} returns this
+ */
+proto.google.protobuf.EnumValueOptions.prototype.clearFeatures = function() {
+  return this.setFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.EnumValueOptions.prototype.hasFeatures = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional bool debug_redact = 3;
+ * @return {boolean}
+ */
+proto.google.protobuf.EnumValueOptions.prototype.getDebugRedact = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.google.protobuf.EnumValueOptions} returns this
+ */
+proto.google.protobuf.EnumValueOptions.prototype.setDebugRedact = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.EnumValueOptions} returns this
+ */
+proto.google.protobuf.EnumValueOptions.prototype.clearDebugRedact = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.EnumValueOptions.prototype.hasDebugRedact = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional FieldOptions.FeatureSupport feature_support = 4;
+ * @return {?proto.google.protobuf.FieldOptions.FeatureSupport}
+ */
+proto.google.protobuf.EnumValueOptions.prototype.getFeatureSupport = function() {
+  return /** @type{?proto.google.protobuf.FieldOptions.FeatureSupport} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FieldOptions.FeatureSupport, 4));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FieldOptions.FeatureSupport|undefined} value
+ * @return {!proto.google.protobuf.EnumValueOptions} returns this
+*/
+proto.google.protobuf.EnumValueOptions.prototype.setFeatureSupport = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.EnumValueOptions} returns this
+ */
+proto.google.protobuf.EnumValueOptions.prototype.clearFeatureSupport = function() {
+  return this.setFeatureSupport(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.EnumValueOptions.prototype.hasFeatureSupport = function() {
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
@@ -7979,8 +10251,9 @@ proto.google.protobuf.ServiceOptions.prototype.toObject = function(opt_includeIn
  */
 proto.google.protobuf.ServiceOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 33, false),
-    uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
+features: (f = msg.getFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 33, false),
+uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
     proto.google.protobuf.UninterpretedOption.toObject, includeInstance)
   };
 
@@ -8021,6 +10294,11 @@ proto.google.protobuf.ServiceOptions.deserializeBinaryFromReader = function(msg,
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 34:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFeatures(value);
+      break;
     case 33:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setDeprecated(value);
@@ -8062,6 +10340,14 @@ proto.google.protobuf.ServiceOptions.prototype.serializeBinary = function() {
  */
 proto.google.protobuf.ServiceOptions.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      34,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
+    );
+  }
   f = /** @type {boolean} */ (jspb.Message.getField(message, 33));
   if (f != null) {
     writer.writeBool(
@@ -8079,6 +10365,43 @@ proto.google.protobuf.ServiceOptions.serializeBinaryToWriter = function(message,
   }
   jspb.Message.serializeBinaryExtensions(message, writer,
     proto.google.protobuf.ServiceOptions.extensionsBinary, proto.google.protobuf.ServiceOptions.prototype.getExtension);
+};
+
+
+/**
+ * optional FeatureSet features = 34;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.ServiceOptions.prototype.getFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 34));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.ServiceOptions} returns this
+*/
+proto.google.protobuf.ServiceOptions.prototype.setFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 34, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.ServiceOptions} returns this
+ */
+proto.google.protobuf.ServiceOptions.prototype.clearFeatures = function() {
+  return this.setFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.ServiceOptions.prototype.hasFeatures = function() {
+  return jspb.Message.getField(this, 34) != null;
 };
 
 
@@ -8195,9 +10518,10 @@ proto.google.protobuf.MethodOptions.prototype.toObject = function(opt_includeIns
  */
 proto.google.protobuf.MethodOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 33, false),
-    idempotencyLevel: jspb.Message.getFieldWithDefault(msg, 34, 0),
-    uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
+deprecated: jspb.Message.getBooleanFieldWithDefault(msg, 33, false),
+idempotencyLevel: jspb.Message.getFieldWithDefault(msg, 34, 0),
+features: (f = msg.getFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+uninterpretedOptionList: jspb.Message.toObjectList(msg.getUninterpretedOptionList(),
     proto.google.protobuf.UninterpretedOption.toObject, includeInstance)
   };
 
@@ -8245,6 +10569,11 @@ proto.google.protobuf.MethodOptions.deserializeBinaryFromReader = function(msg, 
     case 34:
       var value = /** @type {!proto.google.protobuf.MethodOptions.IdempotencyLevel} */ (reader.readEnum());
       msg.setIdempotencyLevel(value);
+      break;
+    case 35:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFeatures(value);
       break;
     case 999:
       var value = new proto.google.protobuf.UninterpretedOption;
@@ -8295,6 +10624,14 @@ proto.google.protobuf.MethodOptions.serializeBinaryToWriter = function(message, 
     writer.writeEnum(
       34,
       f
+    );
+  }
+  f = message.getFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      35,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
     );
   }
   f = message.getUninterpretedOptionList();
@@ -8392,6 +10729,43 @@ proto.google.protobuf.MethodOptions.prototype.hasIdempotencyLevel = function() {
 
 
 /**
+ * optional FeatureSet features = 35;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.MethodOptions.prototype.getFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 35));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.MethodOptions} returns this
+*/
+proto.google.protobuf.MethodOptions.prototype.setFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 35, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.MethodOptions} returns this
+ */
+proto.google.protobuf.MethodOptions.prototype.clearFeatures = function() {
+  return this.setFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.MethodOptions.prototype.hasFeatures = function() {
+  return jspb.Message.getField(this, 35) != null;
+};
+
+
+/**
  * repeated UninterpretedOption uninterpreted_option = 999;
  * @return {!Array<!proto.google.protobuf.UninterpretedOption>}
  */
@@ -8468,14 +10842,14 @@ proto.google.protobuf.UninterpretedOption.prototype.toObject = function(opt_incl
  */
 proto.google.protobuf.UninterpretedOption.toObject = function(includeInstance, msg) {
   var f, obj = {
-    nameList: jspb.Message.toObjectList(msg.getNameList(),
+nameList: jspb.Message.toObjectList(msg.getNameList(),
     proto.google.protobuf.UninterpretedOption.NamePart.toObject, includeInstance),
-    identifierValue: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
-    positiveIntValue: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
-    negativeIntValue: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
-    doubleValue: (f = jspb.Message.getOptionalFloatingPointField(msg, 6)) == null ? undefined : f,
-    stringValue: msg.getStringValue_asB64(),
-    aggregateValue: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f
+identifierValue: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+positiveIntValue: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+negativeIntValue: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
+doubleValue: (f = jspb.Message.getOptionalFloatingPointField(msg, 6)) == null ? undefined : f,
+stringValue: msg.getStringValue_asB64(),
+aggregateValue: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -8655,8 +11029,8 @@ proto.google.protobuf.UninterpretedOption.NamePart.prototype.toObject = function
  */
 proto.google.protobuf.UninterpretedOption.NamePart.toObject = function(includeInstance, msg) {
   var f, obj = {
-    namePart: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
-    isExtension: (f = jspb.Message.getBooleanField(msg, 2)) == null ? undefined : f
+namePart: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+isExtension: (f = jspb.Message.getBooleanField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -9098,6 +11472,1181 @@ proto.google.protobuf.UninterpretedOption.prototype.hasAggregateValue = function
 
 
 
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.google.protobuf.FeatureSet.prototype.toObject = function(opt_includeInstance) {
+  return proto.google.protobuf.FeatureSet.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.google.protobuf.FeatureSet} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FeatureSet.toObject = function(includeInstance, msg) {
+  var f, obj = {
+fieldPresence: (f = jspb.Message.getField(msg, 1)) == null ? undefined : f,
+enumType: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+repeatedFieldEncoding: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+utf8Validation: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+messageEncoding: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
+jsonFormat: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
+enforceNamingStyle: (f = jspb.Message.getField(msg, 7)) == null ? undefined : f,
+defaultSymbolVisibility: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f
+  };
+
+  jspb.Message.toObjectExtension(/** @type {!jspb.Message} */ (msg), obj,
+      proto.google.protobuf.FeatureSet.extensions, proto.google.protobuf.FeatureSet.prototype.getExtension,
+      includeInstance);
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.FeatureSet.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.google.protobuf.FeatureSet;
+  return proto.google.protobuf.FeatureSet.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.google.protobuf.FeatureSet} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.FeatureSet.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {!proto.google.protobuf.FeatureSet.FieldPresence} */ (reader.readEnum());
+      msg.setFieldPresence(value);
+      break;
+    case 2:
+      var value = /** @type {!proto.google.protobuf.FeatureSet.EnumType} */ (reader.readEnum());
+      msg.setEnumType(value);
+      break;
+    case 3:
+      var value = /** @type {!proto.google.protobuf.FeatureSet.RepeatedFieldEncoding} */ (reader.readEnum());
+      msg.setRepeatedFieldEncoding(value);
+      break;
+    case 4:
+      var value = /** @type {!proto.google.protobuf.FeatureSet.Utf8Validation} */ (reader.readEnum());
+      msg.setUtf8Validation(value);
+      break;
+    case 5:
+      var value = /** @type {!proto.google.protobuf.FeatureSet.MessageEncoding} */ (reader.readEnum());
+      msg.setMessageEncoding(value);
+      break;
+    case 6:
+      var value = /** @type {!proto.google.protobuf.FeatureSet.JsonFormat} */ (reader.readEnum());
+      msg.setJsonFormat(value);
+      break;
+    case 7:
+      var value = /** @type {!proto.google.protobuf.FeatureSet.EnforceNamingStyle} */ (reader.readEnum());
+      msg.setEnforceNamingStyle(value);
+      break;
+    case 8:
+      var value = /** @type {!proto.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} */ (reader.readEnum());
+      msg.setDefaultSymbolVisibility(value);
+      break;
+    default:
+      jspb.Message.readBinaryExtension(msg, reader,
+        proto.google.protobuf.FeatureSet.extensionsBinary,
+        proto.google.protobuf.FeatureSet.prototype.getExtension,
+        proto.google.protobuf.FeatureSet.prototype.setExtension);
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.google.protobuf.FeatureSet.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.google.protobuf.FeatureSet.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.google.protobuf.FeatureSet} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FeatureSet.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = /** @type {!proto.google.protobuf.FeatureSet.FieldPresence} */ (jspb.Message.getField(message, 1));
+  if (f != null) {
+    writer.writeEnum(
+      1,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.FeatureSet.EnumType} */ (jspb.Message.getField(message, 2));
+  if (f != null) {
+    writer.writeEnum(
+      2,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.FeatureSet.RepeatedFieldEncoding} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.FeatureSet.Utf8Validation} */ (jspb.Message.getField(message, 4));
+  if (f != null) {
+    writer.writeEnum(
+      4,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.FeatureSet.MessageEncoding} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeEnum(
+      5,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.FeatureSet.JsonFormat} */ (jspb.Message.getField(message, 6));
+  if (f != null) {
+    writer.writeEnum(
+      6,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.FeatureSet.EnforceNamingStyle} */ (jspb.Message.getField(message, 7));
+  if (f != null) {
+    writer.writeEnum(
+      7,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeEnum(
+      8,
+      f
+    );
+  }
+  jspb.Message.serializeBinaryExtensions(message, writer,
+    proto.google.protobuf.FeatureSet.extensionsBinary, proto.google.protobuf.FeatureSet.prototype.getExtension);
+};
+
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FeatureSet.FieldPresence = {
+  FIELD_PRESENCE_UNKNOWN: 0,
+  EXPLICIT: 1,
+  IMPLICIT: 2,
+  LEGACY_REQUIRED: 3
+};
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FeatureSet.EnumType = {
+  ENUM_TYPE_UNKNOWN: 0,
+  OPEN: 1,
+  CLOSED: 2
+};
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FeatureSet.RepeatedFieldEncoding = {
+  REPEATED_FIELD_ENCODING_UNKNOWN: 0,
+  PACKED: 1,
+  EXPANDED: 2
+};
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FeatureSet.Utf8Validation = {
+  UTF8_VALIDATION_UNKNOWN: 0,
+  VERIFY: 2,
+  NONE: 3
+};
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FeatureSet.MessageEncoding = {
+  MESSAGE_ENCODING_UNKNOWN: 0,
+  LENGTH_PREFIXED: 1,
+  DELIMITED: 2
+};
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FeatureSet.JsonFormat = {
+  JSON_FORMAT_UNKNOWN: 0,
+  ALLOW: 1,
+  LEGACY_BEST_EFFORT: 2
+};
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FeatureSet.EnforceNamingStyle = {
+  ENFORCE_NAMING_STYLE_UNKNOWN: 0,
+  STYLE2024: 1,
+  STYLE_LEGACY: 2,
+  STYLE2026: 3
+};
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.google.protobuf.FeatureSet.VisibilityFeature.prototype.toObject = function(opt_includeInstance) {
+  return proto.google.protobuf.FeatureSet.VisibilityFeature.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.google.protobuf.FeatureSet.VisibilityFeature} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FeatureSet.VisibilityFeature.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.google.protobuf.FeatureSet.VisibilityFeature}
+ */
+proto.google.protobuf.FeatureSet.VisibilityFeature.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.google.protobuf.FeatureSet.VisibilityFeature;
+  return proto.google.protobuf.FeatureSet.VisibilityFeature.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.google.protobuf.FeatureSet.VisibilityFeature} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.google.protobuf.FeatureSet.VisibilityFeature}
+ */
+proto.google.protobuf.FeatureSet.VisibilityFeature.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.google.protobuf.FeatureSet.VisibilityFeature.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.google.protobuf.FeatureSet.VisibilityFeature.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.google.protobuf.FeatureSet.VisibilityFeature} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FeatureSet.VisibilityFeature.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+};
+
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility = {
+  DEFAULT_SYMBOL_VISIBILITY_UNKNOWN: 0,
+  EXPORT_ALL: 1,
+  EXPORT_TOP_LEVEL: 2,
+  LOCAL_ALL: 3,
+  STRICT: 4
+};
+
+/**
+ * optional FieldPresence field_presence = 1;
+ * @return {!proto.google.protobuf.FeatureSet.FieldPresence}
+ */
+proto.google.protobuf.FeatureSet.prototype.getFieldPresence = function() {
+  return /** @type {!proto.google.protobuf.FeatureSet.FieldPresence} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FeatureSet.FieldPresence} value
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.setFieldPresence = function(value) {
+  return jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.clearFieldPresence = function() {
+  return jspb.Message.setField(this, 1, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSet.prototype.hasFieldPresence = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional EnumType enum_type = 2;
+ * @return {!proto.google.protobuf.FeatureSet.EnumType}
+ */
+proto.google.protobuf.FeatureSet.prototype.getEnumType = function() {
+  return /** @type {!proto.google.protobuf.FeatureSet.EnumType} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FeatureSet.EnumType} value
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.setEnumType = function(value) {
+  return jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.clearEnumType = function() {
+  return jspb.Message.setField(this, 2, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSet.prototype.hasEnumType = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional RepeatedFieldEncoding repeated_field_encoding = 3;
+ * @return {!proto.google.protobuf.FeatureSet.RepeatedFieldEncoding}
+ */
+proto.google.protobuf.FeatureSet.prototype.getRepeatedFieldEncoding = function() {
+  return /** @type {!proto.google.protobuf.FeatureSet.RepeatedFieldEncoding} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FeatureSet.RepeatedFieldEncoding} value
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.setRepeatedFieldEncoding = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.clearRepeatedFieldEncoding = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSet.prototype.hasRepeatedFieldEncoding = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional Utf8Validation utf8_validation = 4;
+ * @return {!proto.google.protobuf.FeatureSet.Utf8Validation}
+ */
+proto.google.protobuf.FeatureSet.prototype.getUtf8Validation = function() {
+  return /** @type {!proto.google.protobuf.FeatureSet.Utf8Validation} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FeatureSet.Utf8Validation} value
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.setUtf8Validation = function(value) {
+  return jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.clearUtf8Validation = function() {
+  return jspb.Message.setField(this, 4, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSet.prototype.hasUtf8Validation = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional MessageEncoding message_encoding = 5;
+ * @return {!proto.google.protobuf.FeatureSet.MessageEncoding}
+ */
+proto.google.protobuf.FeatureSet.prototype.getMessageEncoding = function() {
+  return /** @type {!proto.google.protobuf.FeatureSet.MessageEncoding} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FeatureSet.MessageEncoding} value
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.setMessageEncoding = function(value) {
+  return jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.clearMessageEncoding = function() {
+  return jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSet.prototype.hasMessageEncoding = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
+
+/**
+ * optional JsonFormat json_format = 6;
+ * @return {!proto.google.protobuf.FeatureSet.JsonFormat}
+ */
+proto.google.protobuf.FeatureSet.prototype.getJsonFormat = function() {
+  return /** @type {!proto.google.protobuf.FeatureSet.JsonFormat} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FeatureSet.JsonFormat} value
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.setJsonFormat = function(value) {
+  return jspb.Message.setField(this, 6, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.clearJsonFormat = function() {
+  return jspb.Message.setField(this, 6, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSet.prototype.hasJsonFormat = function() {
+  return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional EnforceNamingStyle enforce_naming_style = 7;
+ * @return {!proto.google.protobuf.FeatureSet.EnforceNamingStyle}
+ */
+proto.google.protobuf.FeatureSet.prototype.getEnforceNamingStyle = function() {
+  return /** @type {!proto.google.protobuf.FeatureSet.EnforceNamingStyle} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FeatureSet.EnforceNamingStyle} value
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.setEnforceNamingStyle = function(value) {
+  return jspb.Message.setField(this, 7, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.clearEnforceNamingStyle = function() {
+  return jspb.Message.setField(this, 7, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSet.prototype.hasEnforceNamingStyle = function() {
+  return jspb.Message.getField(this, 7) != null;
+};
+
+
+/**
+ * optional VisibilityFeature.DefaultSymbolVisibility default_symbol_visibility = 8;
+ * @return {!proto.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility}
+ */
+proto.google.protobuf.FeatureSet.prototype.getDefaultSymbolVisibility = function() {
+  return /** @type {!proto.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} value
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.setDefaultSymbolVisibility = function(value) {
+  return jspb.Message.setField(this, 8, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSet} returns this
+ */
+proto.google.protobuf.FeatureSet.prototype.clearDefaultSymbolVisibility = function() {
+  return jspb.Message.setField(this, 8, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSet.prototype.hasDefaultSymbolVisibility = function() {
+  return jspb.Message.getField(this, 8) != null;
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.google.protobuf.FeatureSetDefaults.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.toObject = function(opt_includeInstance) {
+  return proto.google.protobuf.FeatureSetDefaults.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.google.protobuf.FeatureSetDefaults} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FeatureSetDefaults.toObject = function(includeInstance, msg) {
+  var f, obj = {
+defaultsList: jspb.Message.toObjectList(msg.getDefaultsList(),
+    proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject, includeInstance),
+minimumEdition: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+maximumEdition: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.google.protobuf.FeatureSetDefaults}
+ */
+proto.google.protobuf.FeatureSetDefaults.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.google.protobuf.FeatureSetDefaults;
+  return proto.google.protobuf.FeatureSetDefaults.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.google.protobuf.FeatureSetDefaults} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.google.protobuf.FeatureSetDefaults}
+ */
+proto.google.protobuf.FeatureSetDefaults.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+      reader.readMessage(value,proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.deserializeBinaryFromReader);
+      msg.addDefaults(value);
+      break;
+    case 4:
+      var value = /** @type {!proto.google.protobuf.Edition} */ (reader.readEnum());
+      msg.setMinimumEdition(value);
+      break;
+    case 5:
+      var value = /** @type {!proto.google.protobuf.Edition} */ (reader.readEnum());
+      msg.setMaximumEdition(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.google.protobuf.FeatureSetDefaults.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.google.protobuf.FeatureSetDefaults} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FeatureSetDefaults.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getDefaultsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.serializeBinaryToWriter
+    );
+  }
+  f = /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getField(message, 4));
+  if (f != null) {
+    writer.writeEnum(
+      4,
+      f
+    );
+  }
+  f = /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeEnum(
+      5,
+      f
+    );
+  }
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.toObject = function(opt_includeInstance) {
+  return proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject = function(includeInstance, msg) {
+  var f, obj = {
+edition: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+overridableFeatures: (f = msg.getOverridableFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f),
+fixedFeatures: (f = msg.getFixedFeatures()) && proto.google.protobuf.FeatureSet.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+  return proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 3:
+      var value = /** @type {!proto.google.protobuf.Edition} */ (reader.readEnum());
+      msg.setEdition(value);
+      break;
+    case 4:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setOverridableFeatures(value);
+      break;
+    case 5:
+      var value = new proto.google.protobuf.FeatureSet;
+      reader.readMessage(value,proto.google.protobuf.FeatureSet.deserializeBinaryFromReader);
+      msg.setFixedFeatures(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
+  f = message.getOverridableFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      4,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
+    );
+  }
+  f = message.getFixedFeatures();
+  if (f != null) {
+    writer.writeMessage(
+      5,
+      f,
+      proto.google.protobuf.FeatureSet.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Edition edition = 3;
+ * @return {!proto.google.protobuf.Edition}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.getEdition = function() {
+  return /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.Edition} value
+ * @return {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} returns this
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.setEdition = function(value) {
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} returns this
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.clearEdition = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.hasEdition = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional FeatureSet overridable_features = 4;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.getOverridableFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 4));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} returns this
+*/
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.setOverridableFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} returns this
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.clearOverridableFeatures = function() {
+  return this.setOverridableFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.hasOverridableFeatures = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional FeatureSet fixed_features = 5;
+ * @return {?proto.google.protobuf.FeatureSet}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.getFixedFeatures = function() {
+  return /** @type{?proto.google.protobuf.FeatureSet} */ (
+    jspb.Message.getWrapperField(this, proto.google.protobuf.FeatureSet, 5));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.FeatureSet|undefined} value
+ * @return {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} returns this
+*/
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.setFixedFeatures = function(value) {
+  return jspb.Message.setWrapperField(this, 5, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} returns this
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.clearFixedFeatures = function() {
+  return this.setFixedFeatures(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.prototype.hasFixedFeatures = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
+
+/**
+ * repeated FeatureSetEditionDefault defaults = 1;
+ * @return {!Array<!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault>}
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.getDefaultsList = function() {
+  return /** @type{!Array<!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault>} value
+ * @return {!proto.google.protobuf.FeatureSetDefaults} returns this
+*/
+proto.google.protobuf.FeatureSetDefaults.prototype.setDefaultsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault}
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.addDefaults = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.google.protobuf.FeatureSetDefaults} returns this
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.clearDefaultsList = function() {
+  return this.setDefaultsList([]);
+};
+
+
+/**
+ * optional Edition minimum_edition = 4;
+ * @return {!proto.google.protobuf.Edition}
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.getMinimumEdition = function() {
+  return /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.Edition} value
+ * @return {!proto.google.protobuf.FeatureSetDefaults} returns this
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.setMinimumEdition = function(value) {
+  return jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSetDefaults} returns this
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.clearMinimumEdition = function() {
+  return jspb.Message.setField(this, 4, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.hasMinimumEdition = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional Edition maximum_edition = 5;
+ * @return {!proto.google.protobuf.Edition}
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.getMaximumEdition = function() {
+  return /** @type {!proto.google.protobuf.Edition} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.Edition} value
+ * @return {!proto.google.protobuf.FeatureSetDefaults} returns this
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.setMaximumEdition = function(value) {
+  return jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.FeatureSetDefaults} returns this
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.clearMaximumEdition = function() {
+  return jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.FeatureSetDefaults.prototype.hasMaximumEdition = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
+
+
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
@@ -9136,10 +12685,13 @@ proto.google.protobuf.SourceCodeInfo.prototype.toObject = function(opt_includeIn
  */
 proto.google.protobuf.SourceCodeInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
-    locationList: jspb.Message.toObjectList(msg.getLocationList(),
+locationList: jspb.Message.toObjectList(msg.getLocationList(),
     proto.google.protobuf.SourceCodeInfo.Location.toObject, includeInstance)
   };
 
+  jspb.Message.toObjectExtension(/** @type {!jspb.Message} */ (msg), obj,
+      proto.google.protobuf.SourceCodeInfo.extensions, proto.google.protobuf.SourceCodeInfo.prototype.getExtension,
+      includeInstance);
   if (includeInstance) {
     obj.$jspbMessageInstance = msg;
   }
@@ -9180,7 +12732,10 @@ proto.google.protobuf.SourceCodeInfo.deserializeBinaryFromReader = function(msg,
       msg.addLocation(value);
       break;
     default:
-      reader.skipField();
+      jspb.Message.readBinaryExtension(msg, reader,
+        proto.google.protobuf.SourceCodeInfo.extensionsBinary,
+        proto.google.protobuf.SourceCodeInfo.prototype.getExtension,
+        proto.google.protobuf.SourceCodeInfo.prototype.setExtension);
       break;
     }
   }
@@ -9216,6 +12771,8 @@ proto.google.protobuf.SourceCodeInfo.serializeBinaryToWriter = function(message,
       proto.google.protobuf.SourceCodeInfo.Location.serializeBinaryToWriter
     );
   }
+  jspb.Message.serializeBinaryExtensions(message, writer,
+    proto.google.protobuf.SourceCodeInfo.extensionsBinary, proto.google.protobuf.SourceCodeInfo.prototype.getExtension);
 };
 
 
@@ -9258,11 +12815,11 @@ proto.google.protobuf.SourceCodeInfo.Location.prototype.toObject = function(opt_
  */
 proto.google.protobuf.SourceCodeInfo.Location.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pathList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    spanList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
-    leadingComments: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
-    trailingComments: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
-    leadingDetachedCommentsList: (f = jspb.Message.getRepeatedField(msg, 6)) == null ? undefined : f
+pathList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+spanList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+leadingComments: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+trailingComments: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+leadingDetachedCommentsList: (f = jspb.Message.getRepeatedField(msg, 6)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -9650,7 +13207,7 @@ proto.google.protobuf.GeneratedCodeInfo.prototype.toObject = function(opt_includ
  */
 proto.google.protobuf.GeneratedCodeInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
-    annotationList: jspb.Message.toObjectList(msg.getAnnotationList(),
+annotationList: jspb.Message.toObjectList(msg.getAnnotationList(),
     proto.google.protobuf.GeneratedCodeInfo.Annotation.toObject, includeInstance)
   };
 
@@ -9772,10 +13329,11 @@ proto.google.protobuf.GeneratedCodeInfo.Annotation.prototype.toObject = function
  */
 proto.google.protobuf.GeneratedCodeInfo.Annotation.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pathList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    sourceFile: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
-    begin: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
-    end: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
+pathList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+sourceFile: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+begin: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+end: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
+semantic: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -9829,6 +13387,10 @@ proto.google.protobuf.GeneratedCodeInfo.Annotation.deserializeBinaryFromReader =
     case 4:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setEnd(value);
+      break;
+    case 5:
+      var value = /** @type {!proto.google.protobuf.GeneratedCodeInfo.Annotation.Semantic} */ (reader.readEnum());
+      msg.setSemantic(value);
       break;
     default:
       reader.skipField();
@@ -9887,8 +13449,24 @@ proto.google.protobuf.GeneratedCodeInfo.Annotation.serializeBinaryToWriter = fun
       f
     );
   }
+  f = /** @type {!proto.google.protobuf.GeneratedCodeInfo.Annotation.Semantic} */ (jspb.Message.getField(message, 5));
+  if (f != null) {
+    writer.writeEnum(
+      5,
+      f
+    );
+  }
 };
 
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.GeneratedCodeInfo.Annotation.Semantic = {
+  NONE: 0,
+  SET: 1,
+  ALIAS: 2
+};
 
 /**
  * repeated int32 path = 1;
@@ -10036,6 +13614,42 @@ proto.google.protobuf.GeneratedCodeInfo.Annotation.prototype.hasEnd = function()
 
 
 /**
+ * optional Semantic semantic = 5;
+ * @return {!proto.google.protobuf.GeneratedCodeInfo.Annotation.Semantic}
+ */
+proto.google.protobuf.GeneratedCodeInfo.Annotation.prototype.getSemantic = function() {
+  return /** @type {!proto.google.protobuf.GeneratedCodeInfo.Annotation.Semantic} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {!proto.google.protobuf.GeneratedCodeInfo.Annotation.Semantic} value
+ * @return {!proto.google.protobuf.GeneratedCodeInfo.Annotation} returns this
+ */
+proto.google.protobuf.GeneratedCodeInfo.Annotation.prototype.setSemantic = function(value) {
+  return jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.google.protobuf.GeneratedCodeInfo.Annotation} returns this
+ */
+proto.google.protobuf.GeneratedCodeInfo.Annotation.prototype.clearSemantic = function() {
+  return jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.google.protobuf.GeneratedCodeInfo.Annotation.prototype.hasSemantic = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
+
+/**
  * repeated Annotation annotation = 1;
  * @return {!Array<!proto.google.protobuf.GeneratedCodeInfo.Annotation>}
  */
@@ -10072,5 +13686,34 @@ proto.google.protobuf.GeneratedCodeInfo.prototype.clearAnnotationList = function
   return this.setAnnotationList([]);
 };
 
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.Edition = {
+  EDITION_UNKNOWN: 0,
+  EDITION_LEGACY: 900,
+  EDITION_PROTO2: 998,
+  EDITION_PROTO3: 999,
+  EDITION_2023: 1000,
+  EDITION_2024: 1001,
+  EDITION_2026: 1002,
+  EDITION_UNSTABLE: 9999,
+  EDITION_1_TEST_ONLY: 1,
+  EDITION_2_TEST_ONLY: 2,
+  EDITION_99997_TEST_ONLY: 99997,
+  EDITION_99998_TEST_ONLY: 99998,
+  EDITION_99999_TEST_ONLY: 99999,
+  EDITION_MAX: 2147483647
+};
+
+/**
+ * @enum {number}
+ */
+proto.google.protobuf.SymbolVisibility = {
+  VISIBILITY_UNSET: 0,
+  VISIBILITY_LOCAL: 1,
+  VISIBILITY_EXPORT: 2
+};
 
 goog.object.extend(exports, proto.google.protobuf);

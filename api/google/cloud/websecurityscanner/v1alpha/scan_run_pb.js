@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -81,15 +81,15 @@ proto.google.cloud.websecurityscanner.v1alpha.ScanRun.prototype.toObject = funct
  */
 proto.google.cloud.websecurityscanner.v1alpha.ScanRun.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    executionState: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    resultState: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    startTime: (f = msg.getStartTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    endTime: (f = msg.getEndTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    urlsCrawledCount: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    urlsTestedCount: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    hasVulnerabilities: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
-    progressPercent: jspb.Message.getFieldWithDefault(msg, 9, 0)
+name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+executionState: jspb.Message.getFieldWithDefault(msg, 2, 0),
+resultState: jspb.Message.getFieldWithDefault(msg, 3, 0),
+startTime: (f = msg.getStartTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+endTime: (f = msg.getEndTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+urlsCrawledCount: jspb.Message.getFieldWithDefault(msg, 6, 0),
+urlsTestedCount: jspb.Message.getFieldWithDefault(msg, 7, 0),
+hasVulnerabilities: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
+progressPercent: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {

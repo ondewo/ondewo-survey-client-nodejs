@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -145,8 +145,8 @@ proto.google.iam.v1.SetIamPolicyRequest.prototype.toObject = function(opt_includ
  */
 proto.google.iam.v1.SetIamPolicyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    resource: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    policy: (f = msg.getPolicy()) && google_iam_v1_policy_pb.Policy.toObject(includeInstance, f)
+resource: jspb.Message.getFieldWithDefault(msg, 1, ""),
+policy: (f = msg.getPolicy()) && google_iam_v1_policy_pb.Policy.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -326,7 +326,7 @@ proto.google.iam.v1.GetIamPolicyRequest.prototype.toObject = function(opt_includ
  */
 proto.google.iam.v1.GetIamPolicyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    resource: jspb.Message.getFieldWithDefault(msg, 1, "")
+resource: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -463,8 +463,8 @@ proto.google.iam.v1.TestIamPermissionsRequest.prototype.toObject = function(opt_
  */
 proto.google.iam.v1.TestIamPermissionsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    resource: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    permissionsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+resource: jspb.Message.getFieldWithDefault(msg, 1, ""),
+permissionsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -649,7 +649,7 @@ proto.google.iam.v1.TestIamPermissionsResponse.prototype.toObject = function(opt
  */
 proto.google.iam.v1.TestIamPermissionsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    permissionsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+permissionsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {

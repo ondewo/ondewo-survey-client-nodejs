@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -599,14 +599,14 @@ proto.ondewo.survey.Survey.prototype.toObject = function(opt_includeInstance) {
  */
 proto.ondewo.survey.Survey.toObject = function(includeInstance, msg) {
   var f, obj = {
-    surveyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    displayName: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    languageCode: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    questionsList: jspb.Message.toObjectList(msg.getQuestionsList(),
+surveyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+displayName: jspb.Message.getFieldWithDefault(msg, 2, ""),
+languageCode: jspb.Message.getFieldWithDefault(msg, 3, ""),
+questionsList: jspb.Message.toObjectList(msg.getQuestionsList(),
     proto.ondewo.survey.Question.toObject, includeInstance),
-    surveyInfo: (f = msg.getSurveyInfo()) && proto.ondewo.survey.SurveyInfo.toObject(includeInstance, f),
-    excludeSubflowsList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
-    status: jspb.Message.getFieldWithDefault(msg, 10, 0)
+surveyInfo: (f = msg.getSurveyInfo()) && proto.ondewo.survey.SurveyInfo.toObject(includeInstance, f),
+excludeSubflowsList: (f = jspb.Message.getRepeatedField(msg, 9)) == null ? undefined : f,
+status: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -984,16 +984,16 @@ proto.ondewo.survey.SurveyInfo.prototype.toObject = function(opt_includeInstance
  */
 proto.ondewo.survey.SurveyInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
-    legalEntity: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    postalAddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    emailAddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    phoneNumber: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    phoneHours: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    expectedDuration: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    purpose: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    topic: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    legalDisclaimer: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    anonymous: jspb.Message.getBooleanFieldWithDefault(msg, 10, false)
+legalEntity: jspb.Message.getFieldWithDefault(msg, 1, ""),
+postalAddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+emailAddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
+phoneNumber: jspb.Message.getFieldWithDefault(msg, 4, ""),
+phoneHours: jspb.Message.getFieldWithDefault(msg, 5, ""),
+expectedDuration: jspb.Message.getFieldWithDefault(msg, 6, ""),
+purpose: jspb.Message.getFieldWithDefault(msg, 7, ""),
+topic: jspb.Message.getFieldWithDefault(msg, 8, ""),
+legalDisclaimer: jspb.Message.getFieldWithDefault(msg, 9, ""),
+anonymous: jspb.Message.getBooleanFieldWithDefault(msg, 10, false)
   };
 
   if (includeInstance) {
@@ -1414,12 +1414,12 @@ proto.ondewo.survey.Question.prototype.toObject = function(opt_includeInstance) 
  */
 proto.ondewo.survey.Question.toObject = function(includeInstance, msg) {
   var f, obj = {
-    openQuestion: (f = msg.getOpenQuestion()) && proto.ondewo.survey.OpenQuestion.toObject(includeInstance, f),
-    singleChoiceQuestion: (f = msg.getSingleChoiceQuestion()) && proto.ondewo.survey.SingleChoiceQuestion.toObject(includeInstance, f),
-    multipleChoiceQuestion: (f = msg.getMultipleChoiceQuestion()) && proto.ondewo.survey.MultipleChoiceQuestion.toObject(includeInstance, f),
-    scaleQuestion: (f = msg.getScaleQuestion()) && proto.ondewo.survey.ScaleQuestion.toObject(includeInstance, f),
-    singleParameterQuestion: (f = msg.getSingleParameterQuestion()) && proto.ondewo.survey.SingleParameterQuestion.toObject(includeInstance, f),
-    multipleParameterQuestion: (f = msg.getMultipleParameterQuestion()) && proto.ondewo.survey.MultipleParameterQuestion.toObject(includeInstance, f)
+openQuestion: (f = msg.getOpenQuestion()) && proto.ondewo.survey.OpenQuestion.toObject(includeInstance, f),
+singleChoiceQuestion: (f = msg.getSingleChoiceQuestion()) && proto.ondewo.survey.SingleChoiceQuestion.toObject(includeInstance, f),
+multipleChoiceQuestion: (f = msg.getMultipleChoiceQuestion()) && proto.ondewo.survey.MultipleChoiceQuestion.toObject(includeInstance, f),
+scaleQuestion: (f = msg.getScaleQuestion()) && proto.ondewo.survey.ScaleQuestion.toObject(includeInstance, f),
+singleParameterQuestion: (f = msg.getSingleParameterQuestion()) && proto.ondewo.survey.SingleParameterQuestion.toObject(includeInstance, f),
+multipleParameterQuestion: (f = msg.getMultipleParameterQuestion()) && proto.ondewo.survey.MultipleParameterQuestion.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1820,7 +1820,7 @@ proto.ondewo.survey.OpenQuestion.prototype.toObject = function(opt_includeInstan
  */
 proto.ondewo.survey.OpenQuestion.toObject = function(includeInstance, msg) {
   var f, obj = {
-    questionText: jspb.Message.getFieldWithDefault(msg, 1, "")
+questionText: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -1957,8 +1957,8 @@ proto.ondewo.survey.SingleChoiceQuestion.prototype.toObject = function(opt_inclu
  */
 proto.ondewo.survey.SingleChoiceQuestion.toObject = function(includeInstance, msg) {
   var f, obj = {
-    questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    choicesList: jspb.Message.toObjectList(msg.getChoicesList(),
+questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
+choicesList: jspb.Message.toObjectList(msg.getChoicesList(),
     proto.ondewo.survey.Choice.toObject, includeInstance)
   };
 
@@ -2147,8 +2147,8 @@ proto.ondewo.survey.MultipleChoiceQuestion.prototype.toObject = function(opt_inc
  */
 proto.ondewo.survey.MultipleChoiceQuestion.toObject = function(includeInstance, msg) {
   var f, obj = {
-    questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    choicesList: jspb.Message.toObjectList(msg.getChoicesList(),
+questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
+choicesList: jspb.Message.toObjectList(msg.getChoicesList(),
     proto.ondewo.survey.Choice.toObject, includeInstance)
   };
 
@@ -2330,9 +2330,9 @@ proto.ondewo.survey.ScaleQuestion.prototype.toObject = function(opt_includeInsta
  */
 proto.ondewo.survey.ScaleQuestion.toObject = function(includeInstance, msg) {
   var f, obj = {
-    questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    minValue: (f = msg.getMinValue()) && proto.ondewo.survey.ScaleQuestion.ScaleValue.toObject(includeInstance, f),
-    maxValue: (f = msg.getMaxValue()) && proto.ondewo.survey.ScaleQuestion.ScaleValue.toObject(includeInstance, f)
+questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
+minValue: (f = msg.getMinValue()) && proto.ondewo.survey.ScaleQuestion.ScaleValue.toObject(includeInstance, f),
+maxValue: (f = msg.getMaxValue()) && proto.ondewo.survey.ScaleQuestion.ScaleValue.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2470,8 +2470,8 @@ proto.ondewo.survey.ScaleQuestion.ScaleValue.prototype.toObject = function(opt_i
  */
 proto.ondewo.survey.ScaleQuestion.ScaleValue.toObject = function(includeInstance, msg) {
   var f, obj = {
-    value: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    label: jspb.Message.getFieldWithDefault(msg, 2, "")
+value: jspb.Message.getFieldWithDefault(msg, 1, 0),
+label: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -2722,8 +2722,8 @@ proto.ondewo.survey.SingleParameterQuestion.prototype.toObject = function(opt_in
  */
 proto.ondewo.survey.SingleParameterQuestion.toObject = function(includeInstance, msg) {
   var f, obj = {
-    questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    parameterType: jspb.Message.getFieldWithDefault(msg, 2, "")
+questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
+parameterType: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -2882,8 +2882,8 @@ proto.ondewo.survey.MultipleParameterQuestion.prototype.toObject = function(opt_
  */
 proto.ondewo.survey.MultipleParameterQuestion.toObject = function(includeInstance, msg) {
   var f, obj = {
-    questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    parameterType: jspb.Message.getFieldWithDefault(msg, 2, "")
+questionText: jspb.Message.getFieldWithDefault(msg, 1, ""),
+parameterType: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -3049,9 +3049,9 @@ proto.ondewo.survey.Choice.prototype.toObject = function(opt_includeInstance) {
  */
 proto.ondewo.survey.Choice.toObject = function(includeInstance, msg) {
   var f, obj = {
-    synonymsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    followUpQuestion: (f = msg.getFollowUpQuestion()) && proto.ondewo.survey.Question.toObject(includeInstance, f),
-    value: jspb.Message.getFieldWithDefault(msg, 3, "")
+synonymsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+followUpQuestion: (f = msg.getFollowUpQuestion()) && proto.ondewo.survey.Question.toObject(includeInstance, f),
+value: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -3305,13 +3305,13 @@ proto.ondewo.survey.Answer.prototype.toObject = function(opt_includeInstance) {
  */
 proto.ondewo.survey.Answer.toObject = function(includeInstance, msg) {
   var f, obj = {
-    questionNr: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    sessionId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    answerText: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    answerParameter: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    answerParameterOriginal: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    anonymous: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    userInformation: (f = msg.getUserInformation()) && proto.ondewo.survey.Answer.UserInfo.toObject(includeInstance, f)
+questionNr: jspb.Message.getFieldWithDefault(msg, 1, 0),
+sessionId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+answerText: jspb.Message.getFieldWithDefault(msg, 3, ""),
+answerParameter: jspb.Message.getFieldWithDefault(msg, 4, ""),
+answerParameterOriginal: jspb.Message.getFieldWithDefault(msg, 5, ""),
+anonymous: (f = jspb.Message.getBooleanField(msg, 7)) == null ? undefined : f,
+userInformation: (f = msg.getUserInformation()) && proto.ondewo.survey.Answer.UserInfo.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3491,11 +3491,11 @@ proto.ondewo.survey.Answer.UserInfo.prototype.toObject = function(opt_includeIns
  */
 proto.ondewo.survey.Answer.UserInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
-    firstName: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    lastName: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    phoneNumber: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    sessionId: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    userId: jspb.Message.getFieldWithDefault(msg, 5, "")
+firstName: jspb.Message.getFieldWithDefault(msg, 1, ""),
+lastName: jspb.Message.getFieldWithDefault(msg, 2, ""),
+phoneNumber: jspb.Message.getFieldWithDefault(msg, 3, ""),
+sessionId: jspb.Message.getFieldWithDefault(msg, 4, ""),
+userId: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -3904,7 +3904,7 @@ proto.ondewo.survey.CreateSurveyRequest.prototype.toObject = function(opt_includ
  */
 proto.ondewo.survey.CreateSurveyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    survey: (f = msg.getSurvey()) && proto.ondewo.survey.Survey.toObject(includeInstance, f)
+survey: (f = msg.getSurvey()) && proto.ondewo.survey.Survey.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4055,7 +4055,7 @@ proto.ondewo.survey.GetSurveyRequest.prototype.toObject = function(opt_includeIn
  */
 proto.ondewo.survey.GetSurveyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    surveyId: jspb.Message.getFieldWithDefault(msg, 1, "")
+surveyId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -4185,8 +4185,8 @@ proto.ondewo.survey.UpdateSurveyRequest.prototype.toObject = function(opt_includ
  */
 proto.ondewo.survey.UpdateSurveyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    survey: (f = msg.getSurvey()) && proto.ondewo.survey.Survey.toObject(includeInstance, f),
-    updateMask: (f = msg.getUpdateMask()) && google_protobuf_field_mask_pb.FieldMask.toObject(includeInstance, f)
+survey: (f = msg.getSurvey()) && proto.ondewo.survey.Survey.toObject(includeInstance, f),
+updateMask: (f = msg.getUpdateMask()) && google_protobuf_field_mask_pb.FieldMask.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4387,7 +4387,7 @@ proto.ondewo.survey.DeleteSurveyRequest.prototype.toObject = function(opt_includ
  */
 proto.ondewo.survey.DeleteSurveyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    surveyId: jspb.Message.getFieldWithDefault(msg, 1, "")
+surveyId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -4544,10 +4544,10 @@ proto.ondewo.survey.GetSurveyAnswersRequest.prototype.toObject = function(opt_in
  */
 proto.ondewo.survey.GetSurveyAnswersRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    surveyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    sessionId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    userId: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    userPhoneNumber: jspb.Message.getFieldWithDefault(msg, 4, "")
+surveyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+sessionId: (f = jspb.Message.getField(msg, 2)) == null ? undefined : f,
+userId: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+userPhoneNumber: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -4818,7 +4818,7 @@ proto.ondewo.survey.GetAllSurveyAnswersRequest.prototype.toObject = function(opt
  */
 proto.ondewo.survey.GetAllSurveyAnswersRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    surveyId: jspb.Message.getFieldWithDefault(msg, 1, "")
+surveyId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -4955,8 +4955,8 @@ proto.ondewo.survey.SurveyAnswersResponse.prototype.toObject = function(opt_incl
  */
 proto.ondewo.survey.SurveyAnswersResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    surveyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    answersList: jspb.Message.toObjectList(msg.getAnswersList(),
+surveyId: jspb.Message.getFieldWithDefault(msg, 1, ""),
+answersList: jspb.Message.toObjectList(msg.getAnswersList(),
     proto.ondewo.survey.Answer.toObject, includeInstance)
   };
 
@@ -5138,7 +5138,7 @@ proto.ondewo.survey.ListSurveysRequest.prototype.toObject = function(opt_include
  */
 proto.ondewo.survey.ListSurveysRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    pageToken: jspb.Message.getFieldWithDefault(msg, 1, "")
+pageToken: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -5275,9 +5275,9 @@ proto.ondewo.survey.ListSurveysResponse.prototype.toObject = function(opt_includ
  */
 proto.ondewo.survey.ListSurveysResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    surveysList: jspb.Message.toObjectList(msg.getSurveysList(),
+surveysList: jspb.Message.toObjectList(msg.getSurveysList(),
     proto.ondewo.survey.Survey.toObject, includeInstance),
-    nextPageToken: jspb.Message.getFieldWithDefault(msg, 2, "")
+nextPageToken: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -5458,7 +5458,7 @@ proto.ondewo.survey.AgentSurveyRequest.prototype.toObject = function(opt_include
  */
 proto.ondewo.survey.AgentSurveyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    surveyId: jspb.Message.getFieldWithDefault(msg, 1, "")
+surveyId: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -5588,7 +5588,7 @@ proto.ondewo.survey.AgentSurveyResponse.prototype.toObject = function(opt_includ
  */
 proto.ondewo.survey.AgentSurveyResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    parent: jspb.Message.getFieldWithDefault(msg, 1, "")
+parent: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {

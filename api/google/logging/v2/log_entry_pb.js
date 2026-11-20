@@ -13,13 +13,13 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = (function() {
-  if (this) { return this; }
-  if (typeof window !== 'undefined') { return window; }
-  if (typeof global !== 'undefined') { return global; }
-  if (typeof self !== 'undefined') { return self; }
-  return Function('return this')();
-}.call(null));
+var global =
+    (typeof globalThis !== 'undefined' && globalThis) ||
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof self !== 'undefined' && self) ||
+    (function () { return this; }).call(null) ||
+    Function('return this')();
 
 var google_api_annotations_pb = require('../../../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
@@ -161,22 +161,22 @@ proto.google.logging.v2.LogEntry.prototype.toObject = function(opt_includeInstan
  */
 proto.google.logging.v2.LogEntry.toObject = function(includeInstance, msg) {
   var f, obj = {
-    logName: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    resource: (f = msg.getResource()) && google_api_monitored_resource_pb.MonitoredResource.toObject(includeInstance, f),
-    protoPayload: (f = msg.getProtoPayload()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
-    textPayload: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    jsonPayload: (f = msg.getJsonPayload()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    receiveTimestamp: (f = msg.getReceiveTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    severity: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    insertId: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    httpRequest: (f = msg.getHttpRequest()) && google_logging_type_http_request_pb.HttpRequest.toObject(includeInstance, f),
-    labelsMap: (f = msg.getLabelsMap()) ? f.toObject(includeInstance, undefined) : [],
-    metadata: (f = msg.getMetadata()) && google_api_monitored_resource_pb.MonitoredResourceMetadata.toObject(includeInstance, f),
-    operation: (f = msg.getOperation()) && proto.google.logging.v2.LogEntryOperation.toObject(includeInstance, f),
-    trace: jspb.Message.getFieldWithDefault(msg, 22, ""),
-    spanId: jspb.Message.getFieldWithDefault(msg, 27, ""),
-    sourceLocation: (f = msg.getSourceLocation()) && proto.google.logging.v2.LogEntrySourceLocation.toObject(includeInstance, f)
+logName: jspb.Message.getFieldWithDefault(msg, 12, ""),
+resource: (f = msg.getResource()) && google_api_monitored_resource_pb.MonitoredResource.toObject(includeInstance, f),
+protoPayload: (f = msg.getProtoPayload()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
+textPayload: (f = jspb.Message.getField(msg, 3)) == null ? undefined : f,
+jsonPayload: (f = msg.getJsonPayload()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f),
+timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+receiveTimestamp: (f = msg.getReceiveTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+severity: jspb.Message.getFieldWithDefault(msg, 10, 0),
+insertId: jspb.Message.getFieldWithDefault(msg, 4, ""),
+httpRequest: (f = msg.getHttpRequest()) && google_logging_type_http_request_pb.HttpRequest.toObject(includeInstance, f),
+labelsMap: (f = msg.getLabelsMap()) ? f.toObject(includeInstance, undefined) : [],
+metadata: (f = msg.getMetadata()) && google_api_monitored_resource_pb.MonitoredResourceMetadata.toObject(includeInstance, f),
+operation: (f = msg.getOperation()) && proto.google.logging.v2.LogEntryOperation.toObject(includeInstance, f),
+trace: jspb.Message.getFieldWithDefault(msg, 22, ""),
+spanId: jspb.Message.getFieldWithDefault(msg, 27, ""),
+sourceLocation: (f = msg.getSourceLocation()) && proto.google.logging.v2.LogEntrySourceLocation.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -769,7 +769,8 @@ proto.google.logging.v2.LogEntry.prototype.getLabelsMap = function(opt_noLazyCre
  */
 proto.google.logging.v2.LogEntry.prototype.clearLabelsMap = function() {
   this.getLabelsMap().clear();
-  return this;};
+  return this;
+};
 
 
 /**
@@ -951,10 +952,10 @@ proto.google.logging.v2.LogEntryOperation.prototype.toObject = function(opt_incl
  */
 proto.google.logging.v2.LogEntryOperation.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    producer: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    first: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
-    last: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
+id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+producer: jspb.Message.getFieldWithDefault(msg, 2, ""),
+first: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+last: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -1171,9 +1172,9 @@ proto.google.logging.v2.LogEntrySourceLocation.prototype.toObject = function(opt
  */
 proto.google.logging.v2.LogEntrySourceLocation.toObject = function(includeInstance, msg) {
   var f, obj = {
-    file: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    line: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    pb_function: jspb.Message.getFieldWithDefault(msg, 3, "")
+file: jspb.Message.getFieldWithDefault(msg, 1, ""),
+line: jspb.Message.getFieldWithDefault(msg, 2, 0),
+pb_function: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
